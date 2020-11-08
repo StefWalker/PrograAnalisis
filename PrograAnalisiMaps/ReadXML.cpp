@@ -18,7 +18,7 @@ int main(){
     bool begin_tag = false;
     while (getline(in,line))
     {
-        std::string tmp; // strip whitespaces from the beginning
+        string tmp; // strip whitespaces from the beginning
         for (int i = 0; i < line.length(); i++)
         {
             if (line[i] == ' ' && tmp.size() == 0)
