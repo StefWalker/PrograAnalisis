@@ -25,23 +25,30 @@ struct Point{
 
 struct Country{
 	string ID;
-	string Color;
-	Point Centro;
+	int Color;
+	Point *Centro;
 	bool visitado;
-	Country adjacentes [10];
 
-	Country(string pID, string pColor, Point pCentro){
+	Country(string pID, Point *pCentro){
 		this->ID = pID;
-		this->Color = pColor;
+		this->Color = 12;
 		this->Centro = pCentro;
 		this->visitado = false;
 	}
 
-	Country(string pID, string pColor, int px, int py){
+	Country(string pID, int px, int py){
 		this->ID = pID;
-		this->Color = pColor;
-		this->Centro.x = px;
-		this->Centro.y = py;
+		this->Color = 12;
+		this->Centro->x = px;
+		this->Centro->y = py;
+		this->visitado = false;
+	}
+
+	Country(){
+		this->ID = "";
+		this->Color = 12;
+		this->Centro.x = 0;
+		this->Centro.y = 0;
 		this->visitado = false;
 	}
 };
