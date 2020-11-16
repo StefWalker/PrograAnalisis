@@ -5,17 +5,17 @@
  *      Author: dylan
  */
 
+#include <time.h>
 #include "country.h"
-#include "tinyxml2.h"
+#include "Tinyxml2/tinyxml2.h"
 #include <iostream>
 #include <string>
+#include "MergeSort/MergeSort.h"
 
 using namespace tinyxml2;
 
 
-
-
-void XMLLoader(Country *paises[], int arraySize){
+void XMLLoader(Country *paises[]){
 	int contador = 0;
 	XMLDocument doc;
 	const char * path = "mapa.xml";
@@ -34,6 +34,11 @@ void XMLLoader(Country *paises[], int arraySize){
 				paises[contador]->ID = pID->Value();
 				std::cout << pID->Value() << std::endl;                 //Print out id
 			}
+			const XMLAttribute * pDataName = pPath->FindAttribute("data-name");  //Get 'data-name' Attribute
+			if (NULL != pDataName) {
+
+				std::cout << pDataName->Value() << std::endl;        // Print out 'data-name'
+			}
 			const XMLAttribute * pD = pPath->FindAttribute("d");  // Get 'd' Attribute
 			if (NULL != pD) {
 				bool first = false;
@@ -41,7 +46,7 @@ void XMLLoader(Country *paises[], int arraySize){
 				int counter = 2;
 				string read = pD->Value();
 				string valueX;
-				string valueY;
+				string valueY;/*
 				while(first == false && second == false){
 					if(first == false){
 						valueX += read[counter];
@@ -63,9 +68,9 @@ void XMLLoader(Country *paises[], int arraySize){
 							second = true;
 						}
 					}
-				}
-				paises[contador]->Centro->x = stoi(valueX);
-				paises[contador]->Centro->y = stoi(valueY);
+				}*/
+				//paises[contador]->Centro->x = stoi(valueX);
+				//paises[contador]->Centro->y = stoi(valueY);
 				std::cout << pD->Value() << std::endl;    //Print out d
 			}
 			contador ++;
@@ -83,5 +88,6 @@ void XMLLoader(Country *paises[], int arraySize){
 
 int main(){
 	Country *paises[211];
-	XMLLoader(paises, 211);
+	XMLLoader(paises);
+
 }

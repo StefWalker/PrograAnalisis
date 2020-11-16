@@ -5,34 +5,12 @@
  *      Author: ferla
  */
 
-
+#include "MergeSort.h"
 #include <iostream>
 
 
 using namespace std;
 
-
-void merge(int *array,int firstIndex,int lastIndex,int middle);
-void mergesort(int *array,int firstIndex,int lastIndex);
-
-/*int main(void)(){
-	const short int cantidad=15;
-	srand(time(NULL));
-	int *arreglo= new int[cantidad];
-	cout<<"\t\tANTES DE ORDENAR\n\n";
-	for (int i = 0; i < cantidad; i++) {
-		arreglo[i]=rand()%51; //Asignación de número aleatorios entre 0 y 50 en el arreglo de 15 elementos
-		cout<<"Arreglo["<<i+1<<"]= "<<arreglo[i]<<endl;
-	}
-	mergesort1(arreglo,0, cantidad-1); //llamando de la función
-
-	cout<<"\n\n\t\tARREGLO ORDENADO\n";
-
-	for(int i=0;i<cantidad;i++) cout<<"A["<<i+1<<"]= "<<arreglo[i]<<endl;
-	delete arreglo;
-
-}
-*/
 void mergesort(int *array,int firstIndex,int lastIndex){
 
 	if(firstIndex < lastIndex){
