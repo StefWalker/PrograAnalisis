@@ -14,7 +14,7 @@
 using namespace tinyxml2;
 
 
-void XMLLoader(Country *paises[]){
+void XMLLoader(Country paises[]){
 	int contador = 0;
 	XMLDocument doc;
 	const char * path = "mapa.xml";
@@ -29,8 +29,8 @@ void XMLLoader(Country *paises[]){
 
 			const XMLAttribute * pID = pPath->FindAttribute("id");    // Get 'id' Attribute
 			if (NULL != pID) {
-				paises[contador] = new Country();
-				paises[contador]->ID = pID->Value();
+				//paises[contador] = new Country();
+				paises[contador].ID = pID->Value();
 				std::cout << pID->Value() << std::endl;                 //Print out id
 			}
 			const XMLAttribute * pDataName = pPath->FindAttribute("data-name");  //Get 'data-name' Attribute
@@ -69,8 +69,8 @@ void XMLLoader(Country *paises[]){
 					}
 					counter ++;
 				}
-				paises[contador]->Centro->x = stoi(valueX);
-				paises[contador]->Centro->y = stoi(valueY);
+				paises[contador].x = stoi(valueX);
+				paises[contador].y = stoi(valueY);
 				std::cout << stoi(valueX) << std::endl;
 				std::cout << stoi(valueY) << std::endl;    //Print out d
 			}
@@ -86,9 +86,11 @@ void XMLLoader(Country *paises[]){
 	}
 }
 
-/*
+
 int main(){
-	Country *paises[211];
+	Country paises[211];
 	XMLLoader(paises);
+
+	cout << paises[6].ID << endl;
 }
-*/
+
