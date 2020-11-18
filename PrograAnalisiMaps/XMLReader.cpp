@@ -10,6 +10,7 @@
 #include "Tinyxml2/tinyxml2.h"
 #include <iostream>
 #include <string>
+#include "MergeSort.h"
 
 using namespace tinyxml2;
 
@@ -31,12 +32,12 @@ void XMLLoader(Country paises[]){
 			if (NULL != pID) {
 				//paises[contador] = new Country();
 				paises[contador].ID = pID->Value();
-				std::cout << pID->Value() << std::endl;                 //Print out id
+				//std::cout << pID->Value() << std::endl;                 //Print out id
 			}
 			const XMLAttribute * pDataName = pPath->FindAttribute("data-name");  //Get 'data-name' Attribute
 			if (NULL != pDataName) {
 
-				std::cout << pDataName->Value() << std::endl;        // Print out 'data-name'
+				//std::cout << pDataName->Value() << std::endl;        // Print out 'data-name'
 			}
 			const XMLAttribute * pD = pPath->FindAttribute("d");  // Get 'd' Attribute
 			if (NULL != pD) {
@@ -71,26 +72,45 @@ void XMLLoader(Country paises[]){
 				}
 				paises[contador].x = stoi(valueX);
 				paises[contador].y = stoi(valueY);
-				std::cout << stoi(valueX) << std::endl;
-				std::cout << stoi(valueY) << std::endl;    //Print out d
+				//std::cout << stoi(valueX) << std::endl;
+			//	std::cout << stoi(valueY) << std::endl;    //Print out d
 			}
 			contador ++;
-			std::cout << std::endl;
-			std::cout << "------------------------------------------------------------" << contador;
-			std::cout << std::endl;
+			//std::cout << std::endl;
+			//std::cout << "------------------------------------------------------------" << contador;
+		//	std::cout << std::endl;
 
 			pPath = pPath->NextSiblingElement("path");  // Next path (path Sibling)
 		}
-		std::cout << "\n";
+		//std::cout << "\n";
 		}
 	}
 }
 
 
 int main(){
-	Country paises[211];
+	int size = 211 ;
+	Country paises[size];
 	XMLLoader(paises);
+//	int pointx[211];
+//	int pointy[211];
+/*
+	for(int first = 0; first < size; first++){
+		pointx[first] = paises[first].x;
+		pointy[first] = paises[first].y;
+	}
+	for(int i = 0; i<211; i++){
+		std::cout << pointx[i] << " ";
+		std:: cout << endl;
 
-	cout << paises[6].ID << endl;
+	}*/
+
+	//cout << paises[6].ID << endl;
+	mergesort(paises,0,210);
+
+	for(int i = 0; i<211; i++)
+		std::cout << paises[i].x << " ";
+	std:: cout << endl;
+
 }
 

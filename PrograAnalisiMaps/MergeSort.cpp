@@ -12,7 +12,7 @@
 
 using namespace std;
 
-void mergesort(Country *array,int firstIndex,int lastIndex){
+void mergesort(Country array [],int firstIndex,int lastIndex){
 
 	if(firstIndex < lastIndex){
 
@@ -25,16 +25,17 @@ void mergesort(Country *array,int firstIndex,int lastIndex){
 	}
 }
 
-void merge(Country *array,int firstIndex,int lastIndex,int middle){ //Función encargada de ordenar el arreglo
+void merge(Country array[],int firstIndex,int lastIndex,int middle){ //Función encargada de ordenar el arreglo
 
 	int left=firstIndex;
 	int right = middle+1;
 	int counter=0;
-	Country *temp = new Country[lastIndex - firstIndex+1];
-//	Country temp [lastIndex - firstIndex+1];
+
+    Country temp [lastIndex - firstIndex+1];
 
 	while ( left <= middle && right <= lastIndex){
-		if(array[left].Centro->x < array[right].Centro->x){
+		if(array[left].x < array[right].x){
+
 			temp[counter++] = array[left++];
 		}
 		else{
