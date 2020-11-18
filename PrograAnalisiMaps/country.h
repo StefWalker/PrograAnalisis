@@ -15,6 +15,10 @@ using namespace std;
 struct Point{
 	int x;
 	int y;
+	Point(){
+		this->x = 0;
+		this->y = 0;
+	}
 	Point(int px, int py){
 		this->x = px;
 		this->y = py;
@@ -36,19 +40,10 @@ struct Country{
 		this->visitado = false;
 	}
 
-	Country(string pID, int px, int py){
-		this->ID = pID;
-		this->Color = 12;
-		this->Centro->x = px;
-		this->Centro->y = py;
-		this->visitado = false;
-	}
-
 	Country(){
 		this->ID = "";
 		this->Color = 12;
-		this->Centro.x = 0;
-		this->Centro.y = 0;
+		this->Centro = new Point();
 		this->visitado = false;
 	}
 };
