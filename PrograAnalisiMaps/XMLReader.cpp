@@ -10,6 +10,7 @@
 #include "Tinyxml2/tinyxml2.h"
 #include <iostream>
 #include <string>
+#include "MergeSort.h"
 
 using namespace tinyxml2;
 
@@ -86,9 +87,24 @@ void XMLLoader(Country *paises[]){
 	}
 }
 
-/*
 int main(){
 	Country *paises[211];
 	XMLLoader(paises);
+
+	   cout << "Array before Sorting: ";
+	   for(int i = 0; i<211; i++)
+	         cout << paises[i] << " ";
+	      cout << endl;
+	  /*Country tmp[211];
+	  for(int i = 0; i<211; i++){
+		  tmp[i] = new Country();
+		  tmp[i] = paises[i];
+	  }*/
+	  mergesort(paises, 0, 210);     //(n-1) for last index
+
+	   cout << "Array after Sorting: ";
+	   for(int i = 0; i<211; i++)
+	  	         cout << paises[i] << " ";
+	  	      cout << endl;
+	return 0;
 }
-*/

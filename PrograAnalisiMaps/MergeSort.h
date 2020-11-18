@@ -8,12 +8,13 @@
 #ifndef MERGESORT_H_
 #define MERGESORT_H_
 #include <iostream>
+#include "Country.h"
 
 
 using namespace std;
 
-	void merge(int *array,int firstIndex,int lastIndex,int middle);
-	void mergesort(int *array,int firstIndex,int lastIndex);
+	void merge(Country *array,int firstIndex,int lastIndex,int middle);
+	void mergesort(Country *array,int firstIndex,int lastIndex);
 
 
 

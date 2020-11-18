@@ -6,12 +6,13 @@
  */
 
 #include "MergeSort.h"
+#include "country.h"
 #include <iostream>
 
 
 using namespace std;
 
-void mergesort(int *array,int firstIndex,int lastIndex){
+void mergesort(Country *array,int firstIndex,int lastIndex){
 
 	if(firstIndex < lastIndex){
 
@@ -24,24 +25,29 @@ void mergesort(int *array,int firstIndex,int lastIndex){
 	}
 }
 
-void merge(int *array,int firstIndex,int lastIndex,int middle){ //Función encargada de ordenar el arreglo
+void merge(Country *array,int firstIndex,int lastIndex,int middle){ //Función encargada de ordenar el arreglo
 
 	int left=firstIndex;
 	int right = middle+1;
 	int counter=0;
-	int *temp = new int[lastIndex - firstIndex+1];
+	Country *temp = new Country[lastIndex - firstIndex+1];
+//	Country temp [lastIndex - firstIndex+1];
 
 	while ( left <= middle && right <= lastIndex){
-		if(array[left]<array[right]){
+		if(array[left].Centro->x < array[right].Centro->x){
 			temp[counter++] = array[left++];
 		}
 		else{
 			temp[counter++] = array[right++];
 		}
 	}
-	while ( left <= middle) temp[counter++] = array[left++];
+	while ( left <= middle){
+		temp[counter++] = array[left++];
+	}
 
-	while (right <= lastIndex) temp[counter++] = array[right++];
+	while (right <= lastIndex) {
+		temp[counter++] = array[right++];
+	}
 	for( left = firstIndex; left <= lastIndex; left++){
 		array[left] = temp[left-firstIndex];
 	}

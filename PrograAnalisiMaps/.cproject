@@ -43,8 +43,8 @@
 					<sourceEntries>
 						<entry excluding="XML|XML/Load|MergeSort|Tinyxml2" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="MergeSort"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Tinyxml2"/>
 						<entry excluding="Tinyxml2" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="XML"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="XML/Tinyxml2"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -92,8 +92,8 @@
 					<sourceEntries>
 						<entry excluding="XML|XML/Load|MergeSort|Tinyxml2" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="MergeSort"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Tinyxml2"/>
 						<entry excluding="Tinyxml2" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="XML"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="XML/Tinyxml2"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
