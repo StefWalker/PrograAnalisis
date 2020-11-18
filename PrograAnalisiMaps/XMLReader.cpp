@@ -46,7 +46,7 @@ void XMLLoader(Country *paises[]){
 				int counter = 2;
 				string read = pD->Value();
 				string valueX;
-				string valueY;/*
+				string valueY;
 				while(first == false && second == false){
 					if(first == false){
 						valueX += read[counter];
@@ -68,10 +68,12 @@ void XMLLoader(Country *paises[]){
 							second = true;
 						}
 					}
-				}*/
+					counter ++;
+				}
 				//paises[contador]->Centro->x = stoi(valueX);
 				//paises[contador]->Centro->y = stoi(valueY);
-				std::cout << pD->Value() << std::endl;    //Print out d
+				std::cout << stoi(valueX) << std::endl;
+				std::cout << stoi(valueY) << std::endl;    //Print out d
 			}
 			contador ++;
 			std::cout << std::endl;

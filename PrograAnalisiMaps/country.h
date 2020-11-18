@@ -26,7 +26,6 @@ struct Point{
 };
 
 
-
 struct Country{
 	string ID;
 	int Color;
@@ -45,6 +44,30 @@ struct Country{
 		this->Color = 12;
 		this->Centro = new Point();
 		this->visitado = false;
+	}
+};
+
+
+struct Node{
+	int x;
+	int y;
+	Country *pais;
+
+	Node(){
+		this->x = 0;
+		this->y = 0;
+		pais = new Country();
+	}
+};
+
+
+struct DataArray{
+	Node *nodo[211];
+
+	DataArray(){
+		for(int i = 0; i < 211; i++){
+			this->nodo[i] = new Node();
+		}
 	}
 };
 
