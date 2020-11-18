@@ -91,26 +91,25 @@ void XMLLoader(Country paises[]){
 int main(){
 	int size = 211 ;
 	Country paises[size];
-	XMLLoader(paises);
-//	int pointx[211];
-//	int pointy[211];
-/*
-	for(int first = 0; first < size; first++){
-		pointx[first] = paises[first].x;
+	int pointy[size];
+
+	XMLLoader(paises);			 //carga de paises
+
+
+	for(int first = 0; first < size; first++){			//Carga de puntos y
 		pointy[first] = paises[first].y;
 	}
-	for(int i = 0; i<211; i++){
-		std::cout << pointx[i] << " ";
-		std:: cout << endl;
 
-	}*/
-
-	//cout << paises[6].ID << endl;
-	mergesort(paises,0,210);
+	mergesort(paises,0,size-1);						//ordenamientos
+	mergeSorty(pointy, 0 , size-1);
 
 	for(int i = 0; i<211; i++)
 		std::cout << paises[i].x << " ";
 	std:: cout << endl;
+
+	for(int i = 0; i<211; i++)
+			std::cout << pointy[i] << " ";
+		std:: cout << endl;
 
 }
 
