@@ -10,7 +10,6 @@
 #include "Tinyxml2/tinyxml2.h"
 #include <iostream>
 #include <string>
-#include "MergeSort/MergeSort.h"
 
 using namespace tinyxml2;
 
@@ -47,14 +46,14 @@ void XMLLoader(Country *paises[]){
 				string read = pD->Value();
 				string valueX;
 				string valueY;
-				while(first == false && second == false){
+				while(second == false){
 					if(first == false){
 						valueX += read[counter];
 						if(read[counter+1] == '.'){
 							first = true;
 							counter += 4;
 						}
-						if(read[counter+1] == ','){
+						if(first == false && read[counter+1] == ','){
 							first = true;
 							counter += 2;
 						}
@@ -70,8 +69,8 @@ void XMLLoader(Country *paises[]){
 					}
 					counter ++;
 				}
-				//paises[contador]->Centro->x = stoi(valueX);
-				//paises[contador]->Centro->y = stoi(valueY);
+				paises[contador]->Centro->x = stoi(valueX);
+				paises[contador]->Centro->y = stoi(valueY);
 				std::cout << stoi(valueX) << std::endl;
 				std::cout << stoi(valueY) << std::endl;    //Print out d
 			}
@@ -87,9 +86,9 @@ void XMLLoader(Country *paises[]){
 	}
 }
 
-
+/*
 int main(){
 	Country *paises[211];
 	XMLLoader(paises);
-
 }
+*/

@@ -72,5 +72,4 @@ struct DataArray{
 };
 
 
-
 #endif /* COUNTRY_H_ */
