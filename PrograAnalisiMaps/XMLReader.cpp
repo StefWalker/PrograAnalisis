@@ -101,24 +101,28 @@ void XMLLoader(Country paises[]){
 
 int tester(int cantColores){
 	int size = 211 ;
+	int sizeColors = 11;
+
 	Country paisesx[size];
 	Country paisesy[size];
+	int countColors[sizeColors] = {0}; // contador de colores usados
 
 	XMLLoader(paisesx);			 //carga de paises
 	XMLLoader(paisesy);
 
 
-	/*for(int first = 0; first < size; first++){			//Carga de puntos y
-		pointy[first] = paisesx[first].x;
-	}
-*/
+
 	srand(time(0));
-	mergesort(paisesx,0,size-1, cantColores);						//ordenamientos
+	mergesort(paisesx,0,size-1, cantColores,countColors);						//ordenamientos
 	mergeSorty(paisesy, 0 , size-1, cantColores);
 
 	for(int i = 0; i<211; i++)
 		std::cout << paisesx[i].x << " " << paisesx[i].Color << endl;;
 	std:: cout << endl;
+
+	for(int i = 0; i<sizeColors; i++)
+			std::cout << countColors[i] << endl;;
+		std:: cout << endl;
 
 	for(int i = 0; i<211; i++)
 		std::cout << paisesy[i].y << " " << paisesy[i].Color << endl;;

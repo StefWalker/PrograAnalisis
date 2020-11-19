@@ -13,20 +13,20 @@
 
 using namespace std;
 
-void mergesort(Country array [],int firstIndex,int lastIndex, int cantColores){
+void mergesort(Country array [],int firstIndex,int lastIndex, int cantColores,int countColors[]){
 
 	if(firstIndex < lastIndex){
 
 		int middle = (firstIndex + lastIndex) /2;
 
-		mergesort(array,firstIndex,middle,cantColores);
-		mergesort(array,middle+1,lastIndex,cantColores);
+		mergesort(array,firstIndex,middle,cantColores,countColors);
+		mergesort(array,middle+1,lastIndex,cantColores,countColors);
 
-		merge(array,firstIndex,lastIndex,middle,cantColores);
+		merge(array,firstIndex,lastIndex,middle,cantColores,countColors);
 	}
 }
 
-void merge(Country array[],int firstIndex,int lastIndex,int middle, int cantColores){ //Función encargada de ordenar el arreglo
+void merge(Country array[],int firstIndex,int lastIndex,int middle, int cantColores,int countColors[]){ //Función encargada de ordenar el arreglo
 
 	int left=firstIndex;
 	int right = middle+1;
@@ -56,6 +56,7 @@ void merge(Country array[],int firstIndex,int lastIndex,int middle, int cantColo
 		if(array[left].Color == 12){
 			int random = rand() % cantColores;
 			array[left].Color = random;
+			countColors[random] = countColors[random]+1;
 		}
 	}
 
@@ -103,6 +104,7 @@ void mergey(Country array[],int firstIndex,int lastIndex,int middle, int cantCol
 			if(array[left].Color == 12){
 				int random = rand() % cantColores;
 				array[left].Color = random;
+
 			}
 		}
 
