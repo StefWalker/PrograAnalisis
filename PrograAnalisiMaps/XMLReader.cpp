@@ -110,7 +110,7 @@ int tester(int cantColores){
 	int countColors[sizeColors] = {0}; // contador de colores usados
 
 	XMLLoader(countriesx);			 //carga de paises
-	//XMLLoader(countriesy);
+	XMLLoader(countriesy);
 
 
 
