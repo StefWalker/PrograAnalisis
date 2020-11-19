@@ -105,16 +105,30 @@ int tester(int cantColores){
 
 	Country countriesx[size];
 	Country countriesy[size];
+
 	int countColors[sizeColors] = {0}; // contador de colores usados
 
 	XMLLoader(countriesx);			 //carga de paises
-	XMLLoader(countriesy);
+	//XMLLoader(countriesy);
 
 
 
 	srand(time(0));
 	mergesort(countriesx,0,size-1, cantColores,countColors);						//ordenamientos
+	for(int i= 0; i < 211; i++){
+		countriesy[i] = countriesx[i];
+	}
 	mergeSorty(countriesy, 0 , size-1, cantColores);
+
+	for(int i = 0;i < 211;i++){
+		for(int j = 0;j < 211;j++){
+			if(countriesx[i].ID == countriesy[j].ID){
+				countriesx[i].yPosition = j;
+				countriesx[i].xPosition = i;
+				break;
+			}
+		}
+	}
 
 	for(int i = 0; i<211; i++)
 		std::cout << countriesx[i].x << " " << countriesx[i].Color << endl;;
