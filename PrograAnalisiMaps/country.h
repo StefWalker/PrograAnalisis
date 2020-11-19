@@ -60,4 +60,7 @@ struct DataArray{
 	}
 };
 
+void XMLLoader(Country paises[]);
+int tester();
+
 #endif /* COUNTRY_H_ */

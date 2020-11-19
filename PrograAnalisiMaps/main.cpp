@@ -4,18 +4,19 @@
  *  Created on: 17 nov. 2020
  *      Author: dylan
  */
-/*
-#include "XML/country.h"
-#include "XML/XMLReader.cpp"
+
+#include "country.h"
+
+#include <iostream>
+
+using namespace std;
 
 int main(){
 
-	Country *paises[211];
-	XMLLoader(paises);
+	tester();
 
-	return 0;
-
+	cout << "Nice "<< endl;
 }
 
 
-*/
+

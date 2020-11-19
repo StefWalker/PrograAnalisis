@@ -15,14 +15,10 @@ using namespace std;
 struct Color{
 	int value;
 	string color;
-	Color *next;
+	Color next;
 
-	Color(){
-		this->value = 0;
-		this->color = NULL;
-		this->next = new Color;
-	}
 };
+
 
 
 

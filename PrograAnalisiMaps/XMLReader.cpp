@@ -88,7 +88,7 @@ void XMLLoader(Country paises[]){
 }
 
 
-int main(){
+int tester(){
 	int size = 211 ;
 	Country paises[size];
 	int pointy[size];
@@ -108,8 +108,10 @@ int main(){
 	std:: cout << endl;
 
 	for(int i = 0; i<211; i++)
-			std::cout << pointy[i] << " ";
+		std::cout << pointy[i] << " ";
 		std:: cout << endl;
+
+	return 0;
 
 }
 
