@@ -41,9 +41,9 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="MergeSort|Tinyxml2" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="MergeSort"/>
+						<entry excluding="XML|XML/Load|MergeSort|Tinyxml2" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Tinyxml2"/>
+						<entry excluding="Tinyxml2" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="XML"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -89,9 +89,9 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="MergeSort|Tinyxml2" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="MergeSort"/>
+						<entry excluding="XML|XML/Load|MergeSort|Tinyxml2" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Tinyxml2"/>
+						<entry excluding="Tinyxml2" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="XML"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -118,4 +118,5 @@
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
+	<storageModule moduleId="refreshScope"/>
 </cproject>

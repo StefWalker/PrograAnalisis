@@ -12,42 +12,55 @@
 
 using namespace std;
 
-struct Point{
-	int x;
-	int y;
-	Point(){
-		this->x = 0;
-		this->y = 0;
-	}
-	Point(int px, int py){
-		this->x = px;
-		this->y = py;
-	}
-};
-
-
-
 struct Country{
 	string ID;
 	int Color;
-	Point *Centro;
+	int x;
+	int y;
 	bool visitado;
 
-	Country(string pID, Point *pCentro){
+	Country(string pID, int pX, int pY){
 		this->ID = pID;
 		this->Color = 12;
-		this->Centro = pCentro;
+		this->x = pX;
+		this->y = pY;
 		this->visitado = false;
 	}
 
 	Country(){
 		this->ID = "";
 		this->Color = 12;
-		this->Centro = new Point();
+		this->x = 0;
+		this->y = 0;
 		this->visitado = false;
 	}
 };
 
 
+struct Node{
+	int x;
+	int y;
+	Country *pais;
+
+	Node(){
+		this->x = 0;
+		this->y = 0;
+		pais = new Country();
+	}
+};
+
+
+struct DataArray{
+	Node *nodo[211];
+
+	DataArray(){
+		for(int i = 0; i < 211; i++){
+			this->nodo[i] = new Node();
+		}
+	}
+};
+
+void XMLLoader(Country paises[]);
+int tester();
 
 #endif /* COUNTRY_H_ */

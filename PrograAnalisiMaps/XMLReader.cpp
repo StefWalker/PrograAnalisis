@@ -10,12 +10,12 @@
 #include "Tinyxml2/tinyxml2.h"
 #include <iostream>
 #include <string>
-#include "MergeSort/MergeSort.h"
+#include "MergeSort.h"
 
 using namespace tinyxml2;
 
 
-void XMLLoader(Country *paises[]){
+void XMLLoader(Country paises[]){
 	int contador = 0;
 	XMLDocument doc;
 	const char * path = "mapa.xml";
@@ -30,14 +30,14 @@ void XMLLoader(Country *paises[]){
 
 			const XMLAttribute * pID = pPath->FindAttribute("id");    // Get 'id' Attribute
 			if (NULL != pID) {
-				paises[contador] = new Country();
-				paises[contador]->ID = pID->Value();
-				std::cout << pID->Value() << std::endl;                 //Print out id
+				//paises[contador] = new Country();
+				paises[contador].ID = pID->Value();
+				//std::cout << pID->Value() << std::endl;                 //Print out id
 			}
 			const XMLAttribute * pDataName = pPath->FindAttribute("data-name");  //Get 'data-name' Attribute
 			if (NULL != pDataName) {
 
-				std::cout << pDataName->Value() << std::endl;        // Print out 'data-name'
+				//std::cout << pDataName->Value() << std::endl;        // Print out 'data-name'
 			}
 			const XMLAttribute * pD = pPath->FindAttribute("d");  // Get 'd' Attribute
 			if (NULL != pD) {
@@ -46,15 +46,15 @@ void XMLLoader(Country *paises[]){
 				int counter = 2;
 				string read = pD->Value();
 				string valueX;
-				string valueY;/*
-				while(first == false && second == false){
+				string valueY;
+				while(second == false){
 					if(first == false){
 						valueX += read[counter];
 						if(read[counter+1] == '.'){
 							first = true;
 							counter += 4;
 						}
-						if(read[counter+1] == ','){
+						if(first == false && read[counter+1] == ','){
 							first = true;
 							counter += 2;
 						}
@@ -68,26 +68,51 @@ void XMLLoader(Country *paises[]){
 							second = true;
 						}
 					}
-				}*/
-				//paises[contador]->Centro->x = stoi(valueX);
-				//paises[contador]->Centro->y = stoi(valueY);
-				std::cout << pD->Value() << std::endl;    //Print out d
+					counter ++;
+				}
+				paises[contador].x = stoi(valueX);
+				paises[contador].y = stoi(valueY);
+				//std::cout << stoi(valueX) << std::endl;
+			//	std::cout << stoi(valueY) << std::endl;    //Print out d
 			}
 			contador ++;
-			std::cout << std::endl;
-			std::cout << "------------------------------------------------------------" << contador;
-			std::cout << std::endl;
+			//std::cout << std::endl;
+			//std::cout << "------------------------------------------------------------" << contador;
+		//	std::cout << std::endl;
 
 			pPath = pPath->NextSiblingElement("path");  // Next path (path Sibling)
 		}
-		std::cout << "\n";
+		//std::cout << "\n";
 		}
 	}
 }
 
 
-int main(){
-	Country *paises[211];
-	XMLLoader(paises);
+int tester(){
+	int size = 211 ;
+	Country paises[size];
+	int pointy[size];
+
+	XMLLoader(paises);			 //carga de paises
+
+
+	for(int first = 0; first < size; first++){			//Carga de puntos y
+		pointy[first] = paises[first].y;
+	}
+
+	srand(time(0));
+	mergesort(paises,0,size-1);						//ordenamientos
+	mergeSorty(pointy, 0 , size-1);
+
+	for(int i = 0; i<211; i++)
+		std::cout << paises[i].x << " " << paises[i].Color << endl;;
+	std:: cout << endl;
+
+	for(int i = 0; i<211; i++)
+		std::cout << pointy[i] << " ";
+		std:: cout << endl;
+
+	return 0;
 
 }
+
