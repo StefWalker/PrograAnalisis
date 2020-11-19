@@ -62,7 +62,7 @@ void merge(Country array[],int firstIndex,int lastIndex,int middle){ //Función e
 	delete temp;
 }
 
-void mergeSorty(int array [],int firstIndex,int lastIndex){
+void mergeSorty(Country array [],int firstIndex,int lastIndex){
 	if(firstIndex < lastIndex){
 
 		int middle = (firstIndex + lastIndex) /2;
@@ -73,37 +73,38 @@ void mergeSorty(int array [],int firstIndex,int lastIndex){
 	}
 }
 
-void mergey(int array[],int firstIndex,int lastIndex,int middle){ //Función encargada de ordenar el arreglo
+void mergey(Country array[],int firstIndex,int lastIndex,int middle){ //Función encargada de ordenar el arreglo
 
 	int left=firstIndex;
-	int right = middle+1;
-	int counter=0;
+		int right = middle+1;
+		int counter=0;
 
-    int temp [lastIndex - firstIndex+1];
+	    Country temp [lastIndex - firstIndex+1];
 
-	while ( left <= middle && right <= lastIndex){
-		if(array[left] < array[right]){
+		while ( left <= middle && right <= lastIndex){
+			if(array[left].y < array[right].y){
 
+				temp[counter++] = array[left++];
+			}
+			else{
+				temp[counter++] = array[right++];
+			}
+		}
+		while ( left <= middle){
 			temp[counter++] = array[left++];
 		}
-		else{
+
+		while (right <= lastIndex) {
 			temp[counter++] = array[right++];
 		}
-	}
-	while ( left <= middle){
-		temp[counter++] = array[left++];
-	}
 
-	while (right <= lastIndex) {
-		temp[counter++] = array[right++];
-	}
-	for( left = firstIndex; left <= lastIndex; left++){
-		array[left] = temp[left-firstIndex];
-	//	if(array[left].Color == 12){
-	//		int random = rand() % 12;
-	//		array[left].Color = random;
-	//	}
-	}
+		for( left = firstIndex; left <= lastIndex; left++){
+			array[left] = temp[left-firstIndex];
+			if(array[left].Color == 12){
+				int random = rand() % 12;
+				array[left].Color = random;
+			}
+		}
 
-	delete temp;
+		delete temp;
 }
