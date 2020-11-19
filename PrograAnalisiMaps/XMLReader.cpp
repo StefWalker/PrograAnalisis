@@ -49,6 +49,7 @@ void XMLLoader(Country paises[]){
 				bool second = false;
 				int counter = 2;
 				string read = pD->Value();
+				paises[contador].d = read;
 				string valueX;
 				string valueY;
 				while(second == false){

@@ -19,6 +19,7 @@ struct Country{
 	int Color = 12;
 	int x;
 	int y;
+	string d;
 	bool visitado;
 /*
 	Country(string pID, int pX, int pY){
