@@ -13,7 +13,7 @@ using namespace std;
 
 int main(){
 
-	int cantColores = 7;
+	int cantColores = 11;
 
 	tester(cantColores);
 
