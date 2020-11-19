@@ -13,11 +13,11 @@
 
 using namespace std;
 
-	void merge(Country array[],int firstIndex,int lastIndex,int middle);
-	void mergesort(Country array[],int firstIndex,int lastIndex);
+	void merge(Country array[],int firstIndex,int lastIndex,int middle, int cantColores);
+	void mergesort(Country array[],int firstIndex,int lastIndex, int cantColores);
 
-	void mergey(Country array[],int firstIndex,int lastIndex,int middle);
-	void mergeSorty(Country array[],int firstIndex,int lastIndex);
+	void mergey(Country array[],int firstIndex,int lastIndex,int middle, int cantColores);
+	void mergeSorty(Country array[],int firstIndex,int lastIndex, int cantColores);
 
 
 

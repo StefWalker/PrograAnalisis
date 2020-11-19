@@ -61,6 +61,6 @@ struct DataArray{
 };
 
 void XMLLoader(Country paises[]);
-int tester();
+int tester(int cantColores);
 
 #endif /* COUNTRY_H_ */
