@@ -7,8 +7,9 @@
 
 #include "MergeSort.h"
 #include "country.h"
-#include <iostream>
-
+#include<iostream>
+#include<cstdlib>
+#include<ctime>
 
 using namespace std;
 
@@ -49,22 +50,25 @@ void merge(Country array[],int firstIndex,int lastIndex,int middle){ //Función e
 	while (right <= lastIndex) {
 		temp[counter++] = array[right++];
 	}
+
 	for( left = firstIndex; left <= lastIndex; left++){
 		array[left] = temp[left-firstIndex];
+		if(array[left].Color == 12){
+			int random = rand() % 12;
+			array[left].Color = random;
+		}
 	}
 
 	delete temp;
 }
 
 void mergeSorty(int array [],int firstIndex,int lastIndex){
-
 	if(firstIndex < lastIndex){
 
 		int middle = (firstIndex + lastIndex) /2;
 
 		mergeSorty(array,firstIndex,middle);
 		mergeSorty(array,middle+1,lastIndex);
-
 		mergey(array,firstIndex,lastIndex,middle);
 	}
 }
@@ -95,6 +99,10 @@ void mergey(int array[],int firstIndex,int lastIndex,int middle){ //Función enca
 	}
 	for( left = firstIndex; left <= lastIndex; left++){
 		array[left] = temp[left-firstIndex];
+	//	if(array[left].Color == 12){
+	//		int random = rand() % 12;
+	//		array[left].Color = random;
+	//	}
 	}
 
 	delete temp;

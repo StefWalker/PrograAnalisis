@@ -100,11 +100,12 @@ int tester(){
 		pointy[first] = paises[first].y;
 	}
 
+	srand(time(0));
 	mergesort(paises,0,size-1);						//ordenamientos
 	mergeSorty(pointy, 0 , size-1);
 
 	for(int i = 0; i<211; i++)
-		std::cout << paises[i].x << " ";
+		std::cout << paises[i].x << " " << paises[i].Color << endl;;
 	std:: cout << endl;
 
 	for(int i = 0; i<211; i++)
