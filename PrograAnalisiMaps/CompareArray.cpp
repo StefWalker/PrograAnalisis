@@ -10,7 +10,7 @@
 #include <math.h>
 #include "SVG.h"
 
-int counter = 0;\
+int counter = 0;
 
 void compare(Country countriesx [],Country countriesy [], int countColors[]){
 	int position[11];
@@ -55,6 +55,9 @@ void compare(Country countriesx [],Country countriesy [], int countColors[]){
 			else{
 				position[countriesx[first].Color] = first;
 			}
+		}
+		if(counter == 5){
+			printCurrent("DiviveAndConquer");
 		}
 	}
 }

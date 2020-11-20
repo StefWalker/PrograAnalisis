@@ -133,6 +133,6 @@ void traverse(struct Color *last)
 }
 
 
-
+void colorMaker();
 
 #endif /* COLOR_H_ */
