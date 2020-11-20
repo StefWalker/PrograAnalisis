@@ -11,6 +11,7 @@
 #include <iostream>
 #include <string>
 #include "MergeSort.h"
+#include "CompareArray.h"
 
 using namespace tinyxml2;
 
@@ -143,6 +144,8 @@ int tester(int cantColores){
 		std::cout << countriesy[i].y << " " << countriesy[i].Color << endl;;
 		std:: cout << endl;
 
+
+	compare(countriesx, countriesy, countColors);
 	return 0;
 
 }

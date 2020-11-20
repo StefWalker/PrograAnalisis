@@ -9,6 +9,7 @@
 #include <iostream>
 #include <string>
 #include "country.h"
+#include "SVG.h"
 
 using namespace std;
 
@@ -105,6 +106,6 @@ void CountryAdition(Country pais){
 
 void printCurrent(string algoritmo){
 	ofstream out(algoritmo + ".svg");
-	out << SVG + svgBody + end;
+	out << SVG + svgBody + "</svg>";
 	out.close();
 }
