@@ -56,8 +56,9 @@ void compare(Country countriesx [],Country countriesy [], int countColors[]){
 				position[countriesx[first].Color] = first;
 			}
 		}
-		if(counter == 5){
+		if(counter >= 5){
 			printCurrent("DiviveAndConquer");
+			counter = 0;
 		}
 	}
 }
