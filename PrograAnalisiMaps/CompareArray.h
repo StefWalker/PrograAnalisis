@@ -14,6 +14,7 @@ using namespace std;
 struct Country;
 
 void compare(Country countriesx [],Country countriesy [],int countColors[]);
+//void compareDinamico(Country countriesx [],Country countriesy [], int countColors[]);
 
 
 #endif /* COMPAREARRAY_H_ */
