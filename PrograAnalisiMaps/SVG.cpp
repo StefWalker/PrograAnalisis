@@ -14,7 +14,7 @@
 using namespace std;
 
 string SVG;
-string svgBody;
+string svgBody = "";
 //string end = "</svg>";
 string array[11] = {"fill:#0000FF;fill-rule:evenodd","fill:#FF0000;fill-rule:evenodd","fill:#FFFF00;fill-rule:evenodd",
 		"fill:#00FF00;fill-rule:evenodd","fill:#E47833;fill-rule:evenodd","fill:#4F2F4F;fill-rule:evenodd","fill:#BC8F8F;fill-rule:evenodd"
@@ -98,23 +98,25 @@ void SVGGenerator(){
 	SVG += "      </cc:Work>\n";
 	SVG += "    </rdf:RDF>\n";
 	SVG += "  </metadata>\n";
-	SVG += "  <path \n";
 
 }
 
 void CountryAdition(Country pais){
 	if (pais.Color < 12 ){
-		svgBody += "d=\"" + pais.d + "\" />\n";
-		svgBody += array[pais.Color] + "\n";
+		svgBody += "  <path \n";
+		svgBody += "     d=\"" + pais.d + "\"\n";
+		svgBody += "     style=\"" + array[pais.Color] + "\" />\n";
 	}
 	else{
 		string blanco= "fill:#C0C0C0;fill-rule:evenodd";
-		svgBody += "d=\"" + pais.d + "\" />\n";
-		svgBody += blanco + "\n";
+		svgBody += "  <path \n";
+		svgBody += "     d=\"" + pais.d + "\"\n";
+		svgBody += "     style=\"" + blanco + "\" />\n";
 	}
 }
 
 void printCurrent(string algoritmo){
+	SVGGenerator();
 	ofstream out(algoritmo + ".svg");
 	out << SVG + svgBody + "</svg>";
 	out.close();
