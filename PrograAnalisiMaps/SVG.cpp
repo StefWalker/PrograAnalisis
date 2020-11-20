@@ -103,8 +103,15 @@ void SVGGenerator(){
 }
 
 void CountryAdition(Country pais){
-	svgBody += "d=\"" + pais.d + "\" />\n";
-	svgBody += array[pais.Color] + "\n";
+	if (pais.Color < 12 ){
+		svgBody += "d=\"" + pais.d + "\" />\n";
+		svgBody += array[pais.Color] + "\n";
+	}
+	else{
+		string blanco= "fill:#C0C0C0;fill-rule:evenodd";
+		svgBody += "d=\"" + pais.d + "\" />\n";
+		svgBody += blanco + "\n";
+	}
 }
 
 void printCurrent(string algoritmo){

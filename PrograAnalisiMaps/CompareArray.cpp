@@ -23,15 +23,18 @@ void compare(Country countriesx [],Country countriesy [], int countColors[]){
 
 			if (abs(position2 - position1) < 5){
 				if(countriesy[position2].Color == countriesy[position1].Color){
-						// tirar blanco
+						countriesx[first].Color = 12;
+						CountryAdition(countriesx[first]);
 				}
 				else{
 					countriesx[first].Color = countriesy[position1].Color;
 						position[countriesy[position1].Color] = first;
+						CountryAdition(countriesx[first]);
 					}
 			}
 			else{
-				position[countriesx[position1].Color] = first;
+				position[countriesx[first].Color] = first;
+				CountryAdition(countriesx[first]);
 			}
 		}
 		else{
@@ -41,19 +44,23 @@ void compare(Country countriesx [],Country countriesy [], int countColors[]){
 
 				if (abs(position2 - position1) < 5){
 					if(countriesy[position2].Color == countriesy[position1].Color){
-										// tirar blanco
-						}
+						countriesx[first].Color = 12;
+						CountryAdition(countriesx[first]);
+					}
 					else{
 						countriesx[first].Color = countriesy[position1].Color;
 						position[countriesy[position1].Color] = first;
+						CountryAdition(countriesx[first]);
 					}
 				}
 				else{
-					position[countriesx[position1].Color] = first;
+					position[countriesx[first].Color] = first;
+					CountryAdition(countriesx[first]);
 				}
 			}
 			else{
 				position[countriesx[first].Color] = first;
+				CountryAdition(countriesx[first]);
 			}
 		}
 		if(counter >= 5){
