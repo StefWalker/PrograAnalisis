@@ -5,12 +5,16 @@
  *      Author: dylan
  */
 
+#include <fstream>
 #include <iostream>
 #include <string>
+#include "country.h"
 
 using namespace std;
 
 string SVG;
+string svgBody;
+string end = "</svg>";
 
 void SVGGenerator(){
 
@@ -94,6 +98,13 @@ void SVGGenerator(){
 
 }
 
-void CountryAdition(string ){
+void CountryAdition(Country pais){
+	svgBody += "d=\"" + pais.d + "\" />\n";
+	svgBody += pais.Color + "\n";
+}
 
+void printCurrent(string algoritmo){
+	ofstream out(algoritmo + ".svg");
+	out << SVG + svgBody + end;
+	out.close();
 }
