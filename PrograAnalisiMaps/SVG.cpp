@@ -9,12 +9,16 @@
 #include <iostream>
 #include <string>
 #include "country.h"
+#include "SVG.h"
 
 using namespace std;
 
 string SVG;
 string svgBody;
-string end = "</svg>";
+//string end = "</svg>";
+string array[11] = {"fill:#0000FF;fill-rule:evenodd","fill:#FF0000;fill-rule:evenodd","fill:#FFFF00;fill-rule:evenodd",
+		"fill:#00FF00;fill-rule:evenodd","fill:#E47833;fill-rule:evenodd","fill:#4F2F4F;fill-rule:evenodd","fill:#BC8F8F;fill-rule:evenodd"
+		,"fill:#A62A2A;fill-rule:evenodd","fill:#4E2F2F;fill-rule:evenodd","fill:#770000;fill-rule:evenodd","fill:#ADEAEA;fill-rule:evenodd"};
 
 void SVGGenerator(){
 
@@ -100,11 +104,11 @@ void SVGGenerator(){
 
 void CountryAdition(Country pais){
 	svgBody += "d=\"" + pais.d + "\" />\n";
-	svgBody += pais.Color + "\n";
+	svgBody += array[pais.Color] + "\n";
 }
 
 void printCurrent(string algoritmo){
 	ofstream out(algoritmo + ".svg");
-	out << SVG + svgBody + end;
+	out << SVG + svgBody + "</svg>";
 	out.close();
 }

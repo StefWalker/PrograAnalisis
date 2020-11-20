@@ -13,7 +13,7 @@
 using namespace std;
 
 //string array[11] = {"azul","rojo","amarillo","verde","naranja","morado","rosado","cafe","vino","celeste","verdeOscuro"};
-string array[11] = {"fill:#0000FF;fill-rule:evenodd","fill:#FF0000;fill-rule:evenodd","fill:#FFFF00;fill-rule:evenodd",
+string arrayColor[11] = {"fill:#0000FF;fill-rule:evenodd","fill:#FF0000;fill-rule:evenodd","fill:#FFFF00;fill-rule:evenodd",
 		"fill:#00FF00;fill-rule:evenodd","fill:#E47833;fill-rule:evenodd","fill:#4F2F4F;fill-rule:evenodd","fill:#BC8F8F;fill-rule:evenodd"
 		,"fill:#A62A2A;fill-rule:evenodd","fill:#4E2F2F;fill-rule:evenodd","fill:#770000;fill-rule:evenodd","fill:#ADEAEA;fill-rule:evenodd"};
 
@@ -36,7 +36,7 @@ struct Color *addToEmpty(struct Color *last, int value)
 
     // Assigning the data.
     temp -> value = value;
-    temp -> color = array[value];
+    temp -> color = arrayColor[value];
     last = temp;
 
     // Creating the link.
@@ -54,7 +54,7 @@ struct Color *addBegin(struct Color *last, int value)
             (struct Color *)malloc(sizeof(struct Color));
 
     temp -> value = value;
-    temp -> color = array[value];
+    temp -> color = arrayColor[value];
     temp -> next = last -> next;
     last -> next = temp;
 
@@ -70,7 +70,7 @@ struct Color *addEnd(struct Color *last, int value)
         (struct Color *)malloc(sizeof(struct Color));
 
     temp -> value = value;
-    temp -> color = array[value];
+    temp -> color = arrayColor[value];
     temp -> next = last -> next;
     last -> next = temp;
     last = temp;
@@ -91,7 +91,7 @@ struct Color *addAfter(struct Color *last, int data, int item)
         {
             temp = (struct Color *)malloc(sizeof(struct Color));
             temp -> value = data;
-            temp -> color = array[data];
+            temp -> color = arrayColor[data];
             temp -> next = p -> next;
             p -> next = temp;
 
@@ -133,6 +133,6 @@ void traverse(struct Color *last)
 }
 
 
-
+void colorMaker();
 
 #endif /* COLOR_H_ */

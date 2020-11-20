@@ -5,11 +5,12 @@
  *      Author: ferla
  */
 #include "country.h"
-#include<iostream>
-#include<cstdlib>
+#include <iostream>
+#include <cstdlib>
 #include <math.h>
+#include "SVG.h"
 
-
+int counter = 0;
 
 void compare(Country countriesx [],Country countriesy [], int countColors[]){
 	int position[11];
@@ -21,7 +22,7 @@ void compare(Country countriesx [],Country countriesy [], int countColors[]){
 			int position2 = countriesx[first-1].yPosition;
 
 			if (abs(position2 - position1) < 5){
-				if(countriesy[position2].Color == countriesy[position1]){
+				if(countriesy[position2].Color == countriesy[position1].Color){
 						// tirar blanco
 				}
 				else{
@@ -39,7 +40,7 @@ void compare(Country countriesx [],Country countriesy [], int countColors[]){
 				int position2 = countriesx[countriesx[first].Color].yPosition;
 
 				if (abs(position2 - position1) < 5){
-					if(countriesy[position2].Color == countriesy[position1]){
+					if(countriesy[position2].Color == countriesy[position1].Color){
 										// tirar blanco
 						}
 					else{
@@ -54,6 +55,10 @@ void compare(Country countriesx [],Country countriesy [], int countColors[]){
 			else{
 				position[countriesx[first].Color] = first;
 			}
+		}
+		if(counter >= 5){
+			printCurrent("DiviveAndConquer");
+			counter = 0;
 		}
 	}
 }

@@ -7,13 +7,13 @@
 
 #include "color.h"
 
-#include<bits/stdc++.h>
+#include<iostream>
 using namespace std;
 
 
 // Driven Program
-/*
-int main()
+
+void colorMaker()
 {
     struct Color *last = NULL;
 
@@ -26,6 +26,6 @@ int main()
 
     traverse(last);
 
-    return 0;
+
 }
-*/
+
