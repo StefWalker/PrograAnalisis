@@ -8,6 +8,9 @@
 #ifndef COMPAREARRAY_H_
 #define COMPAREARRAY_H_
 
+#include <iostream>
+using namespace std;
+
 struct Country;
 
 void compare(Country countriesx [],Country countriesy [],int countColors[]);
