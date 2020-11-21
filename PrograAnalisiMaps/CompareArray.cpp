@@ -76,26 +76,100 @@ int counter = 0;
 		}
 	}
 }*/
-
-void compare(Country countriesx [],Country countriesy []){
-	int position[11] = {0};
+int distancePoints (int x1, int y1, int x2 , int y2){
+	  int distance = sqrt((x1 - y1)*(x1 - y1 ) + (x2 - y2)*(x2 - y2));
+	  return distance;
+}
+void compare(Country countriesx [],Country countriesy [],int countColors[]){
+	Country lastPosition[11];
+	int limit = 15;
 
 	for(int first = 1;first < 211;first++){
 		if (countriesx[first].Color == countriesx[first-1].Color){
 			int firstPoint = countriesx[first].yPosition;
 			if (countriesy[firstPoint].Color == countriesx[first].Color){
+
 				countriesx[first].Color = 12;
 				CountryAdition(countriesx[first]);				//Si son iguales lo deja en blanco
 				counter++;
 			}
 			else{
 				countriesx[first].Color = countriesy[firstPoint].Color;
-				int color = countriesx[first].Color;
-				if (position[color])
+				if (lastPosition[countriesx[first].Color].yPosition != -1){
+
+					int x1 = countriesx[first].x;
+					int y1 = countriesx[first].y;
+					int x2 = lastPosition[countriesx[first].Color].x;
+					int y2 = lastPosition[countriesx[first].Color].y;
+					int distance = distancePoints(x1,y1,x2,y2);
+
+					if (distance < limit ){
+						countriesx[first].Color = 12;
+						CountryAdition(countriesx[first]);				//Si son iguales lo deja en blanco
+						counter++;
+					}
+					else{
+						lastPosition[countriesx[first].Color] = countriesx[first];
+						CountryAdition(countriesx[first]);				//Si son iguales lo deja en blanco
+						counter++;
+					}
+				}
+				else{
+					lastPosition[countriesx[first].Color] = countriesx[first];
+					CountryAdition(countriesx[first]);				//Si son iguales lo deja en blanco
+					counter++;
+				}
 
 			}
 		}
 		else{
+			if(countriesx[first].Color == countriesy[countriesx[first].yPosition].Color){
+				if (lastPosition[countriesx[first].Color].yPosition != -1){
+					int x1 = countriesx[first].x;
+					int y1 = countriesx[first].y;
+					int x2 = lastPosition[countriesx[first].Color].x;
+					int y2 = lastPosition[countriesx[first].Color].y;
+					int distance = distancePoints(x1,y1,x2,y2);
+
+					if (distance < limit ){
+						countriesx[first].Color = 12;
+						CountryAdition(countriesx[first]);				//Si son iguales lo deja en blanco
+						counter++;
+					}
+					else{
+						lastPosition[countriesx[first].Color] = countriesx[first];
+						CountryAdition(countriesx[first]);				//Si son iguales lo deja en blanco
+						counter++;
+					}
+				}
+				else{
+					lastPosition[countriesx[first].Color] = countriesx[first];
+					CountryAdition(countriesx[first]);				//Si son iguales lo deja en blanco
+					counter++;
+				}
+
+			}
+			else{
+				int positiony = countriesx[first].yPosition;
+				if (countColors[countriesx[first].Color] < countColors[countriesy[positiony].Color]){
+
+					countColors[countriesx[first].Color] ++;
+					countColors[countriesy[positiony].Color] --;
+
+					lastPosition[countriesx[first].Color] = countriesx[first];
+					CountryAdition(countriesx[first]);				//Si son iguales lo deja en blanco
+					counter++;
+				}
+				else{
+					countColors[countriesx[first].Color] --;
+					countColors[countriesy[positiony].Color] ++;
+
+					countriesx[first].Color =countriesy[positiony].Color;
+					lastPosition[countriesx[first].Color] = countriesx[first];
+					CountryAdition(countriesx[first]);				//pedo mental
+				}
+
+			}
 
 		}
 		if(counter >= 5){

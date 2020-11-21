@@ -13,7 +13,7 @@ using namespace std;
 
 struct Country;
 
-void compare(Country countriesx [],Country countriesy []);
+void compare(Country countriesx [],Country countriesy [], int countColors []);
 //void compareDinamico(Country countriesx [],Country countriesy [], int countColors[]);
 
 
