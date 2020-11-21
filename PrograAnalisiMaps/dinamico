@@ -1,0 +1,91 @@
+void subEtapa(Country countriesx [],Country countriesy [], int countColors[], int xBegin, int xEnd, int yEnd){
+
+
+	for(int i = xBegin; i < xEnd; i++){
+		if(countriesx[i].yPosition < yEnd){
+			Country tmp = countriesx[i];
+			Country tmp2;
+			int j = i+1;
+			while(tmp2.xPosition == -1){
+				if(countriesy[j].yPosition < yEnd){
+					tmp = countriesy[j];
+				}
+				j++;
+			}
+			
+			
+			
+		}
+	}
+}
+
+void compareDinamico(Country countriesx [],Country countriesy [], int countColors[]){
+	counter = 0;
+	Country lastPosition[11];
+
+	Country first = countriesx[0];
+
+	if(first.Color == countriesy[first.yPosition].Color){
+		CountryAdition(countriesx[first]);
+		lastPosition[first.Color] = first;
+		counter++;
+	}
+	else{
+		if(countColors[first.Color] < countColors[countriesy[first.yPosition].Color]){
+			CountryAdition(countriesx[first]);
+			lastPosition[first.Color] = first;
+			counter++;
+		}
+		else{
+			first.Color = countriesy[first.yPosition].Color;
+			CountryAdition(countriesx[first]);
+			lastPosition[first.Color] = first;
+			counter++;
+		}
+	}
+	int xAxys[4] = {211/2,211/2,211,211};
+	int yAxys[4] = {211/2,211,211/2,211};
+	int xBegin[4] = {1,1,(211/2)+1,(211/2)+1};
+	for(int i = 0; i < 4; i++){
+		subEtapa(countriesx,countriesy,countColors,xBegin[i],xAxys[i],yAxys[i]);
+	}
+
+}
+
+
+/*
+float distance(int x1, int y1, int x2, int y2) {
+
+	float distance =sqrt(pow(x2 - x1, 2) +  pow(y2 - y1, 2) * 1.0);
+	return distance;
+}
+*/
+
+
+
+
+/*
+Country tmp = countriesx[i];
+
+if(tmp.Color == countriesy[tmp.y].Color){
+
+	CountryAdition(countriesx[tmp]);
+	lastPosition[first.Color] = tmp;
+	counter++;
+}
+else{
+	if(countColors[first.Color] > countColors[countriesy[tmp.y].Color]){
+
+		CountryAdition(countriesx[tmp]);
+		lastPosition[first.Color] = tmp;
+		counter++;
+	}
+	else{
+		first.Color = countriesy[tmp.y].Color;
+
+		CountryAdition(countriesx[tmp]);
+		lastPosition[first.Color] = tmp;
+		counter++;
+	}
+}
+*/
