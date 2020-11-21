@@ -14,8 +14,8 @@ using namespace std;
 
 struct Country{
 	string ID;
-	int xPosition;
-	int yPosition;
+	int xPosition ;
+	int yPosition = -1;
 	int Color = 12;
 	int x;
 	int y;

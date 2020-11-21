@@ -145,7 +145,7 @@ int tester(int cantColores){
 		std:: cout << endl;
 
 
-	compare(countriesx, countriesy, countColors);
+	compare(countriesx, countriesy,countColors);
 	return 0;
 
 }
