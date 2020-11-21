@@ -77,8 +77,6 @@ void compare(Country countriesx [],Country countriesy [], int countColors[]){
 	}
 }
 
-/*
-
 void compareDinamico(Country countriesx [],Country countriesy [], int countColors[]){
 	int position[11];
 
@@ -144,7 +142,7 @@ void compareDinamico(Country countriesx [],Country countriesy [], int countColor
 	}
 }
 
-*/
+
 /*
 float distance(int x1, int y1, int x2, int y2) {
 

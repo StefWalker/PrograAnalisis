@@ -17,12 +17,17 @@ void colorMaker()
 {
     struct Color *last = NULL;
 
-    last = addToEmpty(last, 6);
-    last = addBegin(last, 4);
-    last = addBegin(last, 2);
+    last = addToEmpty(last, 1);
+    last = addEnd(last, 2);
+    last = addEnd(last, 3);
+    last = addEnd(last, 4);
+    last = addEnd(last, 5);
+    last = addEnd(last, 6);
+    last = addEnd(last, 7);
     last = addEnd(last, 8);
+    last = addEnd(last, 9);
+    last = addEnd(last, 10);
     last = addEnd(last, 11);
-    last = addAfter(last, 10, 8);
 
     traverse(last);
 
