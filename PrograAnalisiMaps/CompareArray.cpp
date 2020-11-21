@@ -11,8 +11,8 @@
 #include "SVG.h"
 
 int counter = 0;
-
-/*void compare(Country countriesx [],Country countriesy [], int countColors[]){
+/*
+void compare(Country countriesx [],Country countriesy [], int countColors[]){
 	int position[11];
 
 	for(int first = 1;first < 211;first++){
@@ -76,6 +76,7 @@ int counter = 0;
 		}
 	}
 }*/
+
 int distancePoints (int x1, int y1, int x2 , int y2){
 	  int distance = sqrt((x1 - y1)*(x1 - y1 ) + (x2 - y2)*(x2 - y2));
 	  return distance;
@@ -126,7 +127,7 @@ void compare(Country countriesx [],Country countriesy [],int countColors[]){
 			if(countriesx[first].Color == countriesy[countriesx[first].yPosition].Color){
 				if (lastPosition[countriesx[first].Color].yPosition != -1){
 					int x1 = countriesx[first].x;
-					int y1 = countriesx[first].y;
+					int y1 = countriesx[first].y;		//SI son iguales dejo ese color pero reviso el last
 					int x2 = lastPosition[countriesx[first].Color].x;
 					int y2 = lastPosition[countriesx[first].Color].y;
 					int distance = distancePoints(x1,y1,x2,y2);
@@ -149,7 +150,7 @@ void compare(Country countriesx [],Country countriesy [],int countColors[]){
 				}
 
 			}
-			else{
+			else{ // si la y y la x no son iguales paso al contador de colores y debo verificar el que elijo en last
 				int positiony = countriesx[first].yPosition;
 				if (countColors[countriesx[first].Color] < countColors[countriesy[positiony].Color]){
 
