@@ -13,7 +13,9 @@ using namespace std;
 
 int main(){
 
-	tester();
+	int cantColores = 11;
+
+	tester(cantColores);
 
 	cout << "Nice "<< endl;
 }

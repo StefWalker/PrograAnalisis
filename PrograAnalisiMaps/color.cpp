@@ -7,25 +7,21 @@
 
 #include "color.h"
 
-#include<bits/stdc++.h>
+#include<iostream>
 using namespace std;
 
 
 // Driven Program
-/*
-int main()
+
+void colorMaker(int cantColores)
 {
     struct Color *last = NULL;
 
-    last = addToEmpty(last, 6);
-    last = addBegin(last, 4);
-    last = addBegin(last, 2);
-    last = addEnd(last, 8);
-    last = addEnd(last, 11);
-    last = addAfter(last, 10, 8);
+    last = addToEmpty(last, 1);
 
-    traverse(last);
+    for(int i = 0; i < cantColores; i++){
+    	last = addEnd(last, i);
+    }
 
-    return 0;
 }
-*/
+

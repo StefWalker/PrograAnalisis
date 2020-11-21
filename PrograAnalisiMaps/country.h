@@ -14,11 +14,14 @@ using namespace std;
 
 struct Country{
 	string ID;
-	int Color;
+	int xPosition ;
+	int yPosition = -1;
+	int Color = 12;
 	int x;
 	int y;
+	string d;
 	bool visitado;
-
+/*
 	Country(string pID, int pX, int pY){
 		this->ID = pID;
 		this->Color = 12;
@@ -33,10 +36,10 @@ struct Country{
 		this->x = 0;
 		this->y = 0;
 		this->visitado = false;
-	}
+	}*/
 };
 
-
+/*
 struct Node{
 	int x;
 	int y;
@@ -59,8 +62,8 @@ struct DataArray{
 		}
 	}
 };
-
+*/
 void XMLLoader(Country paises[]);
-int tester();
+int tester(int cantColores);
 
 #endif /* COUNTRY_H_ */

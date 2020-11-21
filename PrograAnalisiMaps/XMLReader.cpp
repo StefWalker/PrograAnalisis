@@ -11,8 +11,13 @@
 #include <iostream>
 #include <string>
 #include "MergeSort.h"
+#include "CompareArray.h"
 
 using namespace tinyxml2;
+
+//const string array[11] = {"fill:#0000FF;fill-rule:evenodd","fill:#FF0000;fill-rule:evenodd","fill:#FFFF00;fill-rule:evenodd",
+//		"fill:#00FF00;fill-rule:evenodd","fill:#E47833;fill-rule:evenodd","fill:#4F2F4F;fill-rule:evenodd","fill:#BC8F8F;fill-rule:evenodd"
+//		,"fill:#A62A2A;fill-rule:evenodd","fill:#4E2F2F;fill-rule:evenodd","fill:#770000;fill-rule:evenodd","fill:#ADEAEA;fill-rule:evenodd"};
 
 
 void XMLLoader(Country paises[]){
@@ -35,16 +40,17 @@ void XMLLoader(Country paises[]){
 				//std::cout << pID->Value() << std::endl;                 //Print out id
 			}
 			const XMLAttribute * pDataName = pPath->FindAttribute("data-name");  //Get 'data-name' Attribute
-			if (NULL != pDataName) {
+			//if (NULL != pDataName) {
 
 				//std::cout << pDataName->Value() << std::endl;        // Print out 'data-name'
-			}
+			//}
 			const XMLAttribute * pD = pPath->FindAttribute("d");  // Get 'd' Attribute
 			if (NULL != pD) {
 				bool first = false;
 				bool second = false;
 				int counter = 2;
 				string read = pD->Value();
+				paises[contador].d = read;
 				string valueX;
 				string valueY;
 				while(second == false){
@@ -75,43 +81,71 @@ void XMLLoader(Country paises[]){
 				//std::cout << stoi(valueX) << std::endl;
 			//	std::cout << stoi(valueY) << std::endl;    //Print out d
 			}
+
+			const XMLAttribute * pStyle = pPath->FindAttribute("style");
+
+			//pStyle->SetAttribute(&sender);
+
+			//pStyle->SetAttribute(sender);
 			contador ++;
 			//std::cout << std::endl;
 			//std::cout << "------------------------------------------------------------" << contador;
-		//	std::cout << std::endl;
+			//	std::cout << std::endl;
 
 			pPath = pPath->NextSiblingElement("path");  // Next path (path Sibling)
 		}
+
 		//std::cout << "\n";
 		}
 	}
 }
 
 
-int tester(){
+int tester(int cantColores){
 	int size = 211 ;
-	Country paises[size];
-	int pointy[size];
+	int sizeColors = 11;
 
-	XMLLoader(paises);			 //carga de paises
+	Country countriesx[size];
+	Country countriesy[size];
+
+	int countColors[sizeColors] = {0}; // contador de colores usados
+
+	XMLLoader(countriesx);			 //carga de paises
+	XMLLoader(countriesy);
 
 
-	for(int first = 0; first < size; first++){			//Carga de puntos y
-		pointy[first] = paises[first].y;
-	}
 
 	srand(time(0));
-	mergesort(paises,0,size-1);						//ordenamientos
-	mergeSorty(pointy, 0 , size-1);
+	mergesort(countriesx,0,size-1, cantColores,countColors);						//ordenamientos
+	for(int i= 0; i < 211; i++){
+		countriesy[i] = countriesx[i];
+	}
+	mergeSorty(countriesy, 0 , size-1, cantColores);
+
+	for(int i = 0;i < 211;i++){
+		for(int j = 0;j < 211;j++){
+			if(countriesx[i].ID == countriesy[j].ID){
+				countriesx[i].yPosition = j;
+				countriesx[i].xPosition = i;
+				break;
+			}
+		}
+	}
 
 	for(int i = 0; i<211; i++)
-		std::cout << paises[i].x << " " << paises[i].Color << endl;;
+		std::cout << countriesx[i].x << " " << countriesx[i].Color << endl;;
 	std:: cout << endl;
 
-	for(int i = 0; i<211; i++)
-		std::cout << pointy[i] << " ";
+	for(int i = 0; i<sizeColors; i++)
+			std::cout << countColors[i] << endl;;
 		std:: cout << endl;
 
+	for(int i = 0; i<211; i++)
+		std::cout << countriesy[i].y << " " << countriesy[i].Color << endl;;
+		std:: cout << endl;
+
+
+	compare(countriesx, countriesy,countColors);
 	return 0;
 
 }
