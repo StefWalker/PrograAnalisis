@@ -13,24 +13,15 @@ using namespace std;
 
 // Driven Program
 
-void colorMaker()
+void colorMaker(int cantColores)
 {
     struct Color *last = NULL;
 
     last = addToEmpty(last, 1);
-    last = addEnd(last, 2);
-    last = addEnd(last, 3);
-    last = addEnd(last, 4);
-    last = addEnd(last, 5);
-    last = addEnd(last, 6);
-    last = addEnd(last, 7);
-    last = addEnd(last, 8);
-    last = addEnd(last, 9);
-    last = addEnd(last, 10);
-    last = addEnd(last, 11);
 
-    traverse(last);
-
+    for(int i = 0; i < cantColores; i++){
+    	last = addEnd(last, i);
+    }
 
 }
 
