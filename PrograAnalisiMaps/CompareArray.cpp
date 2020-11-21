@@ -12,7 +12,7 @@
 
 int counter = 0;
 
-void compare(Country countriesx [],Country countriesy [], int countColors[]){
+/*void compare(Country countriesx [],Country countriesy [], int countColors[]){
 	int position[11];
 
 	for(int first = 1;first < 211;first++){
@@ -21,7 +21,7 @@ void compare(Country countriesx [],Country countriesy [], int countColors[]){
 			int position1 = countriesx[first].yPosition;
 			int position2 = countriesx[first-1].yPosition;
 
-			if (abs(position2 - position1) < 15){
+			if (abs(position2 - position1) < 30){
 				if(countriesy[position2].Color == countriesy[position1].Color){
 						countriesx[first].Color = 12;
 						CountryAdition(countriesx[first]);
@@ -75,8 +75,35 @@ void compare(Country countriesx [],Country countriesy [], int countColors[]){
 			counter = 0;
 		}
 	}
-}
+}*/
 
+void compare(Country countriesx [],Country countriesy []){
+	int position[11] = {0};
+
+	for(int first = 1;first < 211;first++){
+		if (countriesx[first].Color == countriesx[first-1].Color){
+			int firstPoint = countriesx[first].yPosition;
+			if (countriesy[firstPoint].Color == countriesx[first].Color){
+				countriesx[first].Color = 12;
+				CountryAdition(countriesx[first]);				//Si son iguales lo deja en blanco
+				counter++;
+			}
+			else{
+				countriesx[first].Color = countriesy[firstPoint].Color;
+				int color = countriesx[first].Color;
+				if (position[color])
+
+			}
+		}
+		else{
+
+		}
+		if(counter >= 5){
+			printCurrent("DiviveAndConquer");
+			counter = 0;
+		}
+	}
+}
 void compareDinamico(Country countriesx [],Country countriesy [], int countColors[]){
 	int position[11];
 
