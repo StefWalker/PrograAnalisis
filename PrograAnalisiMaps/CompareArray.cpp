@@ -84,7 +84,7 @@ int distancePoints (int x1, int y1, int x2 , int y2){
 
 void compare(Country countriesx [],Country countriesy [],int countColors[]){
 	Country lastPosition[11];
-	int limit = 15;
+	int limit = 12;
 
 	for(int first = 1;first < 211;first++){
 		if (countriesx[first].Color == countriesx[first-1].Color){
@@ -155,24 +155,59 @@ void compare(Country countriesx [],Country countriesy [],int countColors[]){
 				int positiony = countriesx[first].yPosition;
 				if (countColors[countriesx[first].Color] < countColors[countriesy[positiony].Color]){
 
-					countColors[countriesx[first].Color] ++;
-					countColors[countriesy[positiony].Color] --;
+					if (lastPosition[countriesx[first].Color].yPosition != -1){
+						int x1 = countriesx[first].x;
+						int y1 = countriesx[first].y;		//SI son iguales dejo ese color pero reviso el last
+						int x2 = lastPosition[countriesx[first].Color].x;
+						int y2 = lastPosition[countriesx[first].Color].y;
+						int distance = distancePoints(x1,y1,x2,y2);
 
-					lastPosition[countriesx[first].Color] = countriesx[first];
-					CountryAdition(countriesx[first]);				//Si son iguales lo deja en blanco
-					counter++;
+						if (distance < limit ){
+							countriesx[first].Color = 12;
+
+							//countColors[countriesy[positiony].Color] ++;
+							//countriesx[first].Color = countriesy[first].Color;
+							//lastPosition[countriesx[first].Color] = countriesx[first];
+							CountryAdition(countriesx[first]);				//Si son iguales lo deja en blanco
+							counter++;
+						}
+						else{
+							countColors[countriesx[first].Color] ++;
+							countColors[countriesy[positiony].Color] --;
+							lastPosition[countriesx[first].Color] = countriesy[first];
+							CountryAdition(countriesx[first]);				//Si son iguales lo deja en blanco
+							counter++;
+						}
+					}
+					else{
+						if (lastPosition[countriesx[first].Color].yPosition != -1){
+							int x1 = countriesx[first].x;
+							int y1 = countriesx[first].y;		//SI son iguales dejo ese color pero reviso el last
+							int x2 = lastPosition[countriesx[first].Color].x;
+							int y2 = lastPosition[countriesx[first].Color].y;
+							int distance = distancePoints(x1,y1,x2,y2);
+
+							if (distance < limit ){
+								countriesx[first].Color = 12;
+
+								//countColors[countriesy[positiony].Color] ++;
+								//countriesx[first].Color = countriesy[first].Color;
+								//lastPosition[countriesx[first].Color] = countriesx[first];
+								CountryAdition(countriesx[first]);				//Si son iguales lo deja en blanco
+								counter++;
+							}
+							else{
+								countColors[countriesx[first].Color] --;
+								countColors[countriesy[positiony].Color] ++;
+								countriesx[first].Color =countriesy[positiony].Color;
+								lastPosition[countriesx[first].Color] = countriesx[first];
+								CountryAdition(countriesx[first]);				//pedo mental
+								counter++;
+							}
+						}
+					}
 				}
-				else{
-					countColors[countriesx[first].Color] --;
-					countColors[countriesy[positiony].Color] ++;
-
-					countriesx[first].Color =countriesy[positiony].Color;
-					lastPosition[countriesx[first].Color] = countriesx[first];
-					CountryAdition(countriesx[first]);				//pedo mental
-				}
-
 			}
-
 		}
 		if(counter >= 5){
 			printCurrent("DiviveAndConquer");
