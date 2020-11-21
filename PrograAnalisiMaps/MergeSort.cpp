@@ -60,7 +60,7 @@ void merge(Country array[],int firstIndex,int lastIndex,int middle, int cantColo
 		}
 	}
 
-	delete temp;
+	//delete temp;
 }
 
 void mergeSorty(Country array [],int firstIndex,int lastIndex, int cantColores){
@@ -108,5 +108,5 @@ void mergey(Country array[],int firstIndex,int lastIndex,int middle, int cantCol
 			}
 		}
 
-		delete temp;
+		//delete temp;
 }
