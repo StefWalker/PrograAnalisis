@@ -18,8 +18,7 @@ using namespace std;
 
 string SVG;
 string svgBody = "";
-//string end = "</svg>";
-string array[11] = {"fill:#0000FF;fill-rule:evenodd","fill:#FF0000;fill-rule:evenodd","fill:#FFFF00;fill-rule:evenodd",
+string colorsArray[11] = {"fill:#0000FF;fill-rule:evenodd","fill:#FF0000;fill-rule:evenodd","fill:#FFFF00;fill-rule:evenodd",
 		"fill:#00FF00;fill-rule:evenodd","fill:#F76D10;fill-rule:evenodd","fill:#9933ff;fill-rule:evenodd","fill:#FF007E;fill-rule:evenodd"
 		,"fill:#009999;fill-rule:evenodd","fill:#00FFFF;fill-rule:evenodd","fill:#770000;fill-rule:evenodd","fill:#007800;fill-rule:evenodd"};
 
@@ -104,16 +103,16 @@ void SVGGenerator(){
 
 }
 
-void CountryAdition(Country pais){
-	if (pais.Color < 12 ){
+void countryAdition(Country pCountry){
+	if (pCountry.Color < 12 ){
 		svgBody += "  <path \n";
-		svgBody += "     d=\"" + pais.d + "\"\n";
-		svgBody += "     style=\"" + array[pais.Color] + "\" />\n";
+		svgBody += "     d=\"" + pCountry.coordenates + "\"\n";
+		svgBody += "     style=\"" + colorsArray[pCountry.Color] + "\" />\n";
 	}
 	else{
 		string blanco= "fill:#C0C0C0;fill-rule:evenodd";
 		svgBody += "  <path \n";
-		svgBody += "     d=\"" + pais.d + "\"\n";
+		svgBody += "     d=\"" + pCountry.coordenates + "\"\n";
 		svgBody += "     style=\"" + blanco + "\" />\n";
 	}
 }
@@ -122,9 +121,9 @@ void reset(){
 	svgBody = "";
 }
 
-void printCurrent(string algoritmo){
+void printCurrent(string pAlgorithm){
 	SVGGenerator();
-	ofstream out(algoritmo + ".svg");
+	ofstream out(pAlgorithm + ".svg");
 	out << SVG + svgBody + "</svg>";
 	out.close();
 }
