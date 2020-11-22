@@ -16,6 +16,11 @@
 
 using namespace std;
 
+/*
+ * Función que divide el array en subarrays por medio de la recursividad
+ * input : array de paises, primer elemento , cantidad de colores, array de cantidad de colores y ultimo elemento.
+ * outputs: ---------------
+ */
 void mergeSortX(Country pArray [],int pFirstIndex,int pLastIndex, int pCantColores,int pCountColors[]){
 
 	if(pFirstIndex < pLastIndex){
@@ -29,43 +34,51 @@ void mergeSortX(Country pArray [],int pFirstIndex,int pLastIndex, int pCantColor
 	}
 }
 
-void mergeX(Country pArray[],int pFirstIndex,int pLastIndex,int pMiddle, int pCantColores,int pCountColors[]){ //Función encargada de ordenar el arreglo
+/*
+ * Función que ordena los subarray y concatenan con el de la par , hasta ordenar el final.Su llave es la coordenanda x del punto.
+ * input : array de paises, primer elemento , cantidad de colores, array de cantidad de colores y ultimo elemento.
+ * outputs: -----
+ */
+void mergeX(Country pArray[],int pFirstIndex,int pLastIndex,int pMiddle, int pCantColores,int pCountColors[]){
 
 	int left = pFirstIndex;
 	int right = pMiddle+1;
 	int counter = 0;
 
-    Country temp [pLastIndex - pFirstIndex+1];
+    Country replace [pLastIndex - pFirstIndex+1];
 
 	while ( left <= pMiddle && right <= pLastIndex){
 		if(pArray[left].x < pArray[right].x){
 
-			temp[counter++] = pArray[left++];
+			replace[counter++] = pArray[left++];
 		}
 		else{
-			temp[counter++] = pArray[right++];
+			replace[counter++] = pArray[right++];
 		}
 	}
 	while ( left <= pMiddle){
-		temp[counter++] = pArray[left++];
+		replace[counter++] = pArray[left++];
 	}
 
 	while (right <= pLastIndex) {
-		temp[counter++] = pArray[right++];
+		replace[counter++] = pArray[right++];
 	}
 
 	for( left = pFirstIndex; left <= pLastIndex; left++){
-		pArray[left] = temp[left-pFirstIndex];
+		pArray[left] = replace[left-pFirstIndex];						//Asigna los colores de manera aleatorea
 		if(pArray[left].Color == 12){
 			int random = rand() % pCantColores;
-			pArray[left].Color = random;
+			pArray[left].Color = random;							//Suma uno al diigito que se encuentra en el array en la posicion del color .
 			pCountColors[random] = pCountColors[random]+1;
 		}
 	}
-
-	//delete temp;
 }
 
+/*
+ * Función que divide el array en subarrays por medio de la recursividad.
+ * input : array de paises, primer elemento , cantidad de colores, array de cantidad de colores y ultimo elemento.
+ * outputs: ---------------
+ */
 void mergeSortY(Country pArray [],int pFirstIndex,int pLastIndex, int pCantColores){
 	if(pFirstIndex < pLastIndex){
 
@@ -77,33 +90,38 @@ void mergeSortY(Country pArray [],int pFirstIndex,int pLastIndex, int pCantColor
 	}
 }
 
+/*
+ * Función que ordena los subarray y concatenan con el de la par , hasta ordenar el final.Su llave es la cordenada y del centro
+ * input : array de paises, primer elemento , cantidad de colores, array de cantidad de colores y ultimo elemento.
+ * outputs: -----
+ */
 void mergeY(Country pArray[],int pFirstIndex,int pLastIndex,int pMiddle, int pCantColores){ //Función encargada de ordenar el arreglo
 
 	int left = pFirstIndex;
 		int right = pMiddle+1;
 		int counter = 0;
 
-	    Country temp [pLastIndex - pFirstIndex+1];
+	    Country temporal [pLastIndex - pFirstIndex+1];
 
 		while ( left <= pMiddle && right <= pLastIndex){
 			if(pArray[left].y < pArray[right].y){
 
-				temp[counter++] = pArray[left++];
+				temporal[counter++] = pArray[left++];
 			}
 			else{
-				temp[counter++] = pArray[right++];
+				temporal[counter++] = pArray[right++];
 			}
 		}
 		while ( left <= pMiddle){
-			temp[counter++] = pArray[left++];
+			temporal[counter++] = pArray[left++];
 		}
 
 		while (right <= pLastIndex) {
-			temp[counter++] = pArray[right++];
+			temporal[counter++] = pArray[right++];
 		}
 
 		for( left = pFirstIndex; left <= pLastIndex; left++){
-			pArray[left] = temp[left-pFirstIndex];
+			pArray[left] = temporal[left-pFirstIndex];
 			if(pArray[left].Color == 12){
 				int random = rand() % pCantColores;
 				pArray[left].Color = random;
@@ -111,5 +129,4 @@ void mergeY(Country pArray[],int pFirstIndex,int pLastIndex,int pMiddle, int pCa
 			}
 		}
 
-		//delete temp;
 }
