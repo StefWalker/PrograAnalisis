@@ -16,9 +16,9 @@ using namespace std;
 
 int main(){
 
-	int pCantColores = 11;
+	int cantColores = 11;
 
-	startProcedure(pCantColores);
+	tester(cantColores);
 
 	cout << "Nice "<< endl;
 }

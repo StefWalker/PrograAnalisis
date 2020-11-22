@@ -16,8 +16,8 @@
 using namespace std;
 
 void SVGGenerator();
-void countryAdition(Country pCountry);
+void CountryAdition(Country pais);
 void reset();
-void printCurrent(string pAlgorithm);
+void printCurrent(string algoritmo);
 
 #endif /* SVG_H_ */
