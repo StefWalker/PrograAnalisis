@@ -5,7 +5,7 @@
  *      		2018135751
  *
  *      		Fernanda Lanza
- *      		201
+ *      		2018133074
  */
 
 #include "C:\Users\dylan\Desktop\GitHub\PrograAnalisis\PrograAnalisiMaps\country.h"
@@ -15,126 +15,142 @@
 #include <math.h>
 
 int counter = 0;
-
+int whites;
+/*
+ * Función que calcula la distancia entre dos puntos.
+ * input : la unidad de las coordenadas x y y de los puntos
+ * outputs: un integer, la distancia entre dos puntos.
+ */
 int distancePoints (int x1, int y1, int x2 , int y2){
 	  int distance = sqrt((x1 - y1)*(x1 - y1 ) + (x2 - y2)*(x2 - y2));
 	  return distance;
 }
 
-void compare(Country countriesx [],Country countriesy [],int countColors[]){
-	Country lastPosition[11];
-	int limit = 12;
+/*
+ * Función que realiza la comparación para finalizar el divide y vencerás.
+ * input : array de paises en eje x y, cantidad de colores que chiva x objetivo penstado.
+ * outputs:-----
+ */
+void compare(Country pCountriesX [],Country pCountriesY [],int pCountColors[]){
+
+	Country lastPosition[11];													//Array que guarda las ultimas posiciones de los paises pintados en un determinado color
+	int limit = 12;																//Limite de distancia
+	whites=0;
 
 	for(int first = 1;first < 211;first++){
-		if (countriesx[first].Color == countriesx[first-1].Color){
-			int firstPoint = countriesx[first].yPosition;
-			if (countriesy[firstPoint].Color == countriesx[first].Color){
+		if (pCountriesX[first].Color == pCountriesX[first-1].Color){
+			int firstPoint = pCountriesX[first].yPosition;						//Si los colores son iguales paso a verificar con "y".
+			if (pCountriesY[firstPoint].Color == pCountriesX[first].Color){
 
-				countriesx[first].Color = 12;
-				CountryAdition(countriesx[first]);				//Si son iguales lo deja en blanco
+				pCountriesX[first].Color = 12;
+				CountryAdition(pCountriesX[first]);								//Si son iguales el color en "y" y x, lo deja en blanco y mando a escribir el color
 				counter++;
+				whites++;
 			}
 			else{
-				countriesx[first].Color = countriesy[firstPoint].Color;
-				if (lastPosition[countriesx[first].Color].yPosition != -1){
+				pCountriesX[first].Color = pCountriesY[firstPoint].Color;	    //Si son diferentes se lo asigno pero paso a verificar con el ultimo que se pintó
+				if (lastPosition[pCountriesX[first].Color].yPosition != -1){
 
-					int x1 = countriesx[first].x;
-					int y1 = countriesx[first].y;
-					int x2 = lastPosition[countriesx[first].Color].x;
-					int y2 = lastPosition[countriesx[first].Color].y;
+					int x1 = pCountriesX[first].x;
+					int y1 = pCountriesX[first].y;								// Saco los puntos en (x,y)
+					int x2 = lastPosition[pCountriesX[first].Color].x;
+					int y2 = lastPosition[pCountriesX[first].Color].y;
 					int distance = distancePoints(x1,y1,x2,y2);
 
 					if (distance < limit ){
-						countriesx[first].Color = 12;
-						CountryAdition(countriesx[first]);				//Si son iguales lo deja en blanco
+						pCountriesX[first].Color = 12;
+						CountryAdition(pCountriesX[first]);						//Si el limete era mayor
 						counter++;
+						whites++;
 					}
 					else{
-						lastPosition[countriesx[first].Color] = countriesx[first];
-						CountryAdition(countriesx[first]);				//Si son iguales lo deja en blanco
+						lastPosition[pCountriesX[first].Color] =pCountriesX[first];		//Si pasa la prueba de la distancia se asigna como en la ulma posicion
+						CountryAdition(pCountriesX[first]);
 						counter++;
 					}
 				}
 				else{
-					lastPosition[countriesx[first].Color] = countriesx[first];
-					CountryAdition(countriesx[first]);				//Si son iguales lo deja en blanco
+					lastPosition[pCountriesX[first].Color] = pCountriesX[first];
+					CountryAdition(pCountriesX[first]);									//Si en el array lastPosition no está vacio solo se coloca el brasalete
 					counter++;
 				}
 
 			}
 		}
-		else{
-			if(countriesx[first].Color == countriesy[countriesx[first].yPosition].Color){
-				if (lastPosition[countriesx[first].Color].yPosition != -1){
-					int x1 = countriesx[first].x;
-					int y1 = countriesx[first].y;		//SI son iguales dejo ese color pero reviso el last
-					int x2 = lastPosition[countriesx[first].Color].x;
-					int y2 = lastPosition[countriesx[first].Color].y;
+		else{																			//Si los colores de first y first -1 son diferentes , se hará lo siguiente.
+			if(pCountriesX[first].Color == pCountriesY[pCountriesX[first].yPosition].Color){
+				if (lastPosition[pCountriesX[first].Color].yPosition != -1){
+					int x1 = pCountriesX[first].x;
+					int y1 = pCountriesX[first].y;		//SI son iguales dejo ese color pero reviso el last
+					int x2 = lastPosition[pCountriesX[first].Color].x;
+					int y2 = lastPosition[pCountriesX[first].Color].y;
 					int distance = distancePoints(x1,y1,x2,y2);
 
 					if (distance < limit ){
-						countriesx[first].Color = 12;
-						CountryAdition(countriesx[first]);				//Si son iguales lo deja en blanco
+						pCountriesX[first].Color = 12;
+						CountryAdition(pCountriesX[first]);				//Si son iguales lo deja en blanco
 						counter++;
+						whites ++;
 					}
 					else{
-						lastPosition[countriesx[first].Color] = countriesx[first];
-						CountryAdition(countriesx[first]);				//Si son iguales lo deja en blanco
+						lastPosition[pCountriesX[first].Color] = pCountriesX[first];
+						CountryAdition(pCountriesX[first]);				//Si son iguales lo deja en blanco
 						counter++;
 					}
 				}
 				else{
-					lastPosition[countriesx[first].Color] = countriesx[first];
-					CountryAdition(countriesx[first]);				//Si son iguales lo deja en blanco
+					lastPosition[pCountriesX[first].Color] = pCountriesX[first];
+					CountryAdition(pCountriesX[first]);				//Si son iguales lo deja en blanco
 					counter++;
 				}
 
 			}
-			else{ // si la y y la x no son iguales paso al contador de colores y debo verificar el que elijo en last
-				int positiony = countriesx[first].yPosition;
-				if (countColors[countriesx[first].Color] < countColors[countriesy[positiony].Color]){
+			else{													 // si la y y la x no son iguales paso al contador de colores y debo verificar el que elijo en last
+				int positiony = pCountriesX[first].yPosition;
+				if (pCountColors[pCountriesX[first].Color] < pCountColors[pCountriesY[positiony].Color]){
 
-					if (lastPosition[countriesx[first].Color].yPosition != -1){
-						int x1 = countriesx[first].x;
-						int y1 = countriesx[first].y;		//SI son iguales dejo ese color pero reviso el last
-						int x2 = lastPosition[countriesx[first].Color].x;
-						int y2 = lastPosition[countriesx[first].Color].y;
+					if (lastPosition[pCountriesX[first].Color].yPosition != -1){
+						int x1 = pCountriesX[first].x;
+						int y1 = pCountriesX[first].y;						//SI son iguales dejo ese color pero reviso el last
+						int x2 = lastPosition[pCountriesX[first].Color].x;
+						int y2 = lastPosition[pCountriesX[first].Color].y;
 						int distance = distancePoints(x1,y1,x2,y2);
 
 						if (distance < limit ){
-							countriesx[first].Color = 12;
+							pCountriesX[first].Color = 12;
 
-							CountryAdition(countriesx[first]);				//Si son iguales lo deja en blanco
+							CountryAdition(pCountriesX[first]);				//Si son iguales lo deja en blanco
 							counter++;
+							whites ++;
 						}
 						else{
-							countColors[countriesx[first].Color] ++;
-							countColors[countriesy[positiony].Color] --;
-							lastPosition[countriesx[first].Color] = countriesy[first];
-							CountryAdition(countriesx[first]);				//Si son iguales lo deja en blanco
+							pCountColors[pCountriesX[first].Color] ++;
+							pCountColors[pCountriesY[positiony].Color] --;
+							lastPosition[pCountriesX[first].Color] = pCountriesY[first];
+							CountryAdition(pCountriesX[first]);				//Sino el que tenga menos paises de ese color se deja del todo.
 							counter++;
 						}
 					}
 					else{
-						if (lastPosition[countriesx[first].Color].yPosition != -1){
-							int x1 = countriesx[first].x;
-							int y1 = countriesx[first].y;		//SI son iguales dejo ese color pero reviso el last
-							int x2 = lastPosition[countriesx[first].Color].x;
-							int y2 = lastPosition[countriesx[first].Color].y;
+						if (lastPosition[pCountriesX[first].Color].yPosition != -1){
+							int x1 = pCountriesX[first].x;
+							int y1 = pCountriesX[first].y;
+							int x2 = lastPosition[pCountriesX[first].Color].x;
+							int y2 = lastPosition[pCountriesX[first].Color].y;
 							int distance = distancePoints(x1,y1,x2,y2);
 
 							if (distance < limit ){
-								countriesx[first].Color = 12;
-
-								CountryAdition(countriesx[first]);				//Si son iguales lo deja en blanco
+								pCountriesX[first].Color = 12;
+								CountryAdition(pCountriesX[first]);
 								counter++;
+								whites ++;
 							}
 							else{
-								countColors[countriesx[first].Color] --;
-								countColors[countriesy[positiony].Color] ++;
-								countriesx[first].Color =countriesy[positiony].Color;
-								lastPosition[countriesx[first].Color] = countriesx[first];
-								CountryAdition(countriesx[first]);				//pedo mental
+								pCountColors[pCountriesX[first].Color] --;			//Si hay más en el color x ,ese será el ultimo que se matiene.
+								pCountColors[pCountriesY[positiony].Color] ++;
+								pCountriesX[first].Color =pCountriesY[positiony].Color;
+								lastPosition[pCountriesX[first].Color] = pCountriesX[first];
+								CountryAdition(pCountriesX[first]);
 								counter++;
 							}
 						}
@@ -147,38 +163,37 @@ void compare(Country countriesx [],Country countriesy [],int countColors[]){
 			counter = 0;
 		}
 	}
+	cout << "D&Q Completado" << endl;
+	cout <<"Cantidad blancos:" << whites << endl;
 }
 
 
 
-void subEtapa(Country countriesx [],Country countriesy [], int countColors[], int xBegin, int xEnd, int yBegin, int yEnd, int ci){
-	cout << "entra" << endl;
+void subEtapa(Country pCountriesX [],Country pCountriesY [], int pCountColors[], int xBegin, int xEnd, int yBegin, int yEnd, int ci){
 	Country lastPosition[11];
-	Country first = countriesx[xBegin];
-	int xDistance = 5;
-	int limitDistance = 15;
-	cout << "entra1" << endl;
+	Country first = pCountriesX[xBegin];
+	int xDistance = 8;
+	int limitDistance = 12;
 	while(first.xPosition == -1 && xBegin < xEnd){ // busca la primera posicion en x valida
-		if(countriesx[xBegin].yPosition < yEnd && countriesx[xBegin].yPosition > yBegin){
-			first = countriesx[xBegin];
+		if(pCountriesX[xBegin].yPosition < yEnd && pCountriesX[xBegin].yPosition > yBegin){
+			first = pCountriesX[xBegin];
 		}
 		xBegin++;
 	}
-	cout << "sale1" << endl;
 
-	if(first.Color == countriesy[first.yPosition].Color){
+	if(first.Color == pCountriesY[first.yPosition].Color){
 			CountryAdition(first);
 			lastPosition[first.Color] = first;
 			counter++;
 	}
 	else{
-		if(countColors[first.Color] < countColors[countriesy[first.yPosition].Color]){
+		if(pCountColors[first.Color] < pCountColors[pCountriesY[first.yPosition].Color]){
 			CountryAdition(first);
 			lastPosition[first.Color] = first;
 			counter++;
 		}
 		else{
-			first.Color = countriesy[first.yPosition].Color;
+			first.Color = pCountriesY[first.yPosition].Color;
 			CountryAdition(first);
 			lastPosition[first.Color] = first;
 			counter++;
@@ -186,76 +201,81 @@ void subEtapa(Country countriesx [],Country countriesy [], int countColors[], in
 	}
 	// ya con el primero con color seteado, se inicia el algoritmo
 	Country last = first;
-	Country tmp = last;
-	for(int i = xBegin; i < xEnd; i++){
-		cout << "ciclo" << xBegin << endl;
-		if(countriesx[i].yPosition < yEnd && countriesx[i].yPosition > yBegin){
-			Country tmp2 = countriesx[i];
-			if(tmp.Color != tmp2.Color && tmp2.Color != countriesy[tmp2.yPosition].Color && tmp.Color != countriesy[tmp2.yPosition].Color){
-				if(countColors[tmp2.Color] > countColors[countriesy[tmp2.yPosition].Color]){
-					countColors[tmp2.Color]--;
-					countColors[countriesy[tmp2.yPosition].Color]++;
+	for(int zone = xBegin; zone < xEnd; zone++){
 
-					tmp2.Color = countriesy[tmp2.yPosition].Color;
+		if(pCountriesX[zone].yPosition < yEnd && pCountriesX[zone].yPosition > yBegin){
+
+			Country nextPosition = pCountriesX[zone];
+			if(last.Color != nextPosition.Color && nextPosition.Color != pCountriesY[nextPosition.yPosition].Color && last.Color != pCountriesY[nextPosition.yPosition].Color){
+				if(pCountColors[nextPosition.Color] > pCountColors[pCountriesY[nextPosition.yPosition].Color]){
+					pCountColors[nextPosition.Color]--;
+					pCountColors[pCountriesY[nextPosition.yPosition].Color]++;
+
+					nextPosition.Color = pCountriesY[nextPosition.yPosition].Color;
 				}
 
 			}
-			else if(tmp.Color == tmp2.Color && tmp2.Color == countriesy[tmp2.yPosition].Color){
-				tmp2.Color = 12;
+			else if(last.Color == nextPosition.Color && nextPosition.Color == pCountriesY[nextPosition.yPosition].Color){
+				nextPosition.Color = 12;
+				whites ++;
 			}
-			else if(tmp.Color == tmp2.Color && tmp2.Color != countriesy[tmp2.yPosition].Color){
-				tmp2.Color = countriesy[tmp2.yPosition].Color;
+			else if(last.Color == nextPosition.Color && nextPosition.Color != pCountriesY[nextPosition.yPosition].Color){
+				nextPosition.Color = pCountriesY[nextPosition.yPosition].Color;
 			}
 
-			if(tmp2.Color != 12){
-				Country tmp3 = lastPosition[tmp2.Color];
-				if(tmp3.xPosition != -1){
-					if(abs(tmp3.xPosition - tmp2.xPosition) <= xDistance){
-						if(distancePoints(tmp3.xPosition, tmp3.yPosition, tmp2.xPosition,tmp2.yPosition) > limitDistance){
-							CountryAdition(tmp2);
-							lastPosition[tmp2.Color] = tmp2;
+			if(nextPosition.Color != 12){
+
+				Country colorSearch = lastPosition[nextPosition.Color];
+
+				if(last.xPosition != -1){
+					if(abs(colorSearch.xPosition - nextPosition.xPosition) <= xDistance){
+						if(distancePoints(colorSearch.xPosition, colorSearch.yPosition, nextPosition.xPosition,nextPosition.yPosition) > limitDistance){
+							CountryAdition(nextPosition);
+							lastPosition[nextPosition.Color] = nextPosition;
 							counter++;
 						}
 						else{
-							tmp2.Color = 12;
-							CountryAdition(tmp2);
+							nextPosition.Color = 12;
+							CountryAdition(nextPosition);
 							counter++;
+							whites ++;
 						}
 					}
 					else{
-						lastPosition[tmp2.Color] = tmp2;
-						CountryAdition(tmp2);
+						lastPosition[nextPosition.Color] = nextPosition;
+						CountryAdition(nextPosition);
 						counter++;
 					}
 				}
 				else{
-					lastPosition[tmp2.Color] = tmp2;
-					CountryAdition(tmp2);
+					lastPosition[nextPosition.Color] = nextPosition;
+					CountryAdition(nextPosition);
 					counter++;
 					}
 			}
 			else{
-				CountryAdition(tmp2);
+				CountryAdition(nextPosition);
 				counter++;
 			}
-		last = tmp2;
+		last = nextPosition;
 		}
 		if(counter >= 5){
 			printCurrent("Dinamico/Dinamico");
 			counter = 0;
 		}
 	}
+	cout << whites << endl;
 }
 
-void compareDinamico(Country countriesx [],Country countriesy [], int countColors[]){
+void compareDinamico(Country pCountriesX [],Country pCountriesY [], int pCountColors[]){
 	counter = 0;
-
+	whites = 0;
 	int xAxys[4] = {211/2,211/2,211,211};
 	int yAxys[4] = {211/2,211,211/2,211};
 	int xBegin[4] = {0,0,(211/2)+1,(211/2)+1};
 	int yBegin[4] = {0,(211/2)+1,0,(211/2)+1};
 	for(int i = 0; i < 4; i++){
-		subEtapa(countriesx,countriesy,countColors,xBegin[i],xAxys[i],yBegin[i],yAxys[i],i);
+		subEtapa(pCountriesX,pCountriesY,pCountColors,xBegin[i],xAxys[i],yBegin[i],yAxys[i],i);
 	}
 	cout << "Dinamico Completado" << endl;
 }
