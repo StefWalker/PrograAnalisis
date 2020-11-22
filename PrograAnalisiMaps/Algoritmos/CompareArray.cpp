@@ -47,7 +47,7 @@ void compare(Country pCountriesX [],Country pCountriesY [],int pCountColors[]){
 
 					if (distance < limit ){
 						pCountriesX[first].Color = 12;
-						CountryAdition(pCountriesx[first]);				//Si son iguales lo deja en blanco
+						CountryAdition(pCountriesX[first]);				//Si son iguales lo deja en blanco
 						counter++;
 					}
 					else{
@@ -58,7 +58,7 @@ void compare(Country pCountriesX [],Country pCountriesY [],int pCountColors[]){
 				}
 				else{
 					lastPosition[pCountriesX[first].Color] = pCountriesX[first];
-					CountryAdition(pCountriesx[first]);				//Si son iguales lo deja en blanco
+					CountryAdition(pCountriesX[first]);				//Si son iguales lo deja en blanco
 					counter++;
 				}
 
@@ -127,7 +127,7 @@ void compare(Country pCountriesX [],Country pCountriesY [],int pCountColors[]){
 							if (distance < limit ){
 								pCountriesX[first].Color = 12;
 
-								CountryAdition(pCountriesx[first]);				//Si son iguales lo deja en blanco
+								CountryAdition(pCountriesX[first]);				//Si son iguales lo deja en blanco
 								counter++;
 							}
 							else{
@@ -148,24 +148,22 @@ void compare(Country pCountriesX [],Country pCountriesY [],int pCountColors[]){
 			counter = 0;
 		}
 	}
+	cout << "D&Q Completado" << endl;
 }
 
 
 
 void subEtapa(Country pCountriesX [],Country pCountriesY [], int pCountColors[], int xBegin, int xEnd, int yBegin, int yEnd, int ci){
-	cout << "entra" << endl;
 	Country lastPosition[11];
 	Country first = pCountriesX[xBegin];
 	int xDistance = 5;
 	int limitDistance = 15;
-	cout << "entra1" << endl;
 	while(first.xPosition == -1 && xBegin < xEnd){ // busca la primera posicion en x valida
 		if(pCountriesX[xBegin].yPosition < yEnd && pCountriesX[xBegin].yPosition > yBegin){
 			first = pCountriesX[xBegin];
 		}
 		xBegin++;
 	}
-	cout << "sale1" << endl;
 
 	if(first.Color == pCountriesY[first.yPosition].Color){
 			CountryAdition(first);
@@ -187,26 +185,24 @@ void subEtapa(Country pCountriesX [],Country pCountriesY [], int pCountColors[],
 	}
 	// ya con el primero con color seteado, se inicia el algoritmo
 	Country last = first;
-	Country lastPosition = last;
 	for(int zone = xBegin; zone < xEnd; zone++){
-		cout << "ciclo" << xBegin << endl;
 
 		if(pCountriesX[zone].yPosition < yEnd && pCountriesX[zone].yPosition > yBegin){
 
 			Country nextPosition = pCountriesX[zone];
-			if(lastPosition.Color != nextPosition.Color && nextPosition.Color != pCountriesY[nextPosition.yPosition].Color && lastPosition.Color != countriesy[nextPosition.yPosition].Color){
+			if(last.Color != nextPosition.Color && nextPosition.Color != pCountriesY[nextPosition.yPosition].Color && last.Color != pCountriesY[nextPosition.yPosition].Color){
 				if(pCountColors[nextPosition.Color] > pCountColors[pCountriesY[nextPosition.yPosition].Color]){
 					pCountColors[nextPosition.Color]--;
 					pCountColors[pCountriesY[nextPosition.yPosition].Color]++;
 
-					nextPosition.Color = pCountriesY[tmp2.yPosition].Color;
+					nextPosition.Color = pCountriesY[nextPosition.yPosition].Color;
 				}
 
 			}
-			else if(lastPosition.Color == nextPosition.Color && nextPosition.Color == pCountriesY[nextPosition.yPosition].Color){
+			else if(last.Color == nextPosition.Color && nextPosition.Color == pCountriesY[nextPosition.yPosition].Color){
 				nextPosition.Color = 12;
 			}
-			else if(lastPosition.Color == nextPosition.Color && nextPosition.Color != pCountriesY[nextPosition.yPosition].Color){
+			else if(last.Color == nextPosition.Color && nextPosition.Color != pCountriesY[nextPosition.yPosition].Color){
 				nextPosition.Color = pCountriesY[nextPosition.yPosition].Color;
 			}
 
@@ -214,7 +210,7 @@ void subEtapa(Country pCountriesX [],Country pCountriesY [], int pCountColors[],
 
 				Country colorSearch = lastPosition[nextPosition.Color];
 
-				if(lastColor.xPosition != -1){
+				if(last.xPosition != -1){
 					if(abs(colorSearch.xPosition - nextPosition.xPosition) <= xDistance){
 						if(distancePoints(colorSearch.xPosition, colorSearch.yPosition, nextPosition.xPosition,nextPosition.yPosition) > limitDistance){
 							CountryAdition(nextPosition);

@@ -125,8 +125,8 @@ int tester(int cantColores){
 		std:: cout << endl;
 */
 
-	compare(countriesx, countriesy,countColors);
-	//compareDinamico(countriesx, countriesy,countColors);
+	//compare(countriesx, countriesy,countColors);
+	compareDinamico(countriesx, countriesy,countColors);
 	return 0;
 
 }
