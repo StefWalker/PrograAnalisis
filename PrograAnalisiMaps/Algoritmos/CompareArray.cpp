@@ -15,12 +15,21 @@
 #include <math.h>
 
 int counter = 0;
-
+/*
+ * Función que calcula la distancia entre dos puntos.
+ * input : la unidad de las coordenadas x y y de los puntos
+ * outputs: un integer, la distancia entre dos puntos.
+ */
 int distancePoints (int x1, int y1, int x2 , int y2){
 	  int distance = sqrt((x1 - y1)*(x1 - y1 ) + (x2 - y2)*(x2 - y2));
 	  return distance;
 }
 
+/*
+ * Función que realiza la comparación para finalizar el divide y vencerás.
+ * input : array de paises en eje x y, cantidad de colores que chiva x objetivo penstado.
+ * outputs:-----
+ */
 void compare(Country pCountriesX [],Country pCountriesY [],int pCountColors[]){
 
 	Country lastPosition[11];													//Array que guarda las ultimas posiciones de los paises pintados en un determinado color
