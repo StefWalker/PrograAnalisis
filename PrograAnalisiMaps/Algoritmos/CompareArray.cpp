@@ -1,81 +1,20 @@
 /*
  * CompareArray.cpp
  *
- *  Created on: 18 nov. 2020
- *      Author: ferla
+ *      Author: Dylan Torres
+ *      		2018135751
+ *
+ *      		Fernanda Lanza
+ *      		201
  */
-#include "country.h"
+
+#include "C:\Users\dylan\Desktop\GitHub\PrograAnalisis\PrograAnalisiMaps\country.h"
+#include "C:\Users\dylan\Desktop\GitHub\PrograAnalisis\PrograAnalisiMaps\SVG\SVG.h"
 #include <iostream>
 #include <cstdlib>
 #include <math.h>
-#include "SVG.h"
 
 int counter = 0;
-/*
-void compare(Country countriesx [],Country countriesy [], int countColors[]){
-	int position[11];
-
-	for(int first = 1;first < 211;first++){
-		if( countriesx[first].Color == countriesx[first-1].Color){
-
-			int position1 = countriesx[first].yPosition;
-			int position2 = countriesx[first-1].yPosition;
-
-			if (abs(position2 - position1) < 30){
-				if(countriesy[position2].Color == countriesy[position1].Color){
-						countriesx[first].Color = 12;
-						CountryAdition(countriesx[first]);
-						counter++;
-				}
-				else{
-					countriesx[first].Color = countriesy[position1].Color;
-						position[countriesy[position1].Color] = first;
-						CountryAdition(countriesx[first]);
-						counter++;
-					}
-			}
-			else{
-				position[countriesx[first].Color] = first;
-				CountryAdition(countriesx[first]);
-				counter++;
-			}
-		}
-		else{
-			if (abs(position[countriesx[first].Color] - first) < 30){
-				int position1 = countriesx[first].yPosition;
-				int position2 = countriesx[countriesx[first].Color].yPosition;
-
-				if (abs(position2 - position1) < 15){
-					if(countriesy[position2].Color == countriesy[position1].Color){
-						countriesx[first].Color = 12;
-						CountryAdition(countriesx[first]);
-						counter++;
-					}
-					else{
-						countriesx[first].Color = countriesy[position1].Color;
-						position[countriesy[position1].Color] = first;
-						CountryAdition(countriesx[first]);
-						counter++;
-					}
-				}
-				else{
-					position[countriesx[first].Color] = first;
-					CountryAdition(countriesx[first]);
-					counter++;
-				}
-			}
-			else{
-				position[countriesx[first].Color] = first;
-				CountryAdition(countriesx[first]);
-				counter++;
-			}
-		}
-		if(counter >= 5){
-			printCurrent("DiviveAndConquer");
-			counter = 0;
-		}
-	}
-}*/
 
 int distancePoints (int x1, int y1, int x2 , int y2){
 	  int distance = sqrt((x1 - y1)*(x1 - y1 ) + (x2 - y2)*(x2 - y2));
@@ -165,9 +104,6 @@ void compare(Country countriesx [],Country countriesy [],int countColors[]){
 						if (distance < limit ){
 							countriesx[first].Color = 12;
 
-							//countColors[countriesy[positiony].Color] ++;
-							//countriesx[first].Color = countriesy[first].Color;
-							//lastPosition[countriesx[first].Color] = countriesx[first];
 							CountryAdition(countriesx[first]);				//Si son iguales lo deja en blanco
 							counter++;
 						}
@@ -190,9 +126,6 @@ void compare(Country countriesx [],Country countriesy [],int countColors[]){
 							if (distance < limit ){
 								countriesx[first].Color = 12;
 
-								//countColors[countriesy[positiony].Color] ++;
-								//countriesx[first].Color = countriesy[first].Color;
-								//lastPosition[countriesx[first].Color] = countriesx[first];
 								CountryAdition(countriesx[first]);				//Si son iguales lo deja en blanco
 								counter++;
 							}
@@ -210,7 +143,7 @@ void compare(Country countriesx [],Country countriesy [],int countColors[]){
 			}
 		}
 		if(counter >= 5){
-			printCurrent("DiviveAndConquer");
+			printCurrent("Divide&Conquer/DiviveAndConquer");
 			counter = 0;
 		}
 	}
@@ -218,37 +151,25 @@ void compare(Country countriesx [],Country countriesy [],int countColors[]){
 
 
 
-void subEtapa(Country countriesx [],Country countriesy [], int countColors[], int xBegin, int xEnd, int yEnd){
-
-
-	for(int i = xBegin; i < xEnd; i++){
-		if(countriesx[i].yPosition < yEnd){
-			Country tmp = countriesx[i];
-			Country tmp2;
-			int j = i+1;
-			while(tmp2.xPosition == -1){
-				if(countriesy[j].yPosition < yEnd){
-					tmp = countriesy[j];
-				}
-				j++;
-			}
-
-
-
-		}
-	}
-}
-
-void compareDinamico(Country countriesx [],Country countriesy [], int countColors[]){
-	counter = 0;
+void subEtapa(Country countriesx [],Country countriesy [], int countColors[], int xBegin, int xEnd, int yBegin, int yEnd, int ci){
+	cout << "entra" << endl;
 	Country lastPosition[11];
-
-	Country first = countriesx[0];
+	Country first = countriesx[xBegin];
+	int xDistance = 5;
+	int limitDistance = 15;
+	cout << "entra1" << endl;
+	while(first.xPosition == -1 && xBegin < xEnd){ // busca la primera posicion en x valida
+		if(countriesx[xBegin].yPosition < yEnd && countriesx[xBegin].yPosition > yBegin){
+			first = countriesx[xBegin];
+		}
+		xBegin++;
+	}
+	cout << "sale1" << endl;
 
 	if(first.Color == countriesy[first.yPosition].Color){
-		CountryAdition(first);
-		lastPosition[first.Color] = first;
-		counter++;
+			CountryAdition(first);
+			lastPosition[first.Color] = first;
+			counter++;
 	}
 	else{
 		if(countColors[first.Color] < countColors[countriesy[first.yPosition].Color]){
@@ -263,49 +184,79 @@ void compareDinamico(Country countriesx [],Country countriesy [], int countColor
 			counter++;
 		}
 	}
+	// ya con el primero con color seteado, se inicia el algoritmo
+	Country last = first;
+	Country tmp = last;
+	for(int i = xBegin; i < xEnd; i++){
+		cout << "ciclo" << xBegin << endl;
+		if(countriesx[i].yPosition < yEnd && countriesx[i].yPosition > yBegin){
+			Country tmp2 = countriesx[i];
+			if(tmp.Color != tmp2.Color && tmp2.Color != countriesy[tmp2.yPosition].Color && tmp.Color != countriesy[tmp2.yPosition].Color){
+				if(countColors[tmp2.Color] > countColors[countriesy[tmp2.yPosition].Color]){
+					countColors[tmp2.Color]--;
+					countColors[countriesy[tmp2.yPosition].Color]++;
+
+					tmp2.Color = countriesy[tmp2.yPosition].Color;
+				}
+
+			}
+			else if(tmp.Color == tmp2.Color && tmp2.Color == countriesy[tmp2.yPosition].Color){
+				tmp2.Color = 12;
+			}
+			else if(tmp.Color == tmp2.Color && tmp2.Color != countriesy[tmp2.yPosition].Color){
+				tmp2.Color = countriesy[tmp2.yPosition].Color;
+			}
+
+			if(tmp2.Color != 12){
+				Country tmp3 = lastPosition[tmp2.Color];
+				if(tmp3.xPosition != -1){
+					if(abs(tmp3.xPosition - tmp2.xPosition) <= xDistance){
+						if(distancePoints(tmp3.xPosition, tmp3.yPosition, tmp2.xPosition,tmp2.yPosition) > limitDistance){
+							CountryAdition(tmp2);
+							lastPosition[tmp2.Color] = tmp2;
+							counter++;
+						}
+						else{
+							tmp2.Color = 12;
+							CountryAdition(tmp2);
+							counter++;
+						}
+					}
+					else{
+						lastPosition[tmp2.Color] = tmp2;
+						CountryAdition(tmp2);
+						counter++;
+					}
+				}
+				else{
+					lastPosition[tmp2.Color] = tmp2;
+					CountryAdition(tmp2);
+					counter++;
+					}
+			}
+			else{
+				CountryAdition(tmp2);
+				counter++;
+			}
+		last = tmp2;
+		}
+		if(counter >= 5){
+			printCurrent("Dinamico/Dinamico");
+			counter = 0;
+		}
+	}
+}
+
+void compareDinamico(Country countriesx [],Country countriesy [], int countColors[]){
+	counter = 0;
+
 	int xAxys[4] = {211/2,211/2,211,211};
 	int yAxys[4] = {211/2,211,211/2,211};
-	int xBegin[4] = {1,1,(211/2)+1,(211/2)+1};
+	int xBegin[4] = {0,0,(211/2)+1,(211/2)+1};
+	int yBegin[4] = {0,(211/2)+1,0,(211/2)+1};
 	for(int i = 0; i < 4; i++){
-		subEtapa(countriesx,countriesy,countColors,xBegin[i],xAxys[i],yAxys[i]);
+		subEtapa(countriesx,countriesy,countColors,xBegin[i],xAxys[i],yBegin[i],yAxys[i],i);
 	}
-
+	cout << "Dinamico Completado" << endl;
 }
 
-
-/*
-float distance(int x1, int y1, int x2, int y2) {
-
-	float distance =sqrt(pow(x2 - x1, 2) +  pow(y2 - y1, 2) * 1.0);
-	return distance;
-}
-*/
-
-
-
-
-/*
-Country tmp = countriesx[i];
-
-if(tmp.Color == countriesy[tmp.y].Color){
-
-	CountryAdition(countriesx[tmp]);
-	lastPosition[first.Color] = tmp;
-	counter++;
-}
-else{
-	if(countColors[first.Color] > countColors[countriesy[tmp.y].Color]){
-
-		CountryAdition(countriesx[tmp]);
-		lastPosition[first.Color] = tmp;
-		counter++;
-	}
-	else{
-		first.Color = countriesy[tmp.y].Color;
-
-		CountryAdition(countriesx[tmp]);
-		lastPosition[first.Color] = tmp;
-		counter++;
-	}
-}
-*/

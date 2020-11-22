@@ -1,14 +1,17 @@
 /*
  * SVG.cpp
  *
- *  Created on: 18 nov. 2020
- *      Author: dylan
+ *      Author: Dylan Torres
+ *      		2018135751
+ *
+ *      		Fernanda Lanza
+ *      		201
  */
 
 #include <fstream>
 #include <iostream>
 #include <string>
-#include "country.h"
+#include "C:\Users\dylan\Desktop\GitHub\PrograAnalisis\PrograAnalisiMaps\country.h"
 #include "SVG.h"
 
 using namespace std;
@@ -18,7 +21,7 @@ string svgBody = "";
 //string end = "</svg>";
 string array[11] = {"fill:#0000FF;fill-rule:evenodd","fill:#FF0000;fill-rule:evenodd","fill:#FFFF00;fill-rule:evenodd",
 		"fill:#00FF00;fill-rule:evenodd","fill:#F76D10;fill-rule:evenodd","fill:#9933ff;fill-rule:evenodd","fill:#FF007E;fill-rule:evenodd"
-		,"fill:#CC6600;fill-rule:evenodd","fill:#00FFFF;fill-rule:evenodd","fill:#770000;fill-rule:evenodd","fill:#007800;fill-rule:evenodd"};
+		,"fill:#009999;fill-rule:evenodd","fill:#00FFFF;fill-rule:evenodd","fill:#770000;fill-rule:evenodd","fill:#007800;fill-rule:evenodd"};
 
 void SVGGenerator(){
 
@@ -113,6 +116,10 @@ void CountryAdition(Country pais){
 		svgBody += "     d=\"" + pais.d + "\"\n";
 		svgBody += "     style=\"" + blanco + "\" />\n";
 	}
+}
+
+void reset(){
+	svgBody = "";
 }
 
 void printCurrent(string algoritmo){

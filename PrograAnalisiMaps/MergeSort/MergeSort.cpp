@@ -1,12 +1,15 @@
 /*
  * MergeSort.cpp
  *
- *  Created on: 15 nov. 2020
- *      Author: ferla
+ *      Author: Dylan Torres
+ *      		2018135751
+ *
+ *      		Fernanda Lanza
+ *      		201
  */
 
 #include "MergeSort.h"
-#include "country.h"
+#include "C:\Users\dylan\Desktop\GitHub\PrograAnalisis\PrograAnalisiMaps\country.h"
 #include<iostream>
 #include<cstdlib>
 #include<ctime>

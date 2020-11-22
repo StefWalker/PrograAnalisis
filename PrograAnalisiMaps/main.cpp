@@ -1,8 +1,11 @@
 /*
  * main.cpp
  *
- *  Created on: 17 nov. 2020
- *      Author: dylan
+ *      Author: Dylan Torres
+ *      		2018135751
+ *
+ *      		Fernanda Lanza
+ *      		201
  */
 
 #include "country.h"

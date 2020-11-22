@@ -41,7 +41,10 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="XML|XML/Load|MergeSort|Tinyxml2" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="Algoritmos|Color|XML|XML/Load|MergeSort|Tinyxml2" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Algoritmos"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Color"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="MergeSort"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Tinyxml2"/>
 						<entry excluding="Tinyxml2" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="XML"/>
 					</sourceEntries>
@@ -89,7 +92,10 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="XML|XML/Load|MergeSort|Tinyxml2" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="Algoritmos|Color|XML|XML/Load|MergeSort|Tinyxml2" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Algoritmos"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Color"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="MergeSort"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Tinyxml2"/>
 						<entry excluding="Tinyxml2" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="XML"/>
 					</sourceEntries>
