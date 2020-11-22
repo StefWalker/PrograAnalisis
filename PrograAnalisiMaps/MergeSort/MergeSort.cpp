@@ -1,0 +1,115 @@
+/*
+ * MergeSort.cpp
+ *
+ *      Author: Dylan Torres
+ *      		2018135751
+ *
+ *      		Fernanda Lanza
+ *      		201
+ */
+
+#include "MergeSort.h"
+#include "C:\Users\dylan\Desktop\GitHub\PrograAnalisis\PrograAnalisiMaps\country.h"
+#include<iostream>
+#include<cstdlib>
+#include<ctime>
+
+using namespace std;
+
+void mergesort(Country array [],int firstIndex,int lastIndex, int cantColores,int countColors[]){
+
+	if(firstIndex < lastIndex){
+
+		int middle = (firstIndex + lastIndex) /2;
+
+		mergesort(array,firstIndex,middle,cantColores,countColors);
+		mergesort(array,middle+1,lastIndex,cantColores,countColors);
+
+		merge(array,firstIndex,lastIndex,middle,cantColores,countColors);
+	}
+}
+
+void merge(Country array[],int firstIndex,int lastIndex,int middle, int cantColores,int countColors[]){ //Función encargada de ordenar el arreglo
+
+	int left=firstIndex;
+	int right = middle+1;
+	int counter=0;
+
+    Country temp [lastIndex - firstIndex+1];
+
+	while ( left <= middle && right <= lastIndex){
+		if(array[left].x < array[right].x){
+
+			temp[counter++] = array[left++];
+		}
+		else{
+			temp[counter++] = array[right++];
+		}
+	}
+	while ( left <= middle){
+		temp[counter++] = array[left++];
+	}
+
+	while (right <= lastIndex) {
+		temp[counter++] = array[right++];
+	}
+
+	for( left = firstIndex; left <= lastIndex; left++){
+		array[left] = temp[left-firstIndex];
+		if(array[left].Color == 12){
+			int random = rand() % cantColores;
+			array[left].Color = random;
+			countColors[random] = countColors[random]+1;
+		}
+	}
+
+	//delete temp;
+}
+
+void mergeSorty(Country array [],int firstIndex,int lastIndex, int cantColores){
+	if(firstIndex < lastIndex){
+
+		int middle = (firstIndex + lastIndex) /2;
+
+		mergeSorty(array,firstIndex,middle,cantColores);
+		mergeSorty(array,middle+1,lastIndex,cantColores);
+		mergey(array,firstIndex,lastIndex,middle,cantColores);
+	}
+}
+
+void mergey(Country array[],int firstIndex,int lastIndex,int middle, int cantColores){ //Función encargada de ordenar el arreglo
+
+	int left=firstIndex;
+		int right = middle+1;
+		int counter=0;
+
+	    Country temp [lastIndex - firstIndex+1];
+
+		while ( left <= middle && right <= lastIndex){
+			if(array[left].y < array[right].y){
+
+				temp[counter++] = array[left++];
+			}
+			else{
+				temp[counter++] = array[right++];
+			}
+		}
+		while ( left <= middle){
+			temp[counter++] = array[left++];
+		}
+
+		while (right <= lastIndex) {
+			temp[counter++] = array[right++];
+		}
+
+		for( left = firstIndex; left <= lastIndex; left++){
+			array[left] = temp[left-firstIndex];
+			if(array[left].Color == 12){
+				int random = rand() % cantColores;
+				array[left].Color = random;
+
+			}
+		}
+
+		//delete temp;
+}
