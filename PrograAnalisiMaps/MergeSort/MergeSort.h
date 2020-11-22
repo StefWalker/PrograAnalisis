@@ -16,11 +16,11 @@ using namespace std;
 
 	struct Country;
 
-	void merge(Country array[],int firstIndex,int lastIndex,int middle, int cantColores, int countColors[]);
-	void mergesort(Country array[],int firstIndex,int lastIndex, int cantColores, int countColors[]);
+	void mergeX(Country pArray[],int pFirstIndex,int pLastIndex,int pMiddle, int pCantColores, int pCountColors[]);
+	void mergeSortX(Country pArray[],int pFirstIndex,int pLastIndex, int pCantColores, int pCountColors[]);
 
-	void mergey(Country array[],int firstIndex,int lastIndex,int middle, int cantColores);
-	void mergeSorty(Country array[],int firstIndex,int lastIndex, int cantColores);
+	void mergeY(Country pArray[],int pFirstIndex,int pLastIndex,int pMiddle, int pCantColores);
+	void mergeSortY(Country pArray[],int pFirstIndex,int pLastIndex, int pCantColores);
 
 
 

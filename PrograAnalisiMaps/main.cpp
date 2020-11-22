@@ -18,9 +18,9 @@ int main(){
 
 	int cantColores = 11;
 
-	tester(cantColores);
+	startProcedure(cantColores);
 
-	cout << "Nice "<< endl;
+	cout << "Fin del Algoritmo.... "<< endl;
 }
 
 

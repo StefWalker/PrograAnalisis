@@ -16,97 +16,97 @@
 
 using namespace std;
 
-void mergesort(Country array [],int firstIndex,int lastIndex, int cantColores,int countColors[]){
+void mergeSortX(Country pArray [],int pFirstIndex,int pLastIndex, int pCantColores,int pCountColors[]){
 
-	if(firstIndex < lastIndex){
+	if(pFirstIndex < pLastIndex){
 
-		int middle = (firstIndex + lastIndex) /2;
+		int middle = (pFirstIndex + pLastIndex) /2;
 
-		mergesort(array,firstIndex,middle,cantColores,countColors);
-		mergesort(array,middle+1,lastIndex,cantColores,countColors);
+		mergeSortX(pArray,pFirstIndex,middle,pCantColores,pCountColors);
+		mergeSortX(pArray,middle+1,pLastIndex,pCantColores,pCountColors);
 
-		merge(array,firstIndex,lastIndex,middle,cantColores,countColors);
+		mergeX(pArray,pFirstIndex,pLastIndex,middle,pCantColores,pCountColors);
 	}
 }
 
-void merge(Country array[],int firstIndex,int lastIndex,int middle, int cantColores,int countColors[]){ //Función encargada de ordenar el arreglo
+void mergeX(Country pArray[],int pFirstIndex,int pLastIndex,int pMiddle, int pCantColores,int pCountColors[]){ //Función encargada de ordenar el arreglo
 
-	int left=firstIndex;
-	int right = middle+1;
-	int counter=0;
+	int left = pFirstIndex;
+	int right = pMiddle+1;
+	int counter = 0;
 
-    Country temp [lastIndex - firstIndex+1];
+    Country temp [pLastIndex - pFirstIndex+1];
 
-	while ( left <= middle && right <= lastIndex){
-		if(array[left].x < array[right].x){
+	while ( left <= pMiddle && right <= pLastIndex){
+		if(pArray[left].x < pArray[right].x){
 
-			temp[counter++] = array[left++];
+			temp[counter++] = pArray[left++];
 		}
 		else{
-			temp[counter++] = array[right++];
+			temp[counter++] = pArray[right++];
 		}
 	}
-	while ( left <= middle){
-		temp[counter++] = array[left++];
+	while ( left <= pMiddle){
+		temp[counter++] = pArray[left++];
 	}
 
-	while (right <= lastIndex) {
-		temp[counter++] = array[right++];
+	while (right <= pLastIndex) {
+		temp[counter++] = pArray[right++];
 	}
 
-	for( left = firstIndex; left <= lastIndex; left++){
-		array[left] = temp[left-firstIndex];
-		if(array[left].Color == 12){
-			int random = rand() % cantColores;
-			array[left].Color = random;
-			countColors[random] = countColors[random]+1;
+	for( left = pFirstIndex; left <= pLastIndex; left++){
+		pArray[left] = temp[left-pFirstIndex];
+		if(pArray[left].Color == 12){
+			int random = rand() % pCantColores;
+			pArray[left].Color = random;
+			pCountColors[random] = pCountColors[random]+1;
 		}
 	}
 
 	//delete temp;
 }
 
-void mergeSorty(Country array [],int firstIndex,int lastIndex, int cantColores){
-	if(firstIndex < lastIndex){
+void mergeSortY(Country pArray [],int pFirstIndex,int pLastIndex, int pCantColores){
+	if(pFirstIndex < pLastIndex){
 
-		int middle = (firstIndex + lastIndex) /2;
+		int middle = (pFirstIndex + pLastIndex) /2;
 
-		mergeSorty(array,firstIndex,middle,cantColores);
-		mergeSorty(array,middle+1,lastIndex,cantColores);
-		mergey(array,firstIndex,lastIndex,middle,cantColores);
+		mergeSortY(pArray,pFirstIndex,middle,pCantColores);
+		mergeSortY(pArray,middle+1,pLastIndex,pCantColores);
+		mergeY(pArray,pFirstIndex,pLastIndex,middle,pCantColores);
 	}
 }
 
-void mergey(Country array[],int firstIndex,int lastIndex,int middle, int cantColores){ //Función encargada de ordenar el arreglo
+void mergeY(Country pArray[],int pFirstIndex,int pLastIndex,int pMiddle, int pCantColores){ //Función encargada de ordenar el arreglo
 
-	int left=firstIndex;
-		int right = middle+1;
-		int counter=0;
+	int left = pFirstIndex;
+		int right = pMiddle+1;
+		int counter = 0;
 
-	    Country temp [lastIndex - firstIndex+1];
+	    Country temp [pLastIndex - pFirstIndex+1];
 
-		while ( left <= middle && right <= lastIndex){
-			if(array[left].y < array[right].y){
+		while ( left <= pMiddle && right <= pLastIndex){
+			if(pArray[left].y < pArray[right].y){
 
-				temp[counter++] = array[left++];
+				temp[counter++] = pArray[left++];
 			}
 			else{
-				temp[counter++] = array[right++];
+				temp[counter++] = pArray[right++];
 			}
 		}
-		while ( left <= middle){
-			temp[counter++] = array[left++];
+		while ( left <= pMiddle){
+			temp[counter++] = pArray[left++];
 		}
 
-		while (right <= lastIndex) {
-			temp[counter++] = array[right++];
+		while (right <= pLastIndex) {
+			temp[counter++] = pArray[right++];
 		}
 
-		for( left = firstIndex; left <= lastIndex; left++){
-			array[left] = temp[left-firstIndex];
-			if(array[left].Color == 12){
-				int random = rand() % cantColores;
-				array[left].Color = random;
+		for( left = pFirstIndex; left <= pLastIndex; left++){
+			pArray[left] = temp[left-pFirstIndex];
+			if(pArray[left].Color == 12){
+				int random = rand() % pCantColores;
+				pArray[left].Color = random;
 
 			}
 		}
