@@ -1,8 +1,11 @@
 /*
  * SVG.h
  *
- *  Created on: 19 nov. 2020
- *      Author: dylan
+ *      Author: Dylan Torres
+ *      		2018135751
+ *
+ *      		Fernanda Lanza
+ *      		201
  */
 
 #ifndef SVG_H_
@@ -14,6 +17,7 @@ using namespace std;
 
 void SVGGenerator();
 void CountryAdition(Country pais);
+void reset();
 void printCurrent(string algoritmo);
 
 #endif /* SVG_H_ */

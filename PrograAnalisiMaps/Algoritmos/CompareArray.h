@@ -1,8 +1,11 @@
 /*
  * CompareArray.h
  *
- *  Created on: 18 nov. 2020
- *      Author: ferla
+ *      Author: Dylan Torres
+ *      		2018135751
+ *
+ *      		Fernanda Lanza
+ *      		201
  */
 
 #ifndef COMPAREARRAY_H_
@@ -14,7 +17,7 @@ using namespace std;
 struct Country;
 
 void compare(Country countriesx [],Country countriesy [], int countColors []);
-//void compareDinamico(Country countriesx [],Country countriesy [], int countColors[]);
+void compareDinamico(Country countriesx [],Country countriesy [], int countColors[]);
 
 
 #endif /* COMPAREARRAY_H_ */

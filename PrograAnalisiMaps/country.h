@@ -1,8 +1,11 @@
 /*
  * country.h
  *
- *  Created on: Nov 6, 2020
- *      Author: dylan
+ *      Author: Dylan Torres
+ *      		2018135751
+ *
+ *      		Fernanda Lanza
+ *      		201
  */
 
 #ifndef COUNTRY_H_
@@ -21,48 +24,9 @@ struct Country{
 	int y;
 	string d;
 	bool visitado;
-/*
-	Country(string pID, int pX, int pY){
-		this->ID = pID;
-		this->Color = 12;
-		this->x = pX;
-		this->y = pY;
-		this->visitado = false;
-	}
 
-	Country(){
-		this->ID = "";
-		this->Color = 12;
-		this->x = 0;
-		this->y = 0;
-		this->visitado = false;
-	}*/
 };
 
-/*
-struct Node{
-	int x;
-	int y;
-	Country *pais;
-
-	Node(){
-		this->x = 0;
-		this->y = 0;
-		pais = new Country();
-	}
-};
-
-
-struct DataArray{
-	Node *nodo[211];
-
-	DataArray(){
-		for(int i = 0; i < 211; i++){
-			this->nodo[i] = new Node();
-		}
-	}
-};
-*/
 void XMLLoader(Country paises[]);
 int tester(int cantColores);
 
