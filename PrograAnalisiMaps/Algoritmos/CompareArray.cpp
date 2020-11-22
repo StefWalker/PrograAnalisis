@@ -143,7 +143,7 @@ void compare(Country pCountriesX [],Country pCountriesY [],int pCountColors[]){
 								pCountriesX[first].Color = 12;
 								CountryAdition(pCountriesX[first]);
 								counter++;
-								white ++;
+								whites ++;
 							}
 							else{
 								pCountColors[pCountriesX[first].Color] --;			//Si hay más en el color x ,ese será el ultimo que se matiene.
@@ -164,7 +164,7 @@ void compare(Country pCountriesX [],Country pCountriesY [],int pCountColors[]){
 		}
 	}
 	cout << "D&Q Completado" << endl;
-	cout <<"Cantidad blancos:" << white<< endl;
+	cout <<"Cantidad blancos:" << whites << endl;
 }
 
 
@@ -172,9 +172,8 @@ void compare(Country pCountriesX [],Country pCountriesY [],int pCountColors[]){
 void subEtapa(Country pCountriesX [],Country pCountriesY [], int pCountColors[], int xBegin, int xEnd, int yBegin, int yEnd, int ci){
 	Country lastPosition[11];
 	Country first = pCountriesX[xBegin];
-	int xDistance = 5;
-	int limitDistance = 15;
-	whites = 0 ;
+	int xDistance = 8;
+	int limitDistance = 12;
 	while(first.xPosition == -1 && xBegin < xEnd){ // busca la primera posicion en x valida
 		if(pCountriesX[xBegin].yPosition < yEnd && pCountriesX[xBegin].yPosition > yBegin){
 			first = pCountriesX[xBegin];
@@ -218,7 +217,7 @@ void subEtapa(Country pCountriesX [],Country pCountriesY [], int pCountColors[],
 			}
 			else if(last.Color == nextPosition.Color && nextPosition.Color == pCountriesY[nextPosition.yPosition].Color){
 				nextPosition.Color = 12;
-				white ++;
+				whites ++;
 			}
 			else if(last.Color == nextPosition.Color && nextPosition.Color != pCountriesY[nextPosition.yPosition].Color){
 				nextPosition.Color = pCountriesY[nextPosition.yPosition].Color;
@@ -239,7 +238,7 @@ void subEtapa(Country pCountriesX [],Country pCountriesY [], int pCountColors[],
 							nextPosition.Color = 12;
 							CountryAdition(nextPosition);
 							counter++;
-							white ++;
+							whites ++;
 						}
 					}
 					else{
@@ -270,7 +269,7 @@ void subEtapa(Country pCountriesX [],Country pCountriesY [], int pCountColors[],
 
 void compareDinamico(Country pCountriesX [],Country pCountriesY [], int pCountColors[]){
 	counter = 0;
-
+	whites = 0;
 	int xAxys[4] = {211/2,211/2,211,211};
 	int yAxys[4] = {211/2,211,211/2,211};
 	int xBegin[4] = {0,0,(211/2)+1,(211/2)+1};
