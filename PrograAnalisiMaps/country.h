@@ -5,7 +5,7 @@
  *      		2018135751
  *
  *      		Fernanda Lanza
- *      		201
+ *      		2018133074
  */
 
 #ifndef COUNTRY_H_
@@ -21,7 +21,7 @@ using namespace std;
  * */
 struct Country{
 	string ID;				// ID del pais (CR,US)
-	int xPosition ;			// Posicion en el array futuro en X
+	int xPosition = -1;			// Posicion en el array futuro en X
 	int yPosition = -1;     // Posicion en el array futuro en X
 	int Color = 12;			// Valor del color asignado (12 = Blanco)
 	int x;					// Valor en X de la lectura del mapa
@@ -29,6 +29,10 @@ struct Country{
 	string d;		     	// Valor d de la lectura
 
 };
+
+
+
+
 
 void XMLLoader(Country pCountries[]);	 // Funcion encargada de la carga de datos provenientes
 void startProcedure(int cantColores);    // Funcion principal del algoritmo encargada de crear toda la

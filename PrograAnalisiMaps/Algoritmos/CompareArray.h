@@ -5,7 +5,7 @@
  *      		2018135751
  *
  *      		Fernanda Lanza
- *      		201
+ *      		2018133074
  */
 
 #ifndef COMPAREARRAY_H_
@@ -16,8 +16,9 @@ using namespace std;
 
 struct Country;
 
-void compare(Country pCountriesx [],Country pCountriesy [], int pCountColors []);
-void compareDinamico(Country pCountriesx [],Country pCountriesy [], int pCountColors[]);
+void compare(Country pCountriesX [],Country pCountriesY [], int pCountColors []);
+void compareDinamico(Country pCountriesX [],Country pCountriesY [], int pCountColors[]);
+void compareBacktracking(Country pCountriesX [],Country pCountriesY [], int pCountColors[]);
 
 
 #endif /* COMPAREARRAY_H_ */
