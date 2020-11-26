@@ -27,8 +27,32 @@ struct Country{
 	int x;					// Valor en X de la lectura del mapa
 	int y;					// Valor en Y de la lectura del mapa
 	string d;		     	// Valor d de la lectura
+	Country *next = NULL;
 
+	void insertar(Country *last, Country pais)
+	{
+	    // This function is only for empty list
+	    if (last == NULL){
+	    	last = &pais;
+	    	//cout << last->Color << endl;
+	    }
+	    else{
+	    	Country *tmp = last;
+	    	if(tmp->next == NULL){
+				while(tmp->next != NULL){
+					tmp = tmp->next;
+				}
+	    	}
+	    	tmp->next = &pais;
+	    	tmp = tmp->next;
+	    	//cout << tmp->Color << endl;
+	    }
+	}
 };
+
+
+
+
 
 void XMLLoader(Country pCountries[]);	 // Funcion encargada de la carga de datos provenientes
 void startProcedure(int cantColores);    // Funcion principal del algoritmo encargada de crear toda la

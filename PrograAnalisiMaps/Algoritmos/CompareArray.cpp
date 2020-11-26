@@ -16,6 +16,7 @@
 
 int counter = 0;
 int whites;
+
 /*
  * Función que calcula la distancia entre dos puntos.
  * input : la unidad de las coordenadas x y y de los puntos
@@ -169,7 +170,7 @@ void compare(Country pCountriesX [],Country pCountriesY [],int pCountColors[]){
 
 
 
-void subEtapa(Country pCountriesX [],Country pCountriesY [], int pCountColors[], int xBegin, int xEnd, int yBegin, int yEnd, int ci){
+void subEtapaDinamico(Country pCountriesX [],Country pCountriesY [], int pCountColors[], int xBegin, int xEnd, int yBegin, int yEnd, int ci){
 	Country lastPosition[11];
 	Country first = pCountriesX[xBegin];
 	int xDistance = 8;
@@ -220,6 +221,8 @@ void subEtapa(Country pCountriesX [],Country pCountriesY [], int pCountColors[],
 				whites ++;
 			}
 			else if(last.Color == nextPosition.Color && nextPosition.Color != pCountriesY[nextPosition.yPosition].Color){
+				pCountColors[nextPosition.Color]--;
+				pCountColors[pCountriesY[nextPosition.yPosition].Color]++;
 				nextPosition.Color = pCountriesY[nextPosition.yPosition].Color;
 			}
 
@@ -275,8 +278,107 @@ void compareDinamico(Country pCountriesX [],Country pCountriesY [], int pCountCo
 	int xBegin[4] = {0,0,(211/2)+1,(211/2)+1};
 	int yBegin[4] = {0,(211/2)+1,0,(211/2)+1};
 	for(int i = 0; i < 4; i++){
-		subEtapa(pCountriesX,pCountriesY,pCountColors,xBegin[i],xAxys[i],yBegin[i],yAxys[i],i);
+		subEtapaDinamico(pCountriesX,pCountriesY,pCountColors,xBegin[i],xAxys[i],yBegin[i],yAxys[i],i);
 	}
 	cout << "Dinamico Completado" << endl;
 }
 
+
+
+int distanceCheck(Country *pArrayPaises[],Country pCountry){
+
+	int blancosGenerados = 0;
+	int limitDistance = 15;
+	Country *tmp = pArrayPaises[pCountry.Color];
+	if(tmp != NULL){
+		while(tmp != NULL){
+
+			if(distancePoints(tmp->xPosition, tmp->yPosition, pCountry.xPosition,pCountry.yPosition) < limitDistance){
+				blancosGenerados++;
+			}
+			tmp = tmp->next;
+
+		}
+
+		cout << blancosGenerados << endl;
+		return blancosGenerados;
+	}
+	else{
+		return 0;
+	}
+}
+
+void subEtapaBacktracking(Country pCountriesX [],Country pCountriesY [], int pCountColors[], int xBegin, int xEnd, int yBegin, int yEnd, Country *pArrayPaises[], int ci){
+	int blancosX = 0;
+	int blancosY = 0;
+	// ya con el primero con color seteado, se inicia el algoritmo
+	for(int zone = xBegin; zone < xEnd; zone++){
+
+		if(pCountriesX[zone].yPosition < yEnd && pCountriesX[zone].yPosition > yBegin){
+
+			Country nextPosition = pCountriesX[zone];
+
+
+			blancosX = distanceCheck(pArrayPaises, pCountriesX[zone]);
+			blancosY = distanceCheck(pArrayPaises, pCountriesY[pCountriesX[zone].yPosition]);
+
+			if(blancosX == 0 && blancosY == 0){
+				if(pCountColors[nextPosition.Color] > pCountColors[pCountriesY[nextPosition.yPosition].Color]){
+					pCountColors[nextPosition.Color]--;
+					pCountColors[pCountriesY[nextPosition.yPosition].Color]++;
+
+					nextPosition.Color = pCountriesY[nextPosition.yPosition].Color;
+				}
+			}
+			else if(blancosY == 0){
+				pCountColors[nextPosition.Color]--;
+				pCountColors[pCountriesY[nextPosition.yPosition].Color]++;
+				nextPosition.Color = pCountriesY[nextPosition.yPosition].Color;
+			}
+			else if(blancosX == 0){
+
+			}
+			else{
+				nextPosition.Color = 12;
+			}
+			if(nextPosition.Color != 12){
+				pArrayPaises[nextPosition.Color]->insertar(pArrayPaises[nextPosition.Color], pCountriesX[zone]);
+				//cout << pArrayPaises[nextPosition.Color]->Color<< endl;
+
+				CountryAdition(nextPosition);
+				counter++;
+			}
+			else{
+				CountryAdition(nextPosition);
+				counter++;
+				whites++;
+			}
+
+		}
+		if(counter >= 5){
+			printCurrent("Backtracking/Backtracking");
+			counter = 0;
+		}
+	//	cout << 0 << endl;
+	}
+	//cout << whites << endl;
+}
+
+void compareBacktracking(Country pCountriesX [],Country pCountriesY [], int pCountColors[]){
+	counter = 0;
+	whites = 0;
+
+	Country *arrayPaises[11];
+	for(int i = 0; i < 11; i++){
+		arrayPaises[i] = NULL;
+	}
+	int xAxys[4] = {211/2,211/2,211,211};
+	int yAxys[4] = {211/2,211,211/2,211};
+	int xBegin[4] = {0,0,(211/2)+1,(211/2)+1};
+	int yBegin[4] = {0,(211/2)+1,0,(211/2)+1};
+	for(int i = 0; i < 4; i++){
+		cout <<  "Backtracking"<< endl;
+	subEtapaBacktracking(pCountriesX,pCountriesY,pCountColors,xBegin[i],xAxys[i],yBegin[i],yAxys[i],arrayPaises,i);
+	}
+	cout << "Backtracking Completado" << endl;
+}
