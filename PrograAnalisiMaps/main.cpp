@@ -5,7 +5,7 @@
  *      		2018135751
  *
  *      		Fernanda Lanza
- *      		201
+ *      		2018133074
  */
 
 #include "country.h"
@@ -18,9 +18,9 @@ int main(){
 
 	int cantColores = 11;
 
-	tester(cantColores);
+	startProcedure(cantColores);
 
-	cout << "Nice "<< endl;
+	cout << "Fin del Algoritmo.... "<< endl;
 }
 
 

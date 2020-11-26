@@ -5,24 +5,30 @@
  *      		2018135751
  *
  *      		Fernanda Lanza
- *      		201
+ *      		2018133074
  */
 
 #include <fstream>
 #include <iostream>
 #include <string>
+//#include "C:\Users\ferla\OneDrive\Documents\GitHub\PrograAnalisis\PrograAnalisiMaps\country.h"
 #include "C:\Users\dylan\Desktop\GitHub\PrograAnalisis\PrograAnalisiMaps\country.h"
 #include "SVG.h"
+#include <windows.h>
+
 
 using namespace std;
 
 string SVG;
 string svgBody = "";
-//string end = "</svg>";
-string array[11] = {"fill:#0000FF;fill-rule:evenodd","fill:#FF0000;fill-rule:evenodd","fill:#FFFF00;fill-rule:evenodd",
+string colorArray[11] = {"fill:#0000FF;fill-rule:evenodd","fill:#FF0000;fill-rule:evenodd","fill:#FFFF00;fill-rule:evenodd",
 		"fill:#00FF00;fill-rule:evenodd","fill:#F76D10;fill-rule:evenodd","fill:#9933ff;fill-rule:evenodd","fill:#FF007E;fill-rule:evenodd"
 		,"fill:#009999;fill-rule:evenodd","fill:#00FFFF;fill-rule:evenodd","fill:#770000;fill-rule:evenodd","fill:#007800;fill-rule:evenodd"};
 
+/* Encargada de generar todos los datos necesario para la creacion del SVG final
+ * input: ninguno
+ * output: encabezado completo
+ * */
 void SVGGenerator(){
 
 	SVG = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n";
@@ -104,27 +110,45 @@ void SVGGenerator(){
 
 }
 
-void CountryAdition(Country pais){
-	if (pais.Color < 12 ){
+/* Crea un path mas en el SVG destino con los datos
+ * 	necesarios para la aparicion del pais junto con su color final
+ * input: el pais a agregar
+ * output: adicion
+ * */
+void CountryAdition(Country pPais){
+	if (pPais.Color < 12 ){
 		svgBody += "  <path \n";
-		svgBody += "     d=\"" + pais.d + "\"\n";
-		svgBody += "     style=\"" + array[pais.Color] + "\" />\n";
+		svgBody += "     d=\"" + pPais.d + "\"\n";
+		svgBody += "     style=\"" + colorArray[pPais.Color] + "\" />\n";
 	}
 	else{
 		string blanco= "fill:#C0C0C0;fill-rule:evenodd";
 		svgBody += "  <path \n";
-		svgBody += "     d=\"" + pais.d + "\"\n";
+		svgBody += "     d=\"" + pPais.d + "\"\n";
 		svgBody += "     style=\"" + blanco + "\" />\n";
 	}
 }
 
+/* Resetea la estructura del SVG
+ * input: ninguno
+ * output: svgBody limpio de posibles datos pasados
+ * */
 void reset(){
 	svgBody = "";
 }
 
-void printCurrent(string algoritmo){
+/* Agrupa lo generado por las funciones anteriores y imprime los datos en un SVG
+ * input: nombre del archivo
+ * output: archivo SVG
+ * */
+void printCurrent(string pAlgorithm){
 	SVGGenerator();
-	ofstream out(algoritmo + ".svg");
+	ofstream out(pAlgorithm + ".svg");
 	out << SVG + svgBody + "</svg>";
 	out.close();
+
+	//char* linkChar="file:///C:/Users/dylan/Desktop/GitHub/PrograAnalisis/PrograAnalisiMaps/"+ "pAlgorithm" + ".svg";
+
+	//ShellExecute(NULL, "open", linkChar, NULL, NULL, SW_SHOWNORMAL);
+	//system("pause");
 }

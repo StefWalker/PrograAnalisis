@@ -5,7 +5,7 @@
  *      		2018135751
  *
  *      		Fernanda Lanza
- *      		201
+ *      		2018133074
  */
 
 #ifndef SVG_H_
@@ -15,9 +15,11 @@
 
 using namespace std;
 
+/* Funciones del SVG
+ * */
 void SVGGenerator();
-void CountryAdition(Country pais);
+void CountryAdition(Country pPais);
 void reset();
-void printCurrent(string algoritmo);
+void printCurrent(string pAlgorithm);
 
 #endif /* SVG_H_ */
