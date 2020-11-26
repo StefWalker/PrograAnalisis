@@ -8,11 +8,14 @@
  *      		2018133074
  */
 
-#include "C:\Users\ferla\OneDrive\Documents\GitHub\PrograAnalisis\PrograAnalisiMaps\country.h"
-#include "C:\Users\ferla\OneDrive\Documents\GitHub\PrograAnalisis\PrograAnalisiMaps\SVG\SVG.h"
+//#include "C:\Users\ferla\OneDrive\Documents\GitHub\PrograAnalisis\PrograAnalisiMaps\country.h"
+//#include "C:\Users\ferla\OneDrive\Documents\GitHub\PrograAnalisis\PrograAnalisiMaps\SVG\SVG.h"
+#include "C:\Users\dylan\Desktop\GitHub\PrograAnalisis\PrograAnalisiMaps\country.h"
+#include "C:\Users\dylan\Desktop\GitHub\PrograAnalisis\PrograAnalisiMaps\SVG\SVG.h"
 #include <iostream>
 #include <cstdlib>
 #include <math.h>
+#include <chrono>
 
 int counter = 0;
 int whites;
@@ -34,6 +37,8 @@ int distancePoints (int x1, int y1, int x2 , int y2){
  * outputs:no devuelve nada como tal , manda a pintar los paises
  */
 void compare(Country pCountriesX [],Country pCountriesY [],int pCountColors[]){
+	std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+	std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
 	Country lastPosition[11];															//Array que guarda las ultimas posiciones de los paises pintados en un determinado color
 	int limit = 11;																		//Limite de distancia entre los paises
@@ -164,6 +169,8 @@ void compare(Country pCountriesX [],Country pCountriesY [],int pCountColors[]){
 	}
 	cout << "D&Q Completado" << endl;
 	cout <<"Cantidad blancos:" << whites << endl;
+	std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() << "[µs]" << std::endl;
+	std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::nanoseconds> (end - begin).count() << "[ns]" << std::endl;
 }
 
 
@@ -230,7 +237,7 @@ void subEtapaDinamico(Country pCountriesX [],Country pCountriesY [], int pCountC
 
 				if(last.xPosition != -1){									//Si no esta vacio
 					if(abs(colorSearch.xPosition - nextPosition.xPosition) <= xDistance){  				//Saco la distancia para saber si esta cerca o no
-						if(distancePoints(colorSearch.xPosition, colorSearch.yPosition, nextPosition.xPosition,nextPosition.yPosition) > limitDistance){  //Distancia de punto a punto
+						if(distancePoints(colorSearch.x, colorSearch.y, nextPosition.x, nextPosition.y) > limitDistance){  //Distancia de punto a punto
 							CountryAdition(nextPosition);
 							lastPosition[nextPosition.Color] = nextPosition;
 							counter++;
@@ -269,6 +276,8 @@ void subEtapaDinamico(Country pCountriesX [],Country pCountriesY [], int pCountC
 }
 
 void compareDinamico(Country pCountriesX [],Country pCountriesY [], int pCountColors[]){
+	std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+	std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 	counter = 0;
 	whites = 0;
 	int xAxys[4] = {211/2,211/2,211,211};					//Paises en el eje x
@@ -279,6 +288,8 @@ void compareDinamico(Country pCountriesX [],Country pCountriesY [], int pCountCo
 		subEtapaDinamico(pCountriesX,pCountriesY,pCountColors,xBegin[i],xAxys[i],yBegin[i],yAxys[i],i);   		//Proceso optimo de cada etapa
 	}
 	cout << "Dinamico Completado" << endl;
+	std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() << "[µs]" << std::endl;
+	std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::nanoseconds> (end - begin).count() << "[ns]" << std::endl;
 }
 
 
@@ -286,7 +297,7 @@ void compareDinamico(Country pCountriesX [],Country pCountriesY [], int pCountCo
 int distanceCheck(Country pCountry){
 
 	int blancosGenerados = 0;						//Blancos generados
-	int limitDistance = 12;							//Limite de distancia
+	int limitDistance = 50;							//Limite de distancia
 
 	Country tmp = arrayPaises[pCountry.Color][0];	//tmp se acomoda en el primer valor de la lista que tenga el mismo color de entrada
 
@@ -295,10 +306,12 @@ int distanceCheck(Country pCountry){
 		for(int color = 0; color < 50; color++){
 			tmp = arrayPaises[pCountry.Color][color];
 			if(tmp.Color == 12){
+				//cout << "no distance" << tmp.x << "   " << tmp. y << "   " << pCountry.x << "   " << pCountry.y << endl;
 				break;
 			}
-			else if(distancePoints(tmp.xPosition, tmp.yPosition, pCountry.xPosition, pCountry.yPosition) < limitDistance){			//Si es menor al limite sumo un blanco
-			//	cout << "Distancia "<< distancePoints(tmp.xPosition, tmp.yPosition, pCountry.xPosition, pCountry.yPosition) << endl;
+			else if(distancePoints(tmp.x, tmp.y, pCountry.x, pCountry.y) < limitDistance){			//Si es menor al limite sumo un blanco
+				cout << tmp.x << "   " << tmp. y << "   " << pCountry.x << "   " << pCountry.y << endl;
+				cout << "Distancia "<< distancePoints(tmp.x, tmp.y, pCountry.x, pCountry.y) << endl;
 				blancosGenerados++;
 				break;
 			}
@@ -316,10 +329,10 @@ void subEtapaBacktracking(Country pCountriesX [],Country pCountriesY [], int pCo
 		if(pCountriesX[zone].yPosition < yEnd && pCountriesX[zone].yPosition > yBegin){				//En posicion y , busco el pais que este en la zona
 
 			Country nextPosition = pCountriesX[zone];												//NextPosition =primer pais encontrado en la zona
-
-
-			whiteX = distanceCheck(pCountriesX[zone]);
-			whiteY = distanceCheck(pCountriesY[pCountriesX[zone].yPosition]);
+			//cout << nextPosition.x << "   " << nextPosition.y << endl;
+			//cout << pCountriesY[nextPosition.yPosition].x << "   " << pCountriesY[nextPosition.yPosition].y << endl;
+			whiteX = distanceCheck(nextPosition);
+			whiteY = distanceCheck(pCountriesY[nextPosition.yPosition]);
 			//cout << blancosX << blancosY << endl;
 
 			if(whiteX == 0 && whiteY == 0){																				// Con ambos colores no hay choques
@@ -343,9 +356,10 @@ void subEtapaBacktracking(Country pCountriesX [],Country pCountriesY [], int pCo
 			}
 			if(nextPosition.Color != 12){
 			//	pArrayPaises[nextPosition.Color]->insertar(pArrayPaises[nextPosition.Color], pCountriesX[zone]);
-				//cout << pArrayPaises[nextPosition.Color]->Color<< endl;
+
 
 				for(int color = 0; color < 50; color++){											//Recorro la matriz , revisa su fila para ver donde colocare el pais actual
+					//cout << arrayPaises[nextPosition.Color][color].Color << endl;
 					if(arrayPaises[nextPosition.Color][color].Color == 12){
 						arrayPaises[nextPosition.Color][color] = nextPosition;
 						break;
@@ -363,7 +377,7 @@ void subEtapaBacktracking(Country pCountriesX [],Country pCountriesY [], int pCo
 			}
 
 		}
-		if(counter >= 5){
+		if(counter >= 20){
 			printCurrent("Backtracking/Backtracking");
 			counter = 0;
 		}
@@ -373,6 +387,8 @@ void subEtapaBacktracking(Country pCountriesX [],Country pCountriesY [], int pCo
 }
 
 void compareBacktracking(Country pCountriesX [],Country pCountriesY [], int pCountColors[]){
+	std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+	std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 	counter = 0;
 	whites = 0;
 
@@ -388,4 +404,6 @@ void compareBacktracking(Country pCountriesX [],Country pCountriesY [], int pCou
 		subEtapaBacktracking(pCountriesX,pCountriesY,pCountColors,xBegin[i],xAxys[i],yBegin[i],yAxys[i],i);
 	}
 	cout << "Backtracking Completado" << endl;
+	std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() << "[µs]" << std::endl;
+	std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::nanoseconds> (end - begin).count() << "[ns]" << std::endl;
 }

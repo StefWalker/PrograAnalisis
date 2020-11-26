@@ -21,33 +21,13 @@ using namespace std;
  * */
 struct Country{
 	string ID;				// ID del pais (CR,US)
-	int xPosition ;			// Posicion en el array futuro en X
+	int xPosition = -1;			// Posicion en el array futuro en X
 	int yPosition = -1;     // Posicion en el array futuro en X
 	int Color = 12;			// Valor del color asignado (12 = Blanco)
 	int x;					// Valor en X de la lectura del mapa
 	int y;					// Valor en Y de la lectura del mapa
 	string d;		     	// Valor d de la lectura
-	Country *next = NULL;
 
-	void insertar(Country *last, Country pais)
-	{
-	    // This function is only for empty list
-	    if (last == NULL){
-	    	last = &pais;
-	    	//cout << last->Color << endl;
-	    }
-	    else{
-	    	Country *tmp = last;
-	    	if(tmp->next == NULL){
-				while(tmp->next != NULL){
-					tmp = tmp->next;
-				}
-	    	}
-	    	tmp->next = &pais;
-	    	tmp = tmp->next;
-	    	//cout << tmp->Color << endl;
-	    }
-	}
 };
 
 

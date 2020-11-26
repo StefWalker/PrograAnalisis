@@ -11,8 +11,11 @@
 #include <fstream>
 #include <iostream>
 #include <string>
-#include "C:\Users\ferla\OneDrive\Documents\GitHub\PrograAnalisis\PrograAnalisiMaps\country.h"
+//#include "C:\Users\ferla\OneDrive\Documents\GitHub\PrograAnalisis\PrograAnalisiMaps\country.h"
+#include "C:\Users\dylan\Desktop\GitHub\PrograAnalisis\PrograAnalisiMaps\country.h"
 #include "SVG.h"
+#include <windows.h>
+
 
 using namespace std;
 
@@ -143,4 +146,9 @@ void printCurrent(string pAlgorithm){
 	ofstream out(pAlgorithm + ".svg");
 	out << SVG + svgBody + "</svg>";
 	out.close();
+
+	//char* linkChar="file:///C:/Users/dylan/Desktop/GitHub/PrograAnalisis/PrograAnalisiMaps/"+ "pAlgorithm" + ".svg";
+
+	//ShellExecute(NULL, "open", linkChar, NULL, NULL, SW_SHOWNORMAL);
+	//system("pause");
 }
