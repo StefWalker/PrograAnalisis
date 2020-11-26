@@ -19,25 +19,25 @@ using namespace std;
 /*
  * Función que divide el array en subarrays por medio de la recursividad
  * input : array de paises, primer elemento , cantidad de colores, array de cantidad de colores y ultimo elemento.
- * outputs: ---------------
+ * outputs:subarrays de un array de los puntos x
  */
 void mergeSortX(Country pArray [],int pFirstIndex,int pLastIndex, int pCantColores,int pCountColors[]){
 
-	if(pFirstIndex < pLastIndex){
+	if(pFirstIndex < pLastIndex){											//Particiones del array en subarrays hasta llegar a 1
 
-		int middle = (pFirstIndex + pLastIndex) /2;
+		int middle = (pFirstIndex + pLastIndex) /2;							//Particion del array a la mitad
 
 		mergeSortX(pArray,pFirstIndex,middle,pCantColores,pCountColors);
 		mergeSortX(pArray,middle+1,pLastIndex,pCantColores,pCountColors);
 
-		mergeX(pArray,pFirstIndex,pLastIndex,middle,pCantColores,pCountColors);
+		mergeX(pArray,pFirstIndex,pLastIndex,middle,pCantColores,pCountColors);		//
 	}
 }
 
 /*
  * Función que ordena los subarray y concatenan con el de la par , hasta ordenar el final.Su llave es la coordenanda x del punto.
  * input : array de paises, primer elemento , cantidad de colores, array de cantidad de colores y ultimo elemento.
- * outputs: -----
+ * outputs: array ordenado de las x
  */
 void mergeX(Country pArray[],int pFirstIndex,int pLastIndex,int pMiddle, int pCantColores,int pCountColors[]){
 
@@ -45,10 +45,10 @@ void mergeX(Country pArray[],int pFirstIndex,int pLastIndex,int pMiddle, int pCa
 	int right = pMiddle+1;
 	int counter = 0;
 
-    Country replace [pLastIndex - pFirstIndex+1];
+    Country replace [pLastIndex - pFirstIndex+1];			//Subarray temporal para el ordenamiento
 
 	while ( left <= pMiddle && right <= pLastIndex){
-		if(pArray[left].x < pArray[right].x){
+		if(pArray[left].x < pArray[right].x){				//Cuando el de la izq es menor que el derecho
 
 			replace[counter++] = pArray[left++];
 		}
@@ -68,7 +68,7 @@ void mergeX(Country pArray[],int pFirstIndex,int pLastIndex,int pMiddle, int pCa
 		pArray[left] = replace[left-pFirstIndex];						//Asigna los colores de manera aleatorea
 		if(pArray[left].Color == 12){
 			int random = rand() % pCantColores;
-			pArray[left].Color = random;							//Suma uno al diigito que se encuentra en el array en la posicion del color .
+			pArray[left].Color = random;							//Suma uno al digito que se encuentra en el array en la posicion del color .
 			pCountColors[random] = pCountColors[random]+1;
 		}
 	}
@@ -77,7 +77,7 @@ void mergeX(Country pArray[],int pFirstIndex,int pLastIndex,int pMiddle, int pCa
 /*
  * Función que divide el array en subarrays por medio de la recursividad.
  * input : array de paises, primer elemento , cantidad de colores, array de cantidad de colores y ultimo elemento.
- * outputs: ---------------
+ * outputs: subarrays del array principal de "y"
  */
 void mergeSortY(Country pArray [],int pFirstIndex,int pLastIndex, int pCantColores){
 	if(pFirstIndex < pLastIndex){
@@ -93,7 +93,7 @@ void mergeSortY(Country pArray [],int pFirstIndex,int pLastIndex, int pCantColor
 /*
  * Función que ordena los subarray y concatenan con el de la par , hasta ordenar el final.Su llave es la cordenada y del centro
  * input : array de paises, primer elemento , cantidad de colores, array de cantidad de colores y ultimo elemento.
- * outputs: -----
+ * outputs: array de "y" ordenado
  */
 void mergeY(Country pArray[],int pFirstIndex,int pLastIndex,int pMiddle, int pCantColores){ //Función encargada de ordenar el arreglo
 
