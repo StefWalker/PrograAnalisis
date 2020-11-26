@@ -8,14 +8,15 @@
  *      		2018133074
  */
 
-#include "C:\Users\ferla\OneDrive\Documents\GitHub\PrograAnalisis\PrograAnalisiMaps\country.h"
-#include "C:\Users\ferla\OneDrive\Documents\GitHub\PrograAnalisis\PrograAnalisiMaps\SVG\SVG.h"
+#include "C:\Users\dylan\Desktop\GitHub\PrograAnalisis\PrograAnalisiMaps\country.h"
+#include "C:\Users\dylan\Desktop\GitHub\PrograAnalisis\PrograAnalisiMaps\SVG\SVG.h"
 #include <iostream>
 #include <cstdlib>
 #include <math.h>
 
 int counter = 0;
 int whites;
+Country arrayPaises[11][50];
 
 /*
  * Función que calcula la distancia entre dos puntos.
@@ -281,30 +282,31 @@ void compareDinamico(Country pCountriesX [],Country pCountriesY [], int pCountCo
 
 
 
-int distanceCheck(Country *pArrayPaises[],Country pCountry){
+int distanceCheck(Country pCountry){
 
 	int blancosGenerados = 0;
-	int limitDistance = 15;
-	Country *tmp = pArrayPaises[pCountry.Color];
-	if(tmp != NULL){
-		while(tmp != NULL){
+	int limitDistance = 25;
 
-			if(distancePoints(tmp->xPosition, tmp->yPosition, pCountry.xPosition,pCountry.yPosition) < limitDistance){
-				blancosGenerados++;
+	Country tmp = arrayPaises[pCountry.Color][0];
+
+	//cout << pCountry.Color << endl;
+	if(tmp.Color != 12){
+		for(int color = 0; color < 50; color++){
+			tmp = arrayPaises[pCountry.Color][color];
+			if(tmp.Color == 12){
+				break;
 			}
-			tmp = tmp->next;
-
+			else if(distancePoints(tmp.xPosition, tmp.yPosition, pCountry.xPosition, pCountry.yPosition) < limitDistance){
+			//	cout << "Distancia "<< distancePoints(tmp.xPosition, tmp.yPosition, pCountry.xPosition, pCountry.yPosition) << endl;
+				blancosGenerados++;
+				break;
+			}
 		}
-
-		cout << blancosGenerados << endl;
-		return blancosGenerados;
 	}
-	else{
-		return 0;
-	}
+	return blancosGenerados;
 }
 
-void subEtapaBacktracking(Country pCountriesX [],Country pCountriesY [], int pCountColors[], int xBegin, int xEnd, int yBegin, int yEnd, Country *pArrayPaises[], int ci){
+void subEtapaBacktracking(Country pCountriesX [],Country pCountriesY [], int pCountColors[], int xBegin, int xEnd, int yBegin, int yEnd, int ci){
 	int blancosX = 0;
 	int blancosY = 0;
 	// ya con el primero con color seteado, se inicia el algoritmo
@@ -315,8 +317,9 @@ void subEtapaBacktracking(Country pCountriesX [],Country pCountriesY [], int pCo
 			Country nextPosition = pCountriesX[zone];
 
 
-			blancosX = distanceCheck(pArrayPaises, pCountriesX[zone]);
-			blancosY = distanceCheck(pArrayPaises, pCountriesY[pCountriesX[zone].yPosition]);
+			blancosX = distanceCheck(pCountriesX[zone]);
+			blancosY = distanceCheck(pCountriesY[pCountriesX[zone].yPosition]);
+			//cout << blancosX << blancosY << endl;
 
 			if(blancosX == 0 && blancosY == 0){
 				if(pCountColors[nextPosition.Color] > pCountColors[pCountriesY[nextPosition.yPosition].Color]){
@@ -338,13 +341,21 @@ void subEtapaBacktracking(Country pCountriesX [],Country pCountriesY [], int pCo
 				nextPosition.Color = 12;
 			}
 			if(nextPosition.Color != 12){
-				pArrayPaises[nextPosition.Color]->insertar(pArrayPaises[nextPosition.Color], pCountriesX[zone]);
+			//	pArrayPaises[nextPosition.Color]->insertar(pArrayPaises[nextPosition.Color], pCountriesX[zone]);
 				//cout << pArrayPaises[nextPosition.Color]->Color<< endl;
 
+				for(int color = 0; color < 50; color++){
+					if(arrayPaises[nextPosition.Color][color].Color == 12){
+						arrayPaises[nextPosition.Color][color] = nextPosition;
+						break;
+					}
+				}
+				//cout << "adicion 1" << endl;
 				CountryAdition(nextPosition);
 				counter++;
 			}
 			else{
+				//cout << "adicion 2" << endl;
 				CountryAdition(nextPosition);
 				counter++;
 				whites++;
@@ -357,24 +368,23 @@ void subEtapaBacktracking(Country pCountriesX [],Country pCountriesY [], int pCo
 		}
 	//	cout << 0 << endl;
 	}
-	//cout << whites << endl;
+	cout << whites << endl;
 }
 
 void compareBacktracking(Country pCountriesX [],Country pCountriesY [], int pCountColors[]){
 	counter = 0;
 	whites = 0;
 
-	Country *arrayPaises[11];
-	for(int i = 0; i < 11; i++){
-		arrayPaises[i] = NULL;
-	}
+	//Country *arrayPaises[11];
+	//for(int i = 0; i < 11; i++){
+	//	arrayPaises[i] = NULL;
+	//}
 	int xAxys[4] = {211/2,211/2,211,211};
 	int yAxys[4] = {211/2,211,211/2,211};
 	int xBegin[4] = {0,0,(211/2)+1,(211/2)+1};
 	int yBegin[4] = {0,(211/2)+1,0,(211/2)+1};
 	for(int i = 0; i < 4; i++){
-		cout <<  "Backtracking"<< endl;
-	subEtapaBacktracking(pCountriesX,pCountriesY,pCountColors,xBegin[i],xAxys[i],yBegin[i],yAxys[i],arrayPaises,i);
+		subEtapaBacktracking(pCountriesX,pCountriesY,pCountColors,xBegin[i],xAxys[i],yBegin[i],yAxys[i],i);
 	}
 	cout << "Backtracking Completado" << endl;
 }
