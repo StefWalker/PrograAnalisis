@@ -19,7 +19,7 @@
 
 int counter = 0;
 int whites;
-Country arrayPaises[11][50];
+Country arrayPaises[11][100];
 
 /*
  * Función que calcula la distancia entre dos puntos.
@@ -306,7 +306,7 @@ int distanceCheck(Country pCountry){
 		for(int color = 0; color < 50; color++){
 			tmp = arrayPaises[pCountry.Color][color];
 			if(tmp.Color == 12){
-				//cout << "no distance" << tmp.x << "   " << tmp. y << "   " << pCountry.x << "   " << pCountry.y << endl;
+				cout << "no distance" << tmp.x << "   " << tmp. y << "   " << pCountry.x << "   " << pCountry.y << endl;
 				break;
 			}
 			else if(distancePoints(tmp.x, tmp.y, pCountry.x, pCountry.y) < limitDistance){			//Si es menor al limite sumo un blanco
@@ -329,11 +329,54 @@ void subEtapaBacktracking(Country pCountriesX [],Country pCountriesY [], int pCo
 		if(pCountriesX[zone].yPosition < yEnd && pCountriesX[zone].yPosition > yBegin){				//En posicion y , busco el pais que este en la zona
 
 			Country nextPosition = pCountriesX[zone];												//NextPosition =primer pais encontrado en la zona
-			//cout << nextPosition.x << "   " << nextPosition.y << endl;
+			cout << nextPosition.x << "   " << nextPosition.y << "   " << nextPosition.Color<< endl;
 			//cout << pCountriesY[nextPosition.yPosition].x << "   " << pCountriesY[nextPosition.yPosition].y << endl;
-			whiteX = distanceCheck(nextPosition);
-			whiteY = distanceCheck(pCountriesY[nextPosition.yPosition]);
+			//whiteX = distanceCheck(nextPosition);
+			//whiteY = distanceCheck(pCountriesY[nextPosition.yPosition]);
 			//cout << blancosX << blancosY << endl;
+
+			int limitDistance = 100;							//Limite de distancia
+
+			Country tmp = arrayPaises[nextPosition.Color][0];	//tmp se acomoda en el primer valor de la lista que tenga el mismo color de entrada
+
+			if(tmp.Color < 12){							//En caso de ser igual no hay valor asiganado 12= blanco
+				for(int color = 0; color < 50; color++){
+					tmp = arrayPaises[nextPosition.Color][color];
+					if(tmp.Color >= 12){
+							//cout << "no distance" << tmp.x << "   " << tmp. y << "   " << pCountry.x << "   " << pCountry.y << endl;
+						break;
+					}
+					else if(distancePoints(tmp.x, tmp.y, nextPosition.x, nextPosition.y) < limitDistance){			//Si es menor al limite sumo un blanco
+						//cout << tmp.x << "   " << tmp. y << "   " << nextPosition.x << "   " << nextPosition.y << endl;
+						cout << "DistanciaX "<< distancePoints(tmp.x, tmp.y, nextPosition.x, nextPosition.y) << endl;
+						whiteX++;
+						break;
+					}
+				}
+			}
+
+			tmp = arrayPaises[pCountriesY[nextPosition.xPosition].Color][0];	//tmp se acomoda en el primer valor de la lista que tenga el mismo color de entrada
+
+							//cout << pCountry.Color << endl;
+			if(tmp.Color < 12){							//En caso de ser igual no hay valor asiganado 12= blanco
+				for(int color = 0; color < 50; color++){
+					tmp = arrayPaises[nextPosition.Color][color];
+					if(tmp.Color >= 12){
+										//cout << "no distance" << tmp.x << "   " << tmp. y << "   " << pCountry.x << "   " << pCountry.y << endl;
+						break;
+					}
+					else if(distancePoints(tmp.x, tmp.y, pCountriesY[nextPosition.xPosition].x, pCountriesY[nextPosition.xPosition].y) < limitDistance){			//Si es menor al limite sumo un blanco
+						//cout << tmp.x << "   " << tmp. y << "   " << pCountriesY[nextPosition.xPosition].x << "   " << pCountriesY[nextPosition.xPosition].y << endl;
+						cout << "DistanciaY "<< distancePoints(tmp.x, tmp.y, pCountriesY[nextPosition.xPosition].x, pCountriesY[nextPosition.xPosition].y) << endl;
+						whiteY++;
+						break;
+					}
+				}
+			}
+
+
+
+
 
 			if(whiteX == 0 && whiteY == 0){																				// Con ambos colores no hay choques
 				if(pCountColors[nextPosition.Color] > pCountColors[pCountriesY[nextPosition.yPosition].Color]){			//Comparo cual color hay mas y asigno el menor
@@ -354,6 +397,8 @@ void subEtapaBacktracking(Country pCountriesX [],Country pCountriesY [], int pCo
 			else{
 				nextPosition.Color = 12;															//Sino pasa a ser pais en blanco
 			}
+			whiteX = 0;
+			whiteY = 0;
 			if(nextPosition.Color != 12){
 			//	pArrayPaises[nextPosition.Color]->insertar(pArrayPaises[nextPosition.Color], pCountriesX[zone]);
 
@@ -383,6 +428,7 @@ void subEtapaBacktracking(Country pCountriesX [],Country pCountriesY [], int pCo
 		}
 	//	cout << 0 << endl;
 	}
+
 	cout << whites << endl;
 }
 
