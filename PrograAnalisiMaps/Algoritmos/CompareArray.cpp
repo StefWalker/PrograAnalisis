@@ -16,10 +16,15 @@
 #include <cstdlib>
 #include <math.h>
 #include <chrono>
+#include <unistd.h>
 
+const int cantidadPaises = 100;
+int sleepTime = 5;
+int cantidadPintado = 30;
 int counter = 0;
 int whites;
-Country arrayPaises[11][50];
+int pintados;
+Country arrayPaises[11][cantidadPaises];
 
 /*
  * Función que calcula la distancia entre dos puntos.
@@ -33,7 +38,7 @@ int distancePoints (int x1, int y1, int x2 , int y2){
 
 /*
  * Función que realiza la comparación para finalizar el divide y vencerás.
- * input : array de paises en eje x y, cantidad de colores que chiva x objetivo penstado.
+ * input : array de paises en eje x y, array con cantidad de paises pintados de ese color.
  * outputs:no devuelve nada como tal , manda a pintar los paises
  */
 void compare(Country pCountriesX [],Country pCountriesY [],int pCountColors[]){
@@ -41,9 +46,9 @@ void compare(Country pCountriesX [],Country pCountriesY [],int pCountColors[]){
 	std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
 	Country lastPosition[11];															//Array que guarda las ultimas posiciones de los paises pintados en un determinado color
-	int limit = 11;																		//Limite de distancia entre los paises
-	whites=0;																			//Contador de blancos
-
+	int limit = 200;																	//Limite de distancia entre los paises
+	whites = 0;																			//Contador de blancos
+	pintados = 0;
 	for(int first = 1;first < 211;first++){
 		if (pCountriesX[first].Color == pCountriesX[first-1].Color){					//Saco el color de la posicion actual , actual -1
 			int firstPoint = pCountriesX[first].yPosition;								//Si los colores en X son iguales paso a verificar con "y".
@@ -162,23 +167,32 @@ void compare(Country pCountriesX [],Country pCountriesY [],int pCountColors[]){
 				}
 			}
 		}
-		if(counter >= 5){
+		if(counter >= cantidadPintado){
 			printCurrent("Divide&Conquer/DiviveAndConquer");
+			pintados++;
+			cout << "Cantidad de pintados : " << pintados*30 - whites << endl;
+			cout << "Blancos generados : " << whites << endl;
 			counter = 0;
+			sleep(sleepTime);
 		}
 	}
+	printCurrent("Divide&Conquer/DiviveAndConquer");
 	cout << "D&Q Completado" << endl;
 	cout <<"Cantidad blancos:" << whites << endl;
 	std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() << "[µs]" << std::endl;
 	std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::nanoseconds> (end - begin).count() << "[ns]" << std::endl;
 }
 
-
+/*
+ * Función que resuelve las subetapas , o el proceso optimo en cada etapa
+ * input : array de paises en eje x y, cantidad de paises por color, inicio en X , un inicio en Y , un limite para x y Y.
+ * outputs: Subetapa pintada, solucion optima del problema.
+ */
 void subEtapaDinamico(Country pCountriesX [],Country pCountriesY [], int pCountColors[], int xBegin, int xEnd, int yBegin, int yEnd, int ci){
 	Country lastPosition[11];												//Guarda el pais que uso x color
 	Country first = pCountriesX[xBegin];									//Primero de cada sección
-	int xDistance = 8;														//Para manter el rango de la etapa en x
-	int limitDistance = 12;													//Limite de distancia
+	int xDistance = 15;														//Para manter el rango de la etapa en x
+	int limitDistance = 200;													//Limite de distancia
 
 	while(first.xPosition == -1 && xBegin < xEnd){ 							// Recorre el array x , para descartar todo pais que esta fuera de rango y elegir el primero
 		if(pCountriesX[xBegin].yPosition < yEnd && pCountriesX[xBegin].yPosition > yBegin){
@@ -241,6 +255,7 @@ void subEtapaDinamico(Country pCountriesX [],Country pCountriesY [], int pCountC
 							CountryAdition(nextPosition);
 							lastPosition[nextPosition.Color] = nextPosition;
 							counter++;
+
 						}
 						else{
 							nextPosition.Color = 12;										//Sino cumple con los limites queda blanco
@@ -253,33 +268,45 @@ void subEtapaDinamico(Country pCountriesX [],Country pCountriesY [], int pCountC
 						lastPosition[nextPosition.Color] = nextPosition;
 						CountryAdition(nextPosition);
 						counter++;
+
 					}
 				}
 				else{																	//Si el last esta vacio de una lo pinta
 					lastPosition[nextPosition.Color] = nextPosition;
 					CountryAdition(nextPosition);
 					counter++;
+
 					}
 			}
 			else{																		//Si es blanco de una vez lo pinta
 				CountryAdition(nextPosition);
 				counter++;
+
 			}
 		last = nextPosition;															//Mi last pasa a ser la posicion actual
 		}
-		if(counter >= 5){
+		if(counter >= cantidadPintado){
 			printCurrent("Dinamico/Dinamico");
+			pintados++;
+			cout << "Cantidad de pintados : " << pintados*30 - whites << endl;
+			cout << "Blancos generados : " << whites << endl;
 			counter = 0;
+			sleep(sleepTime);
+
 		}
 	}
-	cout << whites << endl;
 }
-
+/*
+ * Función que separa los array en subetapas , como eje de coordenadas.
+ * input : array de paises en eje x y, cantidad de paises por color.
+ * outputs: Llama a la funcion que resuelve cada subetapa.
+ */
 void compareDinamico(Country pCountriesX [],Country pCountriesY [], int pCountColors[]){
 	std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 	std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 	counter = 0;
 	whites = 0;
+	pintados = 0;
 	int xAxys[4] = {211/2,211/2,211,211};					//Paises en el eje x
 	int yAxys[4] = {211/2,211,211/2,211};					//Paises en el eje y
 	int xBegin[4] = {0,0,(211/2)+1,(211/2)+1};				//Inicio para el eje x
@@ -287,31 +314,35 @@ void compareDinamico(Country pCountriesX [],Country pCountriesY [], int pCountCo
 	for(int i = 0; i < 4; i++){
 		subEtapaDinamico(pCountriesX,pCountriesY,pCountColors,xBegin[i],xAxys[i],yBegin[i],yAxys[i],i);   		//Proceso optimo de cada etapa
 	}
+	printCurrent("Dinamico/Dinamico");
 	cout << "Dinamico Completado" << endl;
 	std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() << "[µs]" << std::endl;
 	std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::nanoseconds> (end - begin).count() << "[ns]" << std::endl;
 }
 
 
-
+/*
+ * Funcion que calcula la distancia entre el pais seleccionado y sus anteriores pintados del mismo color
+ * input : pais tipo Country
+ * outputs:cantidad de blancos generados.
+ */
 int distanceCheck(Country pCountry){
 
 	int blancosGenerados = 0;						//Blancos generados
-	int limitDistance = 50;							//Limite de distancia
+	int limitDistance = 200;							//Limite de distancia
 
 	Country tmp = arrayPaises[pCountry.Color][0];	//tmp se acomoda en el primer valor de la lista que tenga el mismo color de entrada
 
-	//cout << pCountry.Color << endl;
 	if(tmp.Color != 12){							//En caso de ser igual no hay valor asiganado 12= blanco
-		for(int color = 0; color < 50; color++){
+		for(int color = 0; color < cantidadPaises; color++){
 			tmp = arrayPaises[pCountry.Color][color];
+
 			if(tmp.Color == 12){
-				//cout << "no distance" << tmp.x << "   " << tmp. y << "   " << pCountry.x << "   " << pCountry.y << endl;
+
 				break;
 			}
 			else if(distancePoints(tmp.x, tmp.y, pCountry.x, pCountry.y) < limitDistance){			//Si es menor al limite sumo un blanco
-				cout << tmp.x << "   " << tmp. y << "   " << pCountry.x << "   " << pCountry.y << endl;
-				cout << "Distancia "<< distancePoints(tmp.x, tmp.y, pCountry.x, pCountry.y) << endl;
+
 				blancosGenerados++;
 				break;
 			}
@@ -320,6 +351,11 @@ int distanceCheck(Country pCountry){
 	return blancosGenerados;
 }
 
+/*
+ * Funcion que calcula la distancia entre el pais seleccionado y sus anteriores pintados del mismo color
+ * input : pais tipo Country
+ * outputs:cantidad de blancos generados.
+ */
 void subEtapaBacktracking(Country pCountriesX [],Country pCountriesY [], int pCountColors[], int xBegin, int xEnd, int yBegin, int yEnd, int ci){
 	int whiteX = 0;																					//Blancos en y y x
 	int whiteY = 0;
@@ -329,63 +365,62 @@ void subEtapaBacktracking(Country pCountriesX [],Country pCountriesY [], int pCo
 		if(pCountriesX[zone].yPosition < yEnd && pCountriesX[zone].yPosition > yBegin){				//En posicion y , busco el pais que este en la zona
 
 			Country nextPosition = pCountriesX[zone];												//NextPosition =primer pais encontrado en la zona
-			//cout << nextPosition.x << "   " << nextPosition.y << endl;
-			//cout << pCountriesY[nextPosition.yPosition].x << "   " << pCountriesY[nextPosition.yPosition].y << endl;
-			whiteX = distanceCheck(nextPosition);
+
+			whiteX = distanceCheck(nextPosition);													//Busca choques de colores entre los paises
 			whiteY = distanceCheck(pCountriesY[nextPosition.yPosition]);
-			//cout << blancosX << blancosY << endl;
 
-			if(whiteX == 0 && whiteY == 0){																				// Con ambos colores no hay choques
-				if(pCountColors[nextPosition.Color] > pCountColors[pCountriesY[nextPosition.yPosition].Color]){			//Comparo cual color hay mas y asigno el menor
+			if(whiteX < 1 && whiteY < 1){															//Se inicia una lista de casos que dependen de lo generado por los choques
+				if(pCountColors[nextPosition.Color] > pCountColors[pCountriesY[nextPosition.yPosition].Color] ){
 					pCountColors[nextPosition.Color]--;
-					pCountColors[pCountriesY[nextPosition.yPosition].Color]++;
-
-					nextPosition.Color = pCountriesY[nextPosition.yPosition].Color;
+					nextPosition.Color = pCountriesY[nextPosition.yPosition].Color;					//Se cambian los valores de los colores entre arrays
+					pCountColors[nextPosition.Color]++;
 				}
 			}
-			else if(whiteY == 0){																	//Si el valor en y no tuvo choques
+			else if(whiteX < 1 && whiteY >= 1){
+
+			}
+			else if(whiteX > 1 && whiteY < 1){
 				pCountColors[nextPosition.Color]--;
-				pCountColors[pCountriesY[nextPosition.yPosition].Color]++;							//Se asigna el colore de y en x
-				nextPosition.Color = pCountriesY[nextPosition.yPosition].Color;
+				nextPosition.Color = pCountriesY[nextPosition.yPosition].Color;						//Se cambian los valores de los colores entre arrays
+				pCountColors[nextPosition.Color]++;
 			}
-			else if(whiteX == 0){
-
-			}
-			else{
-				nextPosition.Color = 12;															//Sino pasa a ser pais en blanco
-			}
-			if(nextPosition.Color != 12){
-			//	pArrayPaises[nextPosition.Color]->insertar(pArrayPaises[nextPosition.Color], pCountriesX[zone]);
-
-
-				for(int color = 0; color < 50; color++){											//Recorro la matriz , revisa su fila para ver donde colocare el pais actual
-					//cout << arrayPaises[nextPosition.Color][color].Color << endl;
-					if(arrayPaises[nextPosition.Color][color].Color == 12){
-						arrayPaises[nextPosition.Color][color] = nextPosition;
-						break;
-					}
-				}
-				//cout << "adicion 1" << endl;
-				CountryAdition(nextPosition);													//Lo manda a pintar
-				counter++;
-			}
-			else{
-				//cout << "adicion 2" << endl;
-				CountryAdition(nextPosition);
-				counter++;
+			else if(whiteX >= 1 && whiteY >= 1){
+				nextPosition.Color = 12;
 				whites++;
 			}
 
+			if(nextPosition.Color != 12){
+				CountryAdition(nextPosition);
+				counter++;
+
+				for(int j = 0; j < cantidadPaises;j++){
+					if(arrayPaises[nextPosition.Color][j].Color == 12){
+						arrayPaises[nextPosition.Color][j] = nextPosition;							//Se guarda la ultima posicion pintada en un array determinado por color
+						break;
+					}
+				}
+			}
+			else{
+				CountryAdition(nextPosition);
+				counter++;
+			}
 		}
-		if(counter >= 20){
+
+		if(counter >= cantidadPintado){
 			printCurrent("Backtracking/Backtracking");
 			counter = 0;
+			sleep(sleepTime);
 		}
-	//	cout << 0 << endl;
 	}
+
 	cout << whites << endl;
 }
 
+/*
+ * Funcion que divide los arrays y define la poda
+ * input : array ordenado en x y array ordenado y , array con la cantidad de paises pintados de un color
+ * outputs:llamada al que soluciona el problema .
+ */
 void compareBacktracking(Country pCountriesX [],Country pCountriesY [], int pCountColors[]){
 	std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 	std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
@@ -403,6 +438,7 @@ void compareBacktracking(Country pCountriesX [],Country pCountriesY [], int pCou
 	for(int i = 0; i < 4; i++){
 		subEtapaBacktracking(pCountriesX,pCountriesY,pCountColors,xBegin[i],xAxys[i],yBegin[i],yAxys[i],i);
 	}
+	printCurrent("Backtracking/Backtracking");
 	cout << "Backtracking Completado" << endl;
 	std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() << "[µs]" << std::endl;
 	std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::nanoseconds> (end - begin).count() << "[ns]" << std::endl;

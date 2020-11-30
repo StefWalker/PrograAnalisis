@@ -105,6 +105,7 @@ void startProcedure(int pCantColores){
 	mergeSortX(countriesX, 0, arraySize-1, pCantColores, countColors);		// Ordenamientos Merge Sort X
 	for(int pais = 0; pais < 211; pais++){			 // carga los valores dentro del array en eje Y
 		countriesY[pais] = countriesX[pais];
+
 	}
 	mergeSortY(countriesY, 0, arraySize-1, pCantColores);					// Ordenamientos Merge Sort Y
 
@@ -117,32 +118,10 @@ void startProcedure(int pCantColores){
 			}
 		}
 	}
-/*
-	for(int i = 0; i<211; i++)
-		std::cout << countriesx[i].x << " " << countriesx[i].Color << endl;;
-	std:: cout << endl;
 
-	for(int i = 0; i<sizeColors; i++)
-			std::cout << countColors[i] << endl;;
-		std:: cout << endl;
-
-	for(int i = 0; i<211; i++)
-		std::cout << countriesy[i].y << " " << countriesy[i].Color << endl;;
-		std:: cout << endl;
-*/
-	/*
-	std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
-	std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-
-
-	std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() << "[µs]" << std::endl;
-	std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::nanoseconds> (end - begin).count() << "[ns]" << std::endl;
-	*/
-
-
-	//compare(countriesX, countriesY,countColors);
+	compare(countriesX, countriesY,countColors);
 	//compareDinamico(countriesX, countriesY, countColors);
-	compareBacktracking(countriesX, countriesY, countColors);
+	//compareBacktracking(countriesX, countriesY, countColors);
 
 }
 
