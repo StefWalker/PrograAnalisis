@@ -8,10 +8,10 @@
  *      		2018133074
  */
 
-//#include "C:\Users\ferla\OneDrive\Documents\GitHub\PrograAnalisis\PrograAnalisiMaps\country.h"
-//#include "C:\Users\ferla\OneDrive\Documents\GitHub\PrograAnalisis\PrograAnalisiMaps\SVG\SVG.h"
-#include "C:\Users\dylan\Desktop\GitHub\PrograAnalisis\PrograAnalisiMaps\country.h"
-#include "C:\Users\dylan\Desktop\GitHub\PrograAnalisis\PrograAnalisiMaps\SVG\SVG.h"
+#include "C:\Users\ferla\OneDrive\Documents\GitHub\PrograAnalisis\PrograAnalisiMaps\country.h"
+#include "C:\Users\ferla\OneDrive\Documents\GitHub\PrograAnalisis\PrograAnalisiMaps\SVG\SVG.h"
+//#include "C:\Users\dylan\Desktop\GitHub\PrograAnalisis\PrograAnalisiMaps\country.h"
+//#include "C:\Users\dylan\Desktop\GitHub\PrograAnalisis\PrograAnalisiMaps\SVG\SVG.h"
 #include <iostream>
 #include <cstdlib>
 #include <math.h>
@@ -61,7 +61,7 @@ void compare(Country pCountriesX [],Country pCountriesY [],int pCountColors[]){
 			}
 			else{
 				pCountriesX[first].Color = pCountriesY[firstPoint].Color;	    		//Si son diferentes se lo asigno pero paso a verificar con el ultimo que se pintó
-				if (lastPosition[pCountriesX[first].Color].yPosition != -1){ 			//Verifica que sea diferente que menos -1 eso nos dice que si hay un ultimo
+				//if (lastPosition[pCountriesX[first].Color].yPosition != -1){ 			//Verifica que sea diferente que menos -1 eso nos dice que si hay un ultimo
 
 					int x1 = pCountriesX[first].x;
 					int y1 = pCountriesX[first].y;										// Saco los puntos en (x,y)
@@ -80,18 +80,18 @@ void compare(Country pCountriesX [],Country pCountriesY [],int pCountColors[]){
 						CountryAdition(pCountriesX[first]);
 						counter++;
 					}
-				}
+				/*}
 				else{
 					lastPosition[pCountriesX[first].Color] = pCountriesX[first];
 					CountryAdition(pCountriesX[first]);									//Si en el array lastPosition está vacio solo se coloca en la posicion del color que corresponde
 					counter++;
 				}
-
+*/
 				}
 			}
 		else{																			//Si los colores de first y first -1 son diferentes , se hará lo siguiente.
 			if(pCountriesX[first].Color == pCountriesY[pCountriesX[first].yPosition].Color){
-				if (lastPosition[pCountriesX[first].Color].yPosition != -1){
+				//if (lastPosition[pCountriesX[first].Color].yPosition != -1){
 					int x1 = pCountriesX[first].x;
 					int y1 = pCountriesX[first].y;										//SI son iguales dejo ese color pero reviso la ultima posicion
 					int x2 = lastPosition[pCountriesX[first].Color].x;
@@ -103,12 +103,12 @@ void compare(Country pCountriesX [],Country pCountriesY [],int pCountColors[]){
 						CountryAdition(pCountriesX[first]);								//Si la distancia es menor , dejo en blanco
 						counter++;
 						whites ++;
-					}
-					else{
+					//}
+					/*else{
 						lastPosition[pCountriesX[first].Color] = pCountriesX[first];
 						CountryAdition(pCountriesX[first]);								//Si la distancia es mayor que el limite lo dejo y coloco el last
 						counter++;
-					}
+					}*/
 				}
 				else{
 					lastPosition[pCountriesX[first].Color] = pCountriesX[first];
@@ -121,7 +121,7 @@ void compare(Country pCountriesX [],Country pCountriesY [],int pCountColors[]){
 				int positiony = pCountriesX[first].yPosition;
 				if (pCountColors[pCountriesX[first].Color] < pCountColors[pCountriesY[positiony].Color]){	//Si hay menos del color x, paso a verificar segun el last
 
-					if (lastPosition[pCountriesX[first].Color].yPosition != -1){
+					//if (lastPosition[pCountriesX[first].Color].yPosition != -1){
 						int x1 = pCountriesX[first].x;
 						int y1 = pCountriesX[first].y;
 						int x2 = lastPosition[pCountriesX[first].Color].x;
@@ -139,31 +139,33 @@ void compare(Country pCountriesX [],Country pCountriesY [],int pCountColors[]){
 							CountryAdition(pCountriesX[first]);							//Si la distancia es mayor se queda el color
 							counter++;
 						}
-					}
-					else{																//En caso de que hay menos cantidad del color "y" verifico en el last con este
-						if (lastPosition[pCountriesX[first].Color].yPosition != -1){
-							int x1 = pCountriesX[first].x;
-							int y1 = pCountriesX[first].y;
-							int x2 = lastPosition[pCountriesX[first].Color].x;
-							int y2 = lastPosition[pCountriesX[first].Color].y;
-							int distance = distancePoints(x1,y1,x2,y2);
+					//}
 
-							if (distance < limit ){
-								pCountriesX[first].Color = 12;
-								CountryAdition(pCountriesX[first]);
-								counter++;
-								whites ++;
-							}
-							else{
-								pCountColors[pCountriesX[first].Color] --;					//Si hay más en el color x,se disminuye el contador y se suma en y.
-								pCountColors[pCountriesY[positiony].Color] ++;
-								pCountriesX[first].Color =pCountriesY[positiony].Color;
-								lastPosition[pCountriesX[first].Color] = pCountriesX[first];	//Lo cambio en el array last
-								CountryAdition(pCountriesX[first]);
-								counter++;
-							}
-						}
+				}
+				else{			//En caso de que hay menos cantidad del color "y" verifico en el last con este
+
+					pCountriesX[first].Color = pCountriesY[pCountriesX[first].yPosition].Color;
+					int x1 = pCountriesX[first].x;
+					int y1 = pCountriesX[first].y;
+					int x2 = lastPosition[pCountriesX[first].Color].x;
+					int y2 = lastPosition[pCountriesX[first].Color].y;
+					int distance = distancePoints(x1,y1,x2,y2);
+
+					if (distance < limit ){
+						pCountriesX[first].Color = 12;
+						CountryAdition(pCountriesX[first]);
+						counter++;
+						whites ++;
 					}
+					else{
+						pCountColors[pCountriesX[first].Color] --;					//Si hay más en el color x,se disminuye el contador y se suma en y.
+						pCountColors[pCountriesY[positiony].Color] ++;
+						pCountriesX[first].Color =pCountriesY[positiony].Color;
+						lastPosition[pCountriesX[first].Color] = pCountriesX[first];	//Lo cambio en el array last
+						CountryAdition(pCountriesX[first]);
+						counter++;
+					}
+
 				}
 			}
 		}

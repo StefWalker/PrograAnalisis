@@ -100,13 +100,13 @@ void startProcedure(int pCantColores){
 	int countColors[sizeColors] = {0};				 // contador de colores usados
 
 	XMLLoader(countriesX);			   				 // carga de paises
-
+	XMLLoader(countriesY);
 	srand(time(0));
 	mergeSortX(countriesX, 0, arraySize-1, pCantColores, countColors);		// Ordenamientos Merge Sort X
-	for(int pais = 0; pais < 211; pais++){			 // carga los valores dentro del array en eje Y
+	/*for(int pais = 0; pais < 211; pais++){			 // carga los valores dentro del array en eje Y
 		countriesY[pais] = countriesX[pais];
-
-	}
+		countriesY[pais].Color = 12;
+	}*/
 	mergeSortY(countriesY, 0, arraySize-1, pCantColores);					// Ordenamientos Merge Sort Y
 
 	for(int paisX = 0; paisX < 211; paisX++){						// ciclos encargados de asignar los valores finales de Y a el array en X
