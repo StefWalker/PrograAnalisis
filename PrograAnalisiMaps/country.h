@@ -24,8 +24,8 @@ struct Country{
 	int xPosition = -1;			// Posicion en el array futuro en X
 	int yPosition = -1;     // Posicion en el array futuro en X
 	int Color = 12;			// Valor del color asignado (12 = Blanco)
-	int x;					// Valor en X de la lectura del mapa
-	int y;					// Valor en Y de la lectura del mapa
+	int x = 0;					// Valor en X de la lectura del mapa
+	int y = 0;					// Valor en Y de la lectura del mapa
 	string d;		     	// Valor d de la lectura
 
 };
