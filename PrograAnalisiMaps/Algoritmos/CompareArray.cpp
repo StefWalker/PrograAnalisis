@@ -8,22 +8,23 @@
  *      		2018133074
  */
 
-#include "C:\Users\ferla\OneDrive\Documents\GitHub\PrograAnalisis\PrograAnalisiMaps\country.h"
-#include "C:\Users\ferla\OneDrive\Documents\GitHub\PrograAnalisis\PrograAnalisiMaps\SVG\SVG.h"
-//#include "C:\Users\dylan\Desktop\GitHub\PrograAnalisis\PrograAnalisiMaps\country.h"
-//#include "C:\Users\dylan\Desktop\GitHub\PrograAnalisis\PrograAnalisiMaps\SVG\SVG.h"
+//#include "C:\Users\ferla\OneDrive\Documents\GitHub\PrograAnalisis\PrograAnalisiMaps\country.h"
+//#include "C:\Users\ferla\OneDrive\Documents\GitHub\PrograAnalisis\PrograAnalisiMaps\SVG\SVG.h"
+#include "C:\Users\dylan\Desktop\GitHub\PrograAnalisis\PrograAnalisiMaps\country.h"
+#include "C:\Users\dylan\Desktop\GitHub\PrograAnalisis\PrograAnalisiMaps\SVG\SVG.h"
 #include <iostream>
 #include <cstdlib>
 #include <math.h>
 #include <chrono>
 #include <unistd.h>
 
+const int cantidadPaises = 100;
 int sleepTime = 5;
 int cantidadPintado = 30;
 int counter = 0;
 int whites;
 int pintados;
-Country arrayPaises[11][100];
+Country arrayPaises[11][cantidadPaises];
 
 /*
  * Función que calcula la distancia entre dos puntos.
@@ -169,10 +170,10 @@ void compare(Country pCountriesX [],Country pCountriesY [],int pCountColors[]){
 		if(counter >= cantidadPintado){
 			printCurrent("Divide&Conquer/DiviveAndConquer");
 			counter = 0;
-			sleep(sleepTime);
+			//sleep(sleepTime);
 		}
 	}
-	printCurrent("Divide&Conquer/DiviveAndConquer");
+	//printCurrent("Divide&Conquer/DiviveAndConquer");
 	cout << "D&Q Completado" << endl;
 	cout <<"Cantidad blancos:" << whites << endl;
 	std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() << "[µs]" << std::endl;
@@ -187,8 +188,8 @@ void compare(Country pCountriesX [],Country pCountriesY [],int pCountColors[]){
 void subEtapaDinamico(Country pCountriesX [],Country pCountriesY [], int pCountColors[], int xBegin, int xEnd, int yBegin, int yEnd, int ci){
 	Country lastPosition[11];												//Guarda el pais que uso x color
 	Country first = pCountriesX[xBegin];									//Primero de cada sección
-	int xDistance = 8;														//Para manter el rango de la etapa en x
-	int limitDistance = 12;													//Limite de distancia
+	int xDistance = 15;														//Para manter el rango de la etapa en x
+	int limitDistance = 200;													//Limite de distancia
 
 	while(first.xPosition == -1 && xBegin < xEnd){ 							// Recorre el array x , para descartar todo pais que esta fuera de rango y elegir el primero
 		if(pCountriesX[xBegin].yPosition < yEnd && pCountriesX[xBegin].yPosition > yBegin){
@@ -329,17 +330,19 @@ int distanceCheck(Country pCountry){
 
 	Country tmp = arrayPaises[pCountry.Color][0];	//tmp se acomoda en el primer valor de la lista que tenga el mismo color de entrada
 
-	//cout << pCountry.Color << endl;
+	//cout << "previo a ciclo "<< tmp.Color << endl;
 	if(tmp.Color != 12){							//En caso de ser igual no hay valor asiganado 12= blanco
-		for(int color = 0; color < 50; color++){
+		for(int color = 0; color < cantidadPaises; color++){
 			tmp = arrayPaises[pCountry.Color][color];
+			//cout << "en a ciclo "<< tmp.Color << endl;
+			//cout << "Distancia "<< distancePoints(tmp.x, tmp.y, pCountry.x, pCountry.y) << endl;
 			if(tmp.Color == 12){
-				cout << "no distance" << tmp.x << "   " << tmp. y << "   " << pCountry.x << "   " << pCountry.y << endl;
+
 				break;
 			}
 			else if(distancePoints(tmp.x, tmp.y, pCountry.x, pCountry.y) < limitDistance){			//Si es menor al limite sumo un blanco
-				cout << tmp.x << "   " << tmp. y << "   " << pCountry.x << "   " << pCountry.y << endl;
-				cout << "Distancia "<< distancePoints(tmp.x, tmp.y, pCountry.x, pCountry.y) << endl;
+				//cout << tmp.x << "   " << tmp. y << "   " << pCountry.x << "   " << pCountry.y << endl;
+				//cout << "Distancia "<< distancePoints(tmp.x, tmp.y, pCountry.x, pCountry.y) << endl;
 				blancosGenerados++;
 				break;
 			}
@@ -362,95 +365,48 @@ void subEtapaBacktracking(Country pCountriesX [],Country pCountriesY [], int pCo
 		if(pCountriesX[zone].yPosition < yEnd && pCountriesX[zone].yPosition > yBegin){				//En posicion y , busco el pais que este en la zona
 
 			Country nextPosition = pCountriesX[zone];												//NextPosition =primer pais encontrado en la zona
-			cout << nextPosition.x << "   " << nextPosition.y << "   " << nextPosition.Color<< endl;
-			//cout << pCountriesY[nextPosition.yPosition].x << "   " << pCountriesY[nextPosition.yPosition].y << endl;
-			//whiteX = distanceCheck(nextPosition);
-			//whiteY = distanceCheck(pCountriesY[nextPosition.yPosition]);
-			//cout << blancosX << blancosY << endl;
 
-			int limitDistance = 100;							//Limite de distancia
+			whiteX = distanceCheck(nextPosition);
+			whiteY = distanceCheck(pCountriesY[nextPosition.yPosition]);
 
-			Country tmp = arrayPaises[nextPosition.Color][0];	//tmp se acomoda en el primer valor de la lista que tenga el mismo color de entrada
-
-			if(tmp.Color < 12){							//En caso de ser igual no hay valor asiganado 12= blanco
-				for(int color = 0; color < 50; color++){
-					tmp = arrayPaises[nextPosition.Color][color];
-					if(tmp.Color >= 12){
-							//cout << "no distance" << tmp.x << "   " << tmp. y << "   " << pCountry.x << "   " << pCountry.y << endl;
-						break;
-					}
-					else if(distancePoints(tmp.x, tmp.y, nextPosition.x, nextPosition.y) < limitDistance){			//Si es menor al limite sumo un blanco
-						//cout << tmp.x << "   " << tmp. y << "   " << nextPosition.x << "   " << nextPosition.y << endl;
-						cout << "DistanciaX "<< distancePoints(tmp.x, tmp.y, nextPosition.x, nextPosition.y) << endl;
-						whiteX++;
-						break;
-					}
-				}
-			}
-
-			tmp = arrayPaises[pCountriesY[nextPosition.xPosition].Color][0];	//tmp se acomoda en el primer valor de la lista que tenga el mismo color de entrada
-
-							//cout << pCountry.Color << endl;
-			if(tmp.Color < 12){							//En caso de ser igual no hay valor asiganado 12= blanco
-				for(int color = 0; color < 50; color++){
-					tmp = arrayPaises[nextPosition.Color][color];
-					if(tmp.Color >= 12){
-										//cout << "no distance" << tmp.x << "   " << tmp. y << "   " << pCountry.x << "   " << pCountry.y << endl;
-						break;
-					}
-					else if(distancePoints(tmp.x, tmp.y, pCountriesY[nextPosition.xPosition].x, pCountriesY[nextPosition.xPosition].y) < limitDistance){			//Si es menor al limite sumo un blanco
-						//cout << tmp.x << "   " << tmp. y << "   " << pCountriesY[nextPosition.xPosition].x << "   " << pCountriesY[nextPosition.xPosition].y << endl;
-						cout << "DistanciaY "<< distancePoints(tmp.x, tmp.y, pCountriesY[nextPosition.xPosition].x, pCountriesY[nextPosition.xPosition].y) << endl;
-						whiteY++;
-						break;
-					}
-				}
-			}
-
-			if(whiteX == 0 && whiteY == 0){																				// Con ambos colores no hay choques
-				if(pCountColors[nextPosition.Color] > pCountColors[pCountriesY[nextPosition.yPosition].Color]){			//Comparo cual color hay mas y asigno el menor
+			cout << "blancos generados " << whiteX << "  " << whiteY << endl;
+			if(whiteX < 1 && whiteY < 1){
+				if(pCountColors[nextPosition.Color] > pCountColors[pCountriesY[nextPosition.yPosition].Color] ){
 					pCountColors[nextPosition.Color]--;
-					pCountColors[pCountriesY[nextPosition.yPosition].Color]++;
-
 					nextPosition.Color = pCountriesY[nextPosition.yPosition].Color;
+					pCountColors[nextPosition.Color]++;
 				}
 			}
-			else if(whiteY == 0){																	//Si el valor en y no tuvo choques
+			else if(whiteX < 1 && whiteY >= 1){
+
+			}
+			else if(whiteX > 1 && whiteY < 1){
 				pCountColors[nextPosition.Color]--;
-				pCountColors[pCountriesY[nextPosition.yPosition].Color]++;							//Se asigna el colore de y en x
 				nextPosition.Color = pCountriesY[nextPosition.yPosition].Color;
+				pCountColors[nextPosition.Color]++;
 			}
-			else if(whiteX == 0){
-
-			}
-			else{
-				nextPosition.Color = 12;															//Sino pasa a ser pais en blanco
-			}
-			whiteX = 0;
-			whiteY = 0;
-			if(nextPosition.Color != 12){
-			//	pArrayPaises[nextPosition.Color]->insertar(pArrayPaises[nextPosition.Color], pCountriesX[zone]);
-
-
-				for(int color = 0; color < 50; color++){											//Recorro la matriz , revisa su fila para ver donde colocare el pais actual
-					//cout << arrayPaises[nextPosition.Color][color].Color << endl;
-					if(arrayPaises[nextPosition.Color][color].Color == 12){
-						arrayPaises[nextPosition.Color][color] = nextPosition;
-						break;
-					}
-				}
-				//cout << "adicion 1" << endl;
-				CountryAdition(nextPosition);													//Lo manda a pintar
-				counter++;
-			}
-			else{
-				//cout << "adicion 2" << endl;
-				CountryAdition(nextPosition);
-				counter++;
+			else if(whiteX >= 1 && whiteY >= 1){
+				nextPosition.Color = 12;
 				whites++;
 			}
 
+			if(nextPosition.Color != 12){
+				CountryAdition(nextPosition);
+				counter++;
+
+				for(int j = 0; j < cantidadPaises;j++){
+					if(arrayPaises[nextPosition.Color][j].Color == 12){
+						arrayPaises[nextPosition.Color][j] = nextPosition;
+						break;
+					}
+				}
+			}
+			else{
+				CountryAdition(nextPosition);
+				counter++;
+			}
 		}
+
 		if(counter >= cantidadPintado){
 			printCurrent("Backtracking/Backtracking");
 			counter = 0;
