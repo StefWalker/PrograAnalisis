@@ -8,10 +8,10 @@
  *      		2018133074
  */
 
-//#include "C:\Users\ferla\OneDrive\Documents\GitHub\PrograAnalisis\PrograAnalisiMaps\country.h"
-//#include "C:\Users\ferla\OneDrive\Documents\GitHub\PrograAnalisis\PrograAnalisiMaps\SVG\SVG.h"
-#include "C:\Users\dylan\Desktop\GitHub\PrograAnalisis\PrograAnalisiMaps\country.h"
-#include "C:\Users\dylan\Desktop\GitHub\PrograAnalisis\PrograAnalisiMaps\SVG\SVG.h"
+#include "C:\Users\ferla\OneDrive\Documents\GitHub\PrograAnalisis\PrograAnalisiMaps\country.h"
+#include "C:\Users\ferla\OneDrive\Documents\GitHub\PrograAnalisis\PrograAnalisiMaps\SVG\SVG.h"
+//#include "C:\Users\dylan\Desktop\GitHub\PrograAnalisis\PrograAnalisiMaps\country.h"
+//#include "C:\Users\dylan\Desktop\GitHub\PrograAnalisis\PrograAnalisiMaps\SVG\SVG.h"
 #include <iostream>
 #include <cstdlib>
 #include <math.h>
@@ -37,7 +37,7 @@ int distancePoints (int x1, int y1, int x2 , int y2){
 
 /*
  * Función que realiza la comparación para finalizar el divide y vencerás.
- * input : array de paises en eje x y, cantidad de colores que chiva x objetivo penstado.
+ * input : array de paises en eje x y, array con cantidad de paises pintados de ese color.
  * outputs:no devuelve nada como tal , manda a pintar los paises
  */
 void compare(Country pCountriesX [],Country pCountriesY [],int pCountColors[]){
@@ -179,7 +179,11 @@ void compare(Country pCountriesX [],Country pCountriesY [],int pCountColors[]){
 	std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::nanoseconds> (end - begin).count() << "[ns]" << std::endl;
 }
 
-
+/*
+ * Función que resuelve las subetapas , o el proceso optimo en cada etapa
+ * input : array de paises en eje x y, cantidad de paises por color, inicio en X , un inicio en Y , un limite para x y Y.
+ * outputs: Subetapa pintada, solucion optima del problema.
+ */
 void subEtapaDinamico(Country pCountriesX [],Country pCountriesY [], int pCountColors[], int xBegin, int xEnd, int yBegin, int yEnd, int ci){
 	Country lastPosition[11];												//Guarda el pais que uso x color
 	Country first = pCountriesX[xBegin];									//Primero de cada sección
@@ -288,7 +292,11 @@ void subEtapaDinamico(Country pCountriesX [],Country pCountriesY [], int pCountC
 		}
 	}
 }
-
+/*
+ * Función que separa los array en subetapas , como eje de coordenadas.
+ * input : array de paises en eje x y, cantidad de paises por color.
+ * outputs: Llama a la funcion que resuelve cada subetapa.
+ */
 void compareDinamico(Country pCountriesX [],Country pCountriesY [], int pCountColors[]){
 	std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 	std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
@@ -309,7 +317,11 @@ void compareDinamico(Country pCountriesX [],Country pCountriesY [], int pCountCo
 }
 
 
-
+/*
+ * Funcion que calcula la distancia entre el pais seleccionado y sus anteriores pintados del mismo color
+ * input : pais tipo Country
+ * outputs:cantidad de blancos generados.
+ */
 int distanceCheck(Country pCountry){
 
 	int blancosGenerados = 0;						//Blancos generados
@@ -336,6 +348,11 @@ int distanceCheck(Country pCountry){
 	return blancosGenerados;
 }
 
+/*
+ * Funcion que calcula la distancia entre el pais seleccionado y sus anteriores pintados del mismo color
+ * input : pais tipo Country
+ * outputs:cantidad de blancos generados.
+ */
 void subEtapaBacktracking(Country pCountriesX [],Country pCountriesY [], int pCountColors[], int xBegin, int xEnd, int yBegin, int yEnd, int ci){
 	int whiteX = 0;																					//Blancos en y y x
 	int whiteY = 0;
@@ -389,10 +406,6 @@ void subEtapaBacktracking(Country pCountriesX [],Country pCountriesY [], int pCo
 					}
 				}
 			}
-
-
-
-
 
 			if(whiteX == 0 && whiteY == 0){																				// Con ambos colores no hay choques
 				if(pCountColors[nextPosition.Color] > pCountColors[pCountriesY[nextPosition.yPosition].Color]){			//Comparo cual color hay mas y asigno el menor
@@ -449,6 +462,11 @@ void subEtapaBacktracking(Country pCountriesX [],Country pCountriesY [], int pCo
 	cout << whites << endl;
 }
 
+/*
+ * Funcion que divide los arrays y define la poda
+ * input : array ordenado en x y array ordenado y , array con la cantidad de paises pintados de un color
+ * outputs:llamada al que soluciona el problema .
+ */
 void compareBacktracking(Country pCountriesX [],Country pCountriesY [], int pCountColors[]){
 	std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 	std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
