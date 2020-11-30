@@ -16,9 +16,13 @@
 #include <cstdlib>
 #include <math.h>
 #include <chrono>
+#include <unistd.h>
 
+int sleepTime = 5;
+int cantidadPintado = 30;
 int counter = 0;
 int whites;
+int pintados;
 Country arrayPaises[11][100];
 
 /*
@@ -162,11 +166,13 @@ void compare(Country pCountriesX [],Country pCountriesY [],int pCountColors[]){
 				}
 			}
 		}
-		if(counter >= 5){
+		if(counter >= cantidadPintado){
 			printCurrent("Divide&Conquer/DiviveAndConquer");
 			counter = 0;
+			sleep(sleepTime);
 		}
 	}
+	printCurrent("Divide&Conquer/DiviveAndConquer");
 	cout << "D&Q Completado" << endl;
 	cout <<"Cantidad blancos:" << whites << endl;
 	std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() << "[µs]" << std::endl;
@@ -241,6 +247,7 @@ void subEtapaDinamico(Country pCountriesX [],Country pCountriesY [], int pCountC
 							CountryAdition(nextPosition);
 							lastPosition[nextPosition.Color] = nextPosition;
 							counter++;
+
 						}
 						else{
 							nextPosition.Color = 12;										//Sino cumple con los limites queda blanco
@@ -253,26 +260,33 @@ void subEtapaDinamico(Country pCountriesX [],Country pCountriesY [], int pCountC
 						lastPosition[nextPosition.Color] = nextPosition;
 						CountryAdition(nextPosition);
 						counter++;
+
 					}
 				}
 				else{																	//Si el last esta vacio de una lo pinta
 					lastPosition[nextPosition.Color] = nextPosition;
 					CountryAdition(nextPosition);
 					counter++;
+
 					}
 			}
 			else{																		//Si es blanco de una vez lo pinta
 				CountryAdition(nextPosition);
 				counter++;
+
 			}
 		last = nextPosition;															//Mi last pasa a ser la posicion actual
 		}
-		if(counter >= 5){
+		if(counter >= cantidadPintado){
 			printCurrent("Dinamico/Dinamico");
+			pintados++;
+			cout << "Cantidad de pintados : " << pintados*30 - whites << endl;
+			cout << "Blancos generados : " << whites << endl;
 			counter = 0;
+			sleep(sleepTime);
+
 		}
 	}
-	cout << whites << endl;
 }
 
 void compareDinamico(Country pCountriesX [],Country pCountriesY [], int pCountColors[]){
@@ -280,6 +294,7 @@ void compareDinamico(Country pCountriesX [],Country pCountriesY [], int pCountCo
 	std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 	counter = 0;
 	whites = 0;
+	pintados = 0;
 	int xAxys[4] = {211/2,211/2,211,211};					//Paises en el eje x
 	int yAxys[4] = {211/2,211,211/2,211};					//Paises en el eje y
 	int xBegin[4] = {0,0,(211/2)+1,(211/2)+1};				//Inicio para el eje x
@@ -287,6 +302,7 @@ void compareDinamico(Country pCountriesX [],Country pCountriesY [], int pCountCo
 	for(int i = 0; i < 4; i++){
 		subEtapaDinamico(pCountriesX,pCountriesY,pCountColors,xBegin[i],xAxys[i],yBegin[i],yAxys[i],i);   		//Proceso optimo de cada etapa
 	}
+	printCurrent("Dinamico/Dinamico");
 	cout << "Dinamico Completado" << endl;
 	std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() << "[µs]" << std::endl;
 	std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::nanoseconds> (end - begin).count() << "[ns]" << std::endl;
@@ -422,9 +438,10 @@ void subEtapaBacktracking(Country pCountriesX [],Country pCountriesY [], int pCo
 			}
 
 		}
-		if(counter >= 20){
+		if(counter >= cantidadPintado){
 			printCurrent("Backtracking/Backtracking");
 			counter = 0;
+			sleep(sleepTime);
 		}
 	//	cout << 0 << endl;
 	}
@@ -449,6 +466,7 @@ void compareBacktracking(Country pCountriesX [],Country pCountriesY [], int pCou
 	for(int i = 0; i < 4; i++){
 		subEtapaBacktracking(pCountriesX,pCountriesY,pCountColors,xBegin[i],xAxys[i],yBegin[i],yAxys[i],i);
 	}
+	printCurrent("Backtracking/Backtracking");
 	cout << "Backtracking Completado" << endl;
 	std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() << "[µs]" << std::endl;
 	std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::nanoseconds> (end - begin).count() << "[ns]" << std::endl;

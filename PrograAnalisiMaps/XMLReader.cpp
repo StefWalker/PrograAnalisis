@@ -132,8 +132,8 @@ void startProcedure(int pCantColores){
 */
 
 	//compare(countriesX, countriesY,countColors);
-	//compareDinamico(countriesX, countriesY, countColors);
-	compareBacktracking(countriesX, countriesY, countColors);
+	compareDinamico(countriesX, countriesY, countColors);
+	//compareBacktracking(countriesX, countriesY, countColors);
 
 }
 
